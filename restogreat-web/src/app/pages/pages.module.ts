@@ -33,6 +33,9 @@ import { MedicoComponent } from './medicos/medico.component';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
+//Restaurant 
+import { SeccionesComponent } from './restaurant/secciones/secciones.component';
+
 @NgModule({
     declarations: [
         // PagesComponent,
@@ -50,7 +53,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
         MedicosComponent,
         MedicoComponent,
         // ModalUploadComponent,
-        BusquedaComponent
+        BusquedaComponent,
+        SeccionesComponent
     ],
     exports: [
         DashboardComponent,

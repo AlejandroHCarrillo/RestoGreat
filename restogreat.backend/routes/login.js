@@ -250,7 +250,7 @@ function obtenerMenu(ROLE) {
 
     menu[1].submenu.push({ titulo: "Usuarios", url: "/usuarios" });
     menu[1].submenu.push({ titulo: "Hospitales", url: "/hospitales" });
-    menu[1].submenu.push({ titulo: "Usuarios", url: "/medicos" });
+    menu[1].submenu.push({ titulo: "Medicos", url: "/medicos" });
   }
   // console.log(menu);
   return menu;

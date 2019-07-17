@@ -1,3 +1,4 @@
+import { SeccionesComponent } from './restaurant/secciones/secciones.component';
 import { VerificatokenGuard } from '../services/service.index';
 import { AdminGuard } from './../services/guards/admin.guard';
 
@@ -20,9 +21,6 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 
 import { ProfileComponent } from './profile/profile.component';
 
-
-
-
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
     { path: 'progress', component: ProgressComponent, data: { titulo: 'ProgressBars' } },
@@ -32,6 +30,10 @@ const pagesRoutes: Routes = [
     { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de Tema' } },
     { path: 'perfil', component: ProfileComponent, data: { titulo: 'Perfil de usuario' } },
     { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
+    // Restaurant
+    { path: 'secciones', component: SeccionesComponent, data: { titulo: 'Mantenimiento de secciones' } },
+    { path: 'secciones/:id', component: SeccionesComponent, data: { titulo: 'Actualizar seccion' } },
+
     //  Mantenimiento
     {   path: 'usuarios', 
         component: UsuariosComponent, 

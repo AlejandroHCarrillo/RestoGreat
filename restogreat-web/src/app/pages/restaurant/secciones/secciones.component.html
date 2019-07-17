@@ -1,0 +1,78 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #input
+          (keyup)="buscarSeccion( input.value )"
+          type="text"
+          class="form-control"
+          placeholder="Buscar seccion..."
+          name=""
+          id=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br />
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br />
+      <span>Espere un momento por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">          
+          <button (click)="crearSeccion()" class="btn waves-effect waves-light btn-rounded btn-primary" > 
+              <i class="fa fa-plus"></i>
+              Crear seccion </button>
+          </div>  
+        <h3 class="card-title">Secciones registrados ( <small>{{ totalRegistros }}</small> )</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let seccion of secciones" >
+              <td class="w70">
+                <img (click)="mostrarModal( seccion._id )" src="{{ seccion.img | imagen : 'seccion' }}" class="img-50 img-circle pointer" alt="seccion.nombre">  
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="seccion.nombre">
+              </td>
+              <td>
+                <button (click)="guardarSeccion(seccion)" class="btn btn-primary">
+                  <i class="fa fa-save"></i>
+                </button>
+
+                <button (click)="borrarSeccion( seccion._id )" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
+            Anteriores
+          </button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">
+              Siguientes
+            </button>
+      </div>
+    </div>
+  </div>
+</div>
