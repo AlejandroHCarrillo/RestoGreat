@@ -1,0 +1,86 @@
+<div class="row animated fadeIn">
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Usuarios encontrados ( <small>{{ usuarios.length }}</small> )</h4>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of usuarios"  [routerLink]="['/usuarios']" class="pointer">
+                <td class="w70">
+                  <img (click)="mostrarModal( usuario._id )" src="{{ usuario.img | imagen }}" class="img-50 img-circle pointer" alt="usuario.nombre">  
+                </td>
+                <td>{{ usuario.nombre }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="alert alert-danger" *ngIf="usuarios.length===0" >
+              No se encontraron usuarios con el termino: "{{ termino }}"
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Hospitales encontrados ( <small>{{ hospitales.length }}</small> )</h4>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let hospital of hospitales" [routerLink]="['/medicos']" class="pointer">
+                  <td class="w70">
+                    <img (click)="mostrarModal( hospital._id )" src="{{ hospital.img | imagen: 'hospital' }}" class="img-50 img-circle pointer" alt="hospital.nombre">  
+                  </td>
+                  <td>{{ hospital.nombre }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="alert alert-danger" *ngIf="hospitales.length===0" >
+                No se encontraron hospitales con el termino: "{{ termino }}"
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Medicos encontrados ( <small>{{ medicos.length }}</small> )</h4>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let medico of medicos" [routerLink]="['/medico', medico._id]" class="pointer">
+                    <td class="w70">
+                      <img (click)="mostrarModal( medico._id )" src="{{ medico.img | imagen:'medico' }}" class="img-50 img-circle pointer" alt="medico.nombre">  
+                    </td>
+                    <td>{{ medico.nombre }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="alert alert-danger" *ngIf="medicos.length===0" >
+                  No se encontraron medicos con el termino: "{{ termino }}"
+              </div>
+          </div>
+        </div>
+      </div>
+
+</div>
