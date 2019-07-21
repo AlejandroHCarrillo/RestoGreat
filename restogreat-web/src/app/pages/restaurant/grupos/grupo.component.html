@@ -1,0 +1,67 @@
+<div class="row animated fadeIn">
+  <div class="col-md-6">
+    <div class="card card-body">
+      <h3 class="box-title m-b-0">Grupo: {{ grupo.nombre }}</h3>
+      <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarGrupo(f)">
+            <div class="form-group">
+              <label>Nombre del Grupo</label>
+              <input [(ngModel)]="grupo.nombre" name="nombre"
+                type="text"
+                class="form-control"
+                placeholder="Nombre del Grupo"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Abreviacion</label>
+              <input [(ngModel)]="grupo.abreviacion" name="abreviacion"
+                type="text"
+                class="form-control"
+                placeholder="Abreviacion"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Seccion</label><br>
+              <select (change)="cambioSeccion( $event.target.value );" [(ngModel)]="grupo.seccion" name="seccion" class="formControl" required>
+                <option value="">Seleccione un Seccion</option>
+                <option *ngFor="let seccion of secciones" [value]="seccion._id">{{ seccion.nombre }}</option>
+              </select>
+            </div>
+            <button type="submit"
+              class="btn btn-success waves-effect waves-light m-r-10">
+              <i class="fa fa-save"></i>
+              Guardar
+            </button>
+            <a
+              [routerLink]="'/grupos'"
+              class="btn btn-inverse waves-effect waves-light">
+              Cancel
+          </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card card-body">
+      <h4 class="box-title m-b-0">Seccion: <small>{{ seccion?.nombre }}</small> </h4>
+      <img *ngIf="seccion" src="{{ seccion.img | imagen : 'seccion' }}" alt="seccion.nombre" class="rounded img-fluid">  
+    </div>
+  </div>
+
+  <div class="col-md-3" >
+    <div class="card card-body">
+      <h4 class="box-title m-b-0">Foto: <small>{{ grupo.nombre }}</small></h4>
+      <img *ngIf="grupo._id" (click)="cambiarFoto( grupo._id )" [src]="grupo.img | imagen : 'grupo'" alt="" class="rounded img-fluid pointer"/>
+    </div>
+  </div>
+</div>
+<pre>
+
+  {{grupo|json}}
+</pre>

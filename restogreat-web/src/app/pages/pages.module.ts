@@ -35,6 +35,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
 //Restaurant 
 import { SeccionesComponent } from './restaurant/secciones/secciones.component';
+import { GruposComponent } from './restaurant/grupos/grupos.component';
+import { GrupoComponent } from './restaurant/grupos/grupo.component';
 
 @NgModule({
     declarations: [
@@ -49,12 +51,14 @@ import { SeccionesComponent } from './restaurant/secciones/secciones.component';
         RxjsComponent,
         ProfileComponent,
         UsuariosComponent,
-        HospitalesComponent,
+        HospitalesComponent,        
         MedicosComponent,
         MedicoComponent,
         // ModalUploadComponent,
         BusquedaComponent,
-        SeccionesComponent
+        SeccionesComponent,
+        GruposComponent,
+        GrupoComponent
     ],
     exports: [
         DashboardComponent,

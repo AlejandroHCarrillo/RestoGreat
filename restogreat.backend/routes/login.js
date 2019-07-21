@@ -235,20 +235,21 @@ function obtenerMenu(ROLE) {
     {
       titulo: "Mantenimiento",
       icono: "mdi mdi-folder-lock-open",
-      submenu: [
-        // { titulo: 'Usuarios', url: '/usuarios' },
-        // { titulo: 'Hospitales', url: '/hospitales' },
-        // { titulo: 'Medicos', url: '/medicos' }
-      ]
+      submenu: []
+    },
+    {
+      titulo: "Catalogos",
+      icono: "mdi mdi-folder-lock-open",
+      submenu: []
     }
   ];
 
   if (ROLE === "ADMIN_ROLE") {
     // console.log("es un administrador");
-    menu[1].submenu.unshift({ titulo: "Secciones", url: "/secciones" });
-    menu[1].submenu.push({ titulo: "Grupos", url: "/grupos" });
+    menu[2].submenu.unshift({ titulo: "Secciones", url: "/secciones" });
+    menu[2].submenu.push({ titulo: "Grupos", url: "/grupos" });
 
-    menu[1].submenu.push({ titulo: "Usuarios", url: "/usuarios" });
+    menu[1].submenu.unshift({ titulo: "Usuarios", url: "/usuarios" });
     menu[1].submenu.push({ titulo: "Hospitales", url: "/hospitales" });
     menu[1].submenu.push({ titulo: "Medicos", url: "/medicos" });
   }

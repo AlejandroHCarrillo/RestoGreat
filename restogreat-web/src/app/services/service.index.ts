@@ -12,3 +12,4 @@ export { SharedService } from './shared/shared.service';
 export { SidebarService } from './shared/sidebar.service';
 
 export { SeccionService } from './restaurant/seccion.service';
+export { GrupoService } from './restaurant/grupo.service';

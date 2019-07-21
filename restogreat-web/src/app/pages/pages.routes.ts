@@ -20,6 +20,8 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 
 import { ProfileComponent } from './profile/profile.component';
+import { GruposComponent } from './restaurant/grupos/grupos.component';
+import { GrupoComponent } from './restaurant/grupos/grupo.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -33,6 +35,8 @@ const pagesRoutes: Routes = [
     // Restaurant
     { path: 'secciones', component: SeccionesComponent, data: { titulo: 'Mantenimiento de secciones' } },
     { path: 'secciones/:id', component: SeccionesComponent, data: { titulo: 'Actualizar seccion' } },
+    { path: 'grupos', component: GruposComponent, data: { titulo: 'Mantenimiento de grupos' } },
+    { path: 'grupo/:id', component: GrupoComponent, data: { titulo: 'Actualizar grupo' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

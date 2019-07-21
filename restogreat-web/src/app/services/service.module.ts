@@ -1,3 +1,4 @@
+import { Grupo } from 'src/app/models/grupo.model';
 import { ModalUploadService } from './../components/modal-upload/modal-upload.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,8 @@ import {
   MedicoService,
   SubirArchivoService, 
 
-  SeccionService
+  SeccionService,
+  GrupoService
  } from './service.index';
 
 @NgModule({
@@ -36,7 +38,8 @@ import {
     SubirArchivoService,
     ModalUploadService,
 
-    SeccionService
+    SeccionService,
+    GrupoService
   ],
   declarations: []
 })

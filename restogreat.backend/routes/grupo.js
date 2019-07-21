@@ -13,8 +13,9 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Grupo.find({}, "nombre abreviacion seccion")
+  Grupo.find({}, "nombre abreviacion img seccion")
     .populate("usuario", "nombre email")
+    .populate("seccion", "nombre")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, grupos) => {
@@ -43,6 +44,7 @@ app.get("/:id", (req, res) => {
   var id = req.params.id;
   Grupo.findById(id)
     .populate("usuario", "nombre img email")
+    .populate("seccion", "nombre img")
     .exec((err, grupo) => {
       if (err) {
         return res.status(500).json({
@@ -93,6 +95,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     grupo.nombre = body.nombre;
     grupo.seccion = body.seccion;
+    grupo.img = body.img;
     grupo.usuario = req.usuario._id;
     grupo.abreviacion = body.abreviacion;
 
@@ -124,6 +127,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var grupo = new Grupo({
     nombre: body.nombre,
     seccion: body.seccion,
+    img: body.img,
     usuario: req.usuario._id,
     abreviacion: body.abreviacion
   });
