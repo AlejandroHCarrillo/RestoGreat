@@ -3,7 +3,7 @@ var Schema =	mongoose.Schema;
 
 var grupoSchema =	new Schema({
 				nombre: { type: String, required: [true, 'El nombre del grupo es necesario']	},
-				: { type: String, required: [true, 'La  del grupo es necesaria']	},
+				clave: { type: String, required: [true, 'La clave del grupo es necesaria']	},
 				img: { type: String, required: false },
 				seccion: { type: Schema.Types.ObjectId, ref: 'Seccion', required: [true, 'La  del grupo es necesaria'] },
 				usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },

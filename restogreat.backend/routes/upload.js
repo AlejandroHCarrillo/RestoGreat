@@ -13,9 +13,7 @@ var Hospital = require("../models/hospital");
 var Seccion = require("../models/seccion");
 var Grupo = require("../models/grupo");
 
-app.put("/:tipo/:id", (req, res) => {
-  console.log('Iniciando el guardado de la imagen');
-  
+app.put("/:tipo/:id", (req, res) => {  
   var tipo = req.params.tipo;
   var id = req.params.id;
   //  Validar archvios recibidos
@@ -62,8 +60,7 @@ app.put("/:tipo/:id", (req, res) => {
 
   // standarizamos el nombre
   // IDusuario-numeroRandom.ext
-  var nombreArchivo = `${id}-${new Date().getMilliseconds()}.${extensionArchivo}`;
-  
+  var nombreArchivo = `${id}-${new Date().getMilliseconds()}.${extensionArchivo}`;  
   //   Mover archivo a la carpeta adecuada
   var path = `./uploads/${tipo}/${nombreArchivo}`;
 
@@ -82,7 +79,6 @@ app.put("/:tipo/:id", (req, res) => {
 });
 
 function borrarImagenAnterior(tipo, imgAnterior){
-  console.log('Eliminar imagen anterior ' + tipo);
   var pathViejo = `./uploads/${tipo}/${imgAnterior}`;
   if (fs.existsSync(pathViejo)) {
     fs.unlink(pathViejo);
@@ -93,36 +89,20 @@ function subirImagenUsuario(id, tipo, res){
 
   Usuario.findById(id, (err, usuario) => {
     if (!usuario) {
-      return res.status(400).json({
-          ok: false,
-          mensaje: "Usuario no encontrado",
-          errors: { message: "El usuario buscado no existe"}
-        });
+      return retErr400(res, tipo);
     }
 
     // Localizamos y borramos la imagen anterior
     borrarImagenAnterior(tipo, usuario.img);
-    // var pathViejo = `./uploads/${tipo}/${usuario.img}`;
-    // if (fs.existsSync(pathViejo)) {
-    //   fs.unlink(pathViejo);
-    // }
 
     usuario.img = nombreArchivo;
     usuario.save((err, usuarioActualizado) => {
       if (err) {
-        return res.status(500).json({
-          ok: false,
-          mensaje: "Error actualizando la imagen",
-          errors: err
-        });
+        return retErr500(res, tipo, err);
       }
       usuarioActualizado.password = ":S";
 
-      return res.status(200).json({
-        ok: true,
-        mensaje: "Imagen actualizada con exito",
-        usuario: usuarioActualizado
-      });
+      return retOK200(res, tipo, usuarioActualizado);
     });
   });
 }
@@ -131,83 +111,45 @@ function subirImagenMedico(id, tipo, res){
 
   Medico.findById(id, (err, medico) => {
     if (!medico) {
-        return res.status(400).json({
-            ok: false,
-            mensaje: "Medico no encontrado",
-            errors: { message: "El medico buscado no existe"}
-          });
+      return retErr400(res, tipo);
     }
     // Localizamos y borramos la imagen anterior
     borrarImagenAnterior(tipo, medico.img);
-    // var pathViejo = `./uploads/${tipo}/${medico.img}`;
-    // if (fs.existsSync(pathViejo)) {
-    //   fs.unlink(pathViejo);
-    // }
 
     medico.img = nombreArchivo;
     medico.save((err, medicoActualizado) => {
       if (err) {
-        return res.status(500).json({
-          ok: false,
-          mensaje: "Error actualizando la imagen",
-          errors: err
-        });
+        return retErr500(res, tipo, err);
       }      
-      return res.status(200).json({
-        ok: true,
-        mensaje: "Imagen actualizada con exito",
-        medico: medicoActualizado
-      });
+      return retOK200(res, tipo, medicoActualizado);
     });
   });
   
 }
 
 function subirImagenHospital(id, tipo, res){
-
   Hospital.findById(id, (err, hospital) => {
     if (!hospital) {
-        return res.status(400).json({
-            ok: false,
-            mensaje: "Hospital no encontrado",
-            errors: { message: "El hospital buscado no existe"}
-          });
+      return retErr400(res, tipo);
     }
 
     // Localizamos y borramos la imagen anterior
     borrarImagenAnterior(tipo, hospital.img);
 
-    // var pathViejo = `./uploads/${tipo}/${hospital.img}`;    
-    // if (fs.existsSync(pathViejo)) {
-    //     console.log('eliminar archivo');
-    //   fs.unlink(pathViejo);
-    // }
-
     hospital.img = nombreArchivo;
 
     hospital.save((err, hospitalActualizado) => {
       if (err) {
-        return res.status(500).json({
-          ok: false,
-          mensaje: "Error actualizando la imagen",
-          errors: err
-        });
+        return retErr500(res, tipo, err);
       }      
-      return res.status(200).json({
-        ok: true,
-        mensaje: "Imagen actualizada con exito",
-        hospital: hospitalActualizado
-      });
+      return retOK200(res, tipo, hospitalActualizado);
     });
   });  
 }
 
 function subirImagenSeccion(id, tipo, nombreArchivo, res){
-  console.log('subir imagen ' + tipo);
-
   Seccion.findById(id, (err, seccion) => {
     if (!seccion) {
-    console.log('Elemento no encontrado ' + tipo);
       return retErr400(res, tipo);
     }
 
@@ -226,11 +168,8 @@ function subirImagenSeccion(id, tipo, nombreArchivo, res){
 }
 
 function subirImagenGrupo(id, tipo, nombreArchivo, res){
-  console.log('subir imagen ' + tipo);
-
   Grupo.findById(id, (err, grupo) => {
     if (!grupo) {
-      console.log('Elemento no encontrado ' + tipo);
       return retErr400(res, tipo);
     }
 
@@ -249,10 +188,6 @@ function subirImagenGrupo(id, tipo, nombreArchivo, res){
 }
 
 function retOK200 (res, tipo, data){
-  console.log(`Imagen (${tipo}) actualizada con exito.`);
-  console.log(data);
-  
-
   return res.status(200).json({
     ok: true,
     mensaje: `Imagen (${tipo}) actualizada con exito.`,
@@ -261,8 +196,6 @@ function retOK200 (res, tipo, data){
 }
 
 function retErr400(res, tipo){
-  console.log(`Elemento (${tipo}) buscado no existe.`);
-
   return res.status(400).json({
     ok: false,
     mensaje: `Elemento (${tipo}) no encontrado.`,
@@ -271,8 +204,6 @@ function retErr400(res, tipo){
 }
 
 function retErr500 (res, tipo, err){
-  console.log(`Error actualizando la imagen (${tipo}).`);
-  
   return res.status(500).json({
     ok: false,
     mensaje: `Error actualizando la imagen (${tipo}).`,
@@ -280,28 +211,25 @@ function retErr500 (res, tipo, err){
   });
 }
 
-
 function subirPorTipo(tipo, id, nombreArchivo, res) {
 
   if (tipo === "usuarios") {
-    subirImagenUsuario(id, tipo, res);
+    subirImagenUsuario(id, tipo, nombreArchivo, res);
   }
 
   if (tipo === "medicos") {
-    subirImagenMedico(id, tipo, res);
+    subirImagenMedico(id, tipo, nombreArchivo, res);
   }
 
   if (tipo === "hospitales") {
-    subirImagenHospital(id, tipo, res);
+    subirImagenHospital(id, tipo, nombreArchivo, res);
   }
 
   if (tipo === "secciones") {
-    console.log('subir imagen ' + tipo);
     subirImagenSeccion(id, tipo, nombreArchivo, res);
   }
 
   if (tipo === "grupos") {
-    console.log('subir imagen ' + tipo);
     subirImagenGrupo(id, tipo, nombreArchivo, res);
   }
 

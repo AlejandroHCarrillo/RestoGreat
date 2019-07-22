@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     modificadorrubro.nombre = body.nombre;
     modificadorrubro.usuario = req.usuario._id;
-    modificadorrubro. = body.;
+    modificadorrubro.clave = body.clave;
 
     // Actualizamos la modificadorrubro
     modificadorrubro.save((err, modificadorrubroGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var modificadorrubro = new ModificadorRubro({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   modificadorrubro.save((err, modificadorrubroGuardado) => {

@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     seccion.nombre = body.nombre;
     seccion.usuario = req.usuario._id;
-    seccion. = body.;
+    seccion.clave = body.clave;
 
     // Actualizamos la seccion
     seccion.save((err, seccionGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var seccion = new Seccion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   seccion.save((err, seccionGuardado) => {

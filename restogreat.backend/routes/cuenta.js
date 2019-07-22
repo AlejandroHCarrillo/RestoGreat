@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     cuenta.nombre = body.nombre;
     cuenta.usuario = req.usuario._id;
-    cuenta. = body.;
+    cuenta.clave = body.clave;
 
     // Actualizamos la cuenta
     cuenta.save((err, cuentaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var cuenta = new Seccion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   cuenta.save((err, cuentaGuardado) => {

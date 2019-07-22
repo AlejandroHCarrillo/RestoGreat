@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     conceptodescuento.nombre = body.nombre;
     conceptodescuento.usuario = req.usuario._id;
-    conceptodescuento. = body.;
+    conceptodescuento.clave = body.clave;
 
     // Actualizamos la conceptodescuento
     conceptodescuento.save((err, conceptodescuentoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var conceptodescuento = new ConceptoDescuento({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   conceptodescuento.save((err, conceptodescuentoGuardado) => {

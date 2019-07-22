@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     parametroConfiguracion.nombre = body.nombre;
     parametroConfiguracion.usuario = req.usuario._id;
-    parametroConfiguracion. = body.;
+    parametroConfiguracion.clave = body.clave;
 
     // Actualizamos la parametroConfiguracion
     parametroConfiguracion.save((err, parametroConfiguracionGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var parametroConfiguracion = new ParametroConfiguracion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   parametroConfiguracion.save((err, parametroConfiguracionGuardado) => {

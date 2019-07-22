@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     impresoracomanda.nombre = body.nombre;
     impresoracomanda.usuario = req.usuario._id;
-    impresoracomanda. = body.;
+    impresoracomanda.clave = body.clave;
 
     // Actualizamos la impresoracomanda
     impresoracomanda.save((err, impresoracomandaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var impresoracomanda = new ImpresoraComanda({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   impresoracomanda.save((err, impresoracomandaGuardado) => {

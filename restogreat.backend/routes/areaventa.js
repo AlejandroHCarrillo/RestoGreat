@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     areaventa.nombre = body.nombre;
     areaventa.usuario = req.usuario._id;
-    areaventa. = body.;
+    areaventa.clave = body.clave;
 
     // Actualizamos la areaventa
     areaventa.save((err, areaventaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var areaventa = new AreaVenta({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave: body.clave
   });
 
   areaventa.save((err, areaventaGuardado) => {

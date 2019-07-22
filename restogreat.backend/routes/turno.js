@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     turno.nombre = body.nombre;
     turno.usuario = req.usuario._id;
-    turno. = body.;
+    turno.clave = body.clave;
 
     // Actualizamos la turno
     turno.save((err, turnoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var turno = new Turno({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   turno.save((err, turnoGuardado) => {

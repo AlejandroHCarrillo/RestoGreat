@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     formaPago.nombre = body.nombre;
     formaPago.usuario = req.usuario._id;
-    formaPago. = body.;
+    formaPago.clave = body.clave;
 
     // Actualizamos la formaPago
     formaPago.save((err, formaPagoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var formaPago = new FormPago({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   formaPago.save((err, formaPagoGuardado) => {

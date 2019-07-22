@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     cortecaja.nombre = body.nombre;
     cortecaja.usuario = req.usuario._id;
-    cortecaja. = body.;
+    cortecaja.clave = body.clave;
 
     // Actualizamos la cortecaja
     cortecaja.save((err, cortecajaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var cortecaja = new CorteCaja({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   cortecaja.save((err, cortecajaGuardado) => {

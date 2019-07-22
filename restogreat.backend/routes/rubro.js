@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     rubro.nombre = body.nombre;
     rubro.usuario = req.usuario._id;
-    rubro. = body.;
+    rubro.clave = body.clave;
 
     // Actualizamos la rubro
     rubro.save((err, rubroGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var rubro = new Rubro({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   rubro.save((err, rubroGuardado) => {

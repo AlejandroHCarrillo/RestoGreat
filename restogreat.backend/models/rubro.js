@@ -3,7 +3,7 @@ var Schema =	mongoose.Schema;
 
 var rubroSchema =	new Schema({
 				nombre: { type: String, required: [true, 'El nombre del rubro es necesario']	},
-				: { type: String, required: [true, 'La  de la rubro es necesaria']	},
+				clave: { type: String, required: [true, 'La clave del rubro es necesaria']	},
 				seccion: { type: Schema.Types.ObjectId, ref: 'Seccion' },
 				usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },

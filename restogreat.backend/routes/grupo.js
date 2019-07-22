@@ -97,7 +97,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     grupo.seccion = body.seccion;
     grupo.img = body.img;
     grupo.usuario = req.usuario._id;
-    grupo. = body.;
+    grupo.clave = body.clave;
 
     // Actualizamos el grupo
     grupo.save((err, grupoGuardado) => {
@@ -129,7 +129,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     seccion: body.seccion,
     img: body.img,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   grupo.save((err, grupoGuardado) => {

@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     cliente.nombre = body.nombre;
     cliente.usuario = req.usuario._id;
-    cliente. = body.;
+    cliente.clave = body.clave;
 
     // Actualizamos la cliente
     cliente.save((err, clienteGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var cliente = new Cliente({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   cliente.save((err, clienteGuardado) => {

@@ -97,7 +97,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     producto.nombre = body.nombre;
     producto.nombreCorto = body.nombreCorto;
     producto.descripcion = body.descripcion;
-    producto. = body.;
+    producto.clave = body.clave;
     producto.precio = body.precio;
     producto.tienePrecioAbierto = body.tienePrecioAbierto;
     producto.fechaActualizacion = Date.now;
@@ -134,7 +134,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     nombre : body.nombre,
     nombreCorto : body.nombreCorto,
     descripcion : body.descripcion,
-    : body.,
+    clave : body.clave,
     precio : body.precio,
     tienePrecioAbierto : body.tienePrecioAbierto,
     fechaAlta : new Date(),

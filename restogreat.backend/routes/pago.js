@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     pago.nombre = body.nombre;
     pago.usuario = req.usuario._id;
-    pago. = body.;
+    pago.clave = body.clave;
 
     // Actualizamos la pago
     pago.save((err, pagoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var pago = new Pago({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   pago.save((err, pagoGuardado) => {

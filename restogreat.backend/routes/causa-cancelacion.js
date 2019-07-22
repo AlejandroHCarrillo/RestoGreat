@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     causacancelacion.nombre = body.nombre;
     causacancelacion.usuario = req.usuario._id;
-    causacancelacion. = body.;
+    causacancelacion.clave = body.clave;
 
     // Actualizamos la causacancelacion
     causacancelacion.save((err, causacancelacionGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var causacancelacion = new CausaCancelacion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   causacancelacion.save((err, causacancelacionGuardado) => {

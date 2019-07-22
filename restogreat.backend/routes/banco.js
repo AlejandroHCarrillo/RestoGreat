@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     banco.nombre = body.nombre;
     banco.usuario = req.usuario._id;
-    banco. = body.;
+    banco.clave = body.clave;
 
     // Actualizamos la banco
     banco.save((err, bancoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var banco = new Banco({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   banco.save((err, bancoGuardado) => {

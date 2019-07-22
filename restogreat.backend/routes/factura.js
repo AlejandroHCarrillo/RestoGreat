@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     factura.nombre = body.nombre;
     factura.usuario = req.usuario._id;
-    factura. = body.;
+    factura.clave = body.clave;
 
     // Actualizamos la factura
     factura.save((err, facturaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var factura = new Factura({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   factura.save((err, facturaGuardado) => {

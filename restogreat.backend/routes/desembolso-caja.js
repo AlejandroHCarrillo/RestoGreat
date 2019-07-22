@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     desembolsocaja.nombre = body.nombre;
     desembolsocaja.usuario = req.usuario._id;
-    desembolsocaja. = body.;
+    desembolsocaja.clave = body.clave;
 
     // Actualizamos la desembolsocaja
     desembolsocaja.save((err, desembolsocajaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var desembolsocaja = new DesembolsoCaja({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    : body.
+    clave : body.clave
   });
 
   desembolsocaja.save((err, desembolsocajaGuardado) => {
