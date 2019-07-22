@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ModificadorRubro.find({}, "nombre abreviacion")
+  ModificadorRubro.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     modificadorrubro.nombre = body.nombre;
     modificadorrubro.usuario = req.usuario._id;
-    modificadorrubro.abreviacion = body.abreviacion;
+    modificadorrubro. = body.;
 
     // Actualizamos la modificadorrubro
     modificadorrubro.save((err, modificadorrubroGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var modificadorrubro = new ModificadorRubro({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   modificadorrubro.save((err, modificadorrubroGuardado) => {

@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ParametroConfiguracion.find({}, "nombre abreviacion")
+  ParametroConfiguracion.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     parametroConfiguracion.nombre = body.nombre;
     parametroConfiguracion.usuario = req.usuario._id;
-    parametroConfiguracion.abreviacion = body.abreviacion;
+    parametroConfiguracion. = body.;
 
     // Actualizamos la parametroConfiguracion
     parametroConfiguracion.save((err, parametroConfiguracionGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var parametroConfiguracion = new ParametroConfiguracion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   parametroConfiguracion.save((err, parametroConfiguracionGuardado) => {

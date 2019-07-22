@@ -3,7 +3,7 @@ export class ImpresoraComanda {
         public nombre: string,
         public fechaAlta: Date,
 
-        public abreviacion?: string,        
+        public clave?: string,        
         public usuario?: string,
         public fechaActualizacion?: Date,
         public _id?: string

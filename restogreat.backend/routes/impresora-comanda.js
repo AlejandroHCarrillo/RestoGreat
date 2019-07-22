@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ImpresoraComanda.find({}, "nombre abreviacion")
+  ImpresoraComanda.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     impresoracomanda.nombre = body.nombre;
     impresoracomanda.usuario = req.usuario._id;
-    impresoracomanda.abreviacion = body.abreviacion;
+    impresoracomanda. = body.;
 
     // Actualizamos la impresoracomanda
     impresoracomanda.save((err, impresoracomandaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var impresoracomanda = new ImpresoraComanda({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   impresoracomanda.save((err, impresoracomandaGuardado) => {

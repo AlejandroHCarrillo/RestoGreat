@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Seccion.find({}, "nombre abreviacion img")
+  Seccion.find({}, "nombre  img")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     seccion.nombre = body.nombre;
     seccion.usuario = req.usuario._id;
-    seccion.abreviacion = body.abreviacion;
+    seccion. = body.;
 
     // Actualizamos la seccion
     seccion.save((err, seccionGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var seccion = new Seccion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   seccion.save((err, seccionGuardado) => {

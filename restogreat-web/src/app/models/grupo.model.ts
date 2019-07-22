@@ -4,7 +4,7 @@ export class Grupo {
         public nombre: string,
         public fechaAlta: Date,
         public seccion: string,
-        public abreviacion?: string,
+        public clave?: string,
         public img?: string,
         public usuario?: string,
         public fechaActualizacion?: Date,

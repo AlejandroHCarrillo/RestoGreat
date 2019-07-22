@@ -3,7 +3,7 @@ var Schema =	mongoose.Schema;
 
 var areaVentaSchema =	new Schema({
 				nombre: { type: String, required: [true, 'El nombre de la area de venta es necesario']	},
-                abreviacion: { type: String, required: [true, 'La abreviacion de la area de venta es necesaria']	},
+                clave: { type: String, required: [true, 'La clave del area de venta es necesaria']	},
 				mesainicio: { type: Number },
 				mesafin: { type: Number },
                 cargoservicio: { type: Number },

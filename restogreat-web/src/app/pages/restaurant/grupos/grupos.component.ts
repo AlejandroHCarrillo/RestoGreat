@@ -117,7 +117,7 @@ export class GruposComponent implements OnInit {
     }).then(value => {
       let grupo = new Grupo( value.value,  new Date(), "");
 
-      grupo.abreviacion = value.value;  
+      grupo.clave = value.value;  
       grupo.fechaActualizacion = new Date();
       grupo.usuario =  this._usuarioService.usuario._id;
 

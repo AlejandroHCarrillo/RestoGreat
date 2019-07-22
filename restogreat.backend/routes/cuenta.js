@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Seccion.find({}, "nombre abreviacion")
+  Seccion.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     cuenta.nombre = body.nombre;
     cuenta.usuario = req.usuario._id;
-    cuenta.abreviacion = body.abreviacion;
+    cuenta. = body.;
 
     // Actualizamos la cuenta
     cuenta.save((err, cuentaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var cuenta = new Seccion({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   cuenta.save((err, cuentaGuardado) => {

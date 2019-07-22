@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  AreaVenta.find({}, "nombre abreviacion")
+  AreaVenta.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     areaventa.nombre = body.nombre;
     areaventa.usuario = req.usuario._id;
-    areaventa.abreviacion = body.abreviacion;
+    areaventa. = body.;
 
     // Actualizamos la areaventa
     areaventa.save((err, areaventaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var areaventa = new AreaVenta({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   areaventa.save((err, areaventaGuardado) => {

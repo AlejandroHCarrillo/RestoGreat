@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Banco.find({}, "nombre abreviacion")
+  Banco.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     banco.nombre = body.nombre;
     banco.usuario = req.usuario._id;
-    banco.abreviacion = body.abreviacion;
+    banco. = body.;
 
     // Actualizamos la banco
     banco.save((err, bancoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var banco = new Banco({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   banco.save((err, bancoGuardado) => {

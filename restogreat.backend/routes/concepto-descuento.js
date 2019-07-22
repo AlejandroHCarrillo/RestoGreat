@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ConceptoDescuento.find({}, "nombre abreviacion")
+  ConceptoDescuento.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     conceptodescuento.nombre = body.nombre;
     conceptodescuento.usuario = req.usuario._id;
-    conceptodescuento.abreviacion = body.abreviacion;
+    conceptodescuento. = body.;
 
     // Actualizamos la conceptodescuento
     conceptodescuento.save((err, conceptodescuentoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var conceptodescuento = new ConceptoDescuento({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   conceptodescuento.save((err, conceptodescuentoGuardado) => {

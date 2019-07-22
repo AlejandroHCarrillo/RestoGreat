@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Rubro.find({}, "nombre abreviacion")
+  Rubro.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     rubro.nombre = body.nombre;
     rubro.usuario = req.usuario._id;
-    rubro.abreviacion = body.abreviacion;
+    rubro. = body.;
 
     // Actualizamos la rubro
     rubro.save((err, rubroGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var rubro = new Rubro({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   rubro.save((err, rubroGuardado) => {

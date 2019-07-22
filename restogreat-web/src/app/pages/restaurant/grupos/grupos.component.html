@@ -44,7 +44,7 @@
             <tr>
               <th>Imagen</th>
               <th>Nombre</th>
-              <th>Abreviacion</th>
+              <th>Clave</th>
               <th>Seccion</th>
               <th></th>
             </tr>
@@ -57,7 +57,7 @@
               <td>
                 <input type="text" class="form-control" [(ngModel)]="grupo.nombre">
               </td>
-              <td>{{ grupo.abreviacion }}</td>
+              <td>{{ grupo.clave }}</td>
               <td>{{ grupo.seccion?.nombre }}</td>
               <td>
                   <button (click)="guardarGrupo(grupo)" class="btn btn-primary">

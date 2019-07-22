@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  CorteCaja.find({}, "nombre abreviacion")
+  CorteCaja.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     cortecaja.nombre = body.nombre;
     cortecaja.usuario = req.usuario._id;
-    cortecaja.abreviacion = body.abreviacion;
+    cortecaja. = body.;
 
     // Actualizamos la cortecaja
     cortecaja.save((err, cortecajaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var cortecaja = new CorteCaja({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   cortecaja.save((err, cortecajaGuardado) => {

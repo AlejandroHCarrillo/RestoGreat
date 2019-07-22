@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Turno.find({}, "nombre abreviacion")
+  Turno.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     turno.nombre = body.nombre;
     turno.usuario = req.usuario._id;
-    turno.abreviacion = body.abreviacion;
+    turno. = body.;
 
     // Actualizamos la turno
     turno.save((err, turnoGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var turno = new Turno({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   turno.save((err, turnoGuardado) => {

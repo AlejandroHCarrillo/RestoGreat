@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Cliente.find({}, "nombre abreviacion")
+  Cliente.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     cliente.nombre = body.nombre;
     cliente.usuario = req.usuario._id;
-    cliente.abreviacion = body.abreviacion;
+    cliente. = body.;
 
     // Actualizamos la cliente
     cliente.save((err, clienteGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var cliente = new Cliente({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   cliente.save((err, clienteGuardado) => {

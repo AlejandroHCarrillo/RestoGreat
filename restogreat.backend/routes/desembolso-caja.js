@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  DesembolsoCaja.find({}, "nombre abreviacion")
+  DesembolsoCaja.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -93,7 +93,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     desembolsocaja.nombre = body.nombre;
     desembolsocaja.usuario = req.usuario._id;
-    desembolsocaja.abreviacion = body.abreviacion;
+    desembolsocaja. = body.;
 
     // Actualizamos la desembolsocaja
     desembolsocaja.save((err, desembolsocajaGuardado) => {
@@ -123,7 +123,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var desembolsocaja = new DesembolsoCaja({
     nombre: body.nombre,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   desembolsocaja.save((err, desembolsocajaGuardado) => {

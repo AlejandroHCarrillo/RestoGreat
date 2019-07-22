@@ -3,7 +3,7 @@ var Schema =	mongoose.Schema;
 
 var cuentaSchema =	new Schema({
 				nombre: { type: String, required: [true, 'El nombre de la cuenta es necesario']	},
-				abreviacion: { type: String, required: [true, 'La abreviacion de la cuenta es necesaria']	},
+				clave: { type: String, required: [true, 'La clave de la cuenta es necesaria']	},
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },
                 fechaActualizacion: { type: Date }

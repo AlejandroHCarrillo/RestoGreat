@@ -3,7 +3,7 @@ var Schema =	mongoose.Schema;
 
 var conceptodescuentoSchema =	new Schema({
 				nombre: { type: String, required: [true, 'El concepto del descuento es necesario']	},
-				abreviacion: { type: String, required: [true, 'La abreviacion de la concepto del descuento es necesaria']	},
+				clave: { type: String, required: [true, 'La clave del concepto del descuento es necesaria']	},
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },
                 fechaActualizacion: { type: Date }

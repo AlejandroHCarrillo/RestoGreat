@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Grupo.find({}, "nombre abreviacion img seccion")
+  Grupo.find({}, "nombre  img seccion")
     .populate("usuario", "nombre email")
     .populate("seccion", "nombre")
     .skip(desde)
@@ -97,7 +97,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     grupo.seccion = body.seccion;
     grupo.img = body.img;
     grupo.usuario = req.usuario._id;
-    grupo.abreviacion = body.abreviacion;
+    grupo. = body.;
 
     // Actualizamos el grupo
     grupo.save((err, grupoGuardado) => {
@@ -129,7 +129,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     seccion: body.seccion,
     img: body.img,
     usuario: req.usuario._id,
-    abreviacion: body.abreviacion
+    : body.
   });
 
   grupo.save((err, grupoGuardado) => {
