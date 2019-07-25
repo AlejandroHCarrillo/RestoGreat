@@ -43,6 +43,7 @@
             <tr>
               <th>Imagen</th>
               <th>Nombre</th>
+              <th>Clave</th>
               <th></th>
             </tr>
           </thead>
@@ -53,6 +54,9 @@
               </td>
               <td>
                 <input type="text" class="form-control" [(ngModel)]="seccion.nombre">
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="seccion.clave">
               </td>
               <td>
                 <button (click)="guardarSeccion(seccion)" class="btn btn-primary">

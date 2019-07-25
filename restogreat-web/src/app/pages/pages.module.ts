@@ -37,6 +37,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { SeccionesComponent } from './restaurant/secciones/secciones.component';
 import { GruposComponent } from './restaurant/grupos/grupos.component';
 import { GrupoComponent } from './restaurant/grupos/grupo.component';
+import { ColascomandaComponent } from './restaurant/colascomanda/colascomanda.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import { GrupoComponent } from './restaurant/grupos/grupo.component';
         BusquedaComponent,
         SeccionesComponent,
         GruposComponent,
-        GrupoComponent
+        GrupoComponent,
+        ColascomandaComponent
     ],
     exports: [
         DashboardComponent,

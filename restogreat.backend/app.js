@@ -49,7 +49,7 @@ var desembolsoCajaRoutes = require('./routes/desembolso-caja');
 var facturaRoutes = require('./routes/factura');
 var formaPagoRoutes = require('./routes/forma-pago');
 var grupoRoutes = require('./routes/grupo');
-var impresoraComandaRoutes = require('./routes/impresora-comanda');
+var colaComandaRoutes = require('./routes/colacomanda');
 var meseroRoutes = require('./routes/mesero');
 var modificadorRubroRoutes = require('./routes/modificador-rubro');
 var turnoRoutes = require('./routes/turno');
@@ -77,7 +77,7 @@ app.use('/desembolsocaja', desembolsoCajaRoutes)
 app.use('/factura', facturaRoutes)
 app.use('/formapago', formaPagoRoutes)
 app.use('/grupo', grupoRoutes)
-app.use('/impresoraComanda', impresoraComandaRoutes)
+app.use('/colacomanda', colaComandaRoutes)
 app.use('/mesero', meseroRoutes)
 app.use('/modificadorrubro', modificadorRubroRoutes)
 app.use('/turno', turnoRoutes)

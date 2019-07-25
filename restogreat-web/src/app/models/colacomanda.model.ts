@@ -1,4 +1,4 @@
-export class ImpresoraComanda {
+export class ColaComanda {
     constructor(
         public nombre: string,
         public fechaAlta: Date,

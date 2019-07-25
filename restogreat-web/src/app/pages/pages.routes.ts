@@ -1,4 +1,3 @@
-import { SeccionesComponent } from './restaurant/secciones/secciones.component';
 import { VerificatokenGuard } from '../services/service.index';
 import { AdminGuard } from './../services/guards/admin.guard';
 
@@ -22,6 +21,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GruposComponent } from './restaurant/grupos/grupos.component';
 import { GrupoComponent } from './restaurant/grupos/grupo.component';
+import { SeccionesComponent } from './restaurant/secciones/secciones.component';
+import { ColascomandaComponent } from './restaurant/colascomanda/colascomanda.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -37,6 +38,8 @@ const pagesRoutes: Routes = [
     { path: 'secciones/:id', component: SeccionesComponent, data: { titulo: 'Actualizar seccion' } },
     { path: 'grupos', component: GruposComponent, data: { titulo: 'Mantenimiento de grupos' } },
     { path: 'grupo/:id', component: GrupoComponent, data: { titulo: 'Actualizar grupo' } },
+    { path: 'colascomanda', component: ColascomandaComponent, data: { titulo: 'Colas de impresion de comandas' } },
+
 
     //  Mantenimiento
     {   path: 'usuarios', 

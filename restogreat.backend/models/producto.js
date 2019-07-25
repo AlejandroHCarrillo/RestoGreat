@@ -12,7 +12,7 @@ var productoSchema =	new Schema({
         fechaAlta: { type: Date },
         fechaActualizacion: { type: Date },
         imprimir: { type: Boolean },
-        impresoraComandas: { type: Schema.Types.ObjectId, ref: 'ImpresoraComandas' },
+        colaComandas: { type: Schema.Types.ObjectId, ref: 'ColaComandas' },
         img: { type: String, required: false },
         usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' }
 },	{	collection: 'productos' });

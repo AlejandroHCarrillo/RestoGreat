@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Seccion.find({}, "nombre  img")
+  Seccion.find({}, "nombre clave img")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)

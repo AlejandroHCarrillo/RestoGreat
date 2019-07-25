@@ -4,32 +4,33 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var ImpresoraComanda = require("../models/impresora-comanda");
+var ColaComanda = require("../models/colacomanda");
 
 // ==========================================================
-// Obtener todas las impresorascomandas
+// Obtener todas las colascomandas
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ImpresoraComanda.find({}, "nombre ")
+  // console.log(ColaComanda);
+  ColaComanda.find({}, "nombre")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
-    .exec((err, impresorascomandas) => {
+    .exec((err, colascomandas) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las impresorascomandas",
+          mensaje: "Error cargando las colas de comandas",
           errors: err
         });
       }
 
-      ImpresoraComanda.countDocuments({}, (err, conteo) => {
+      ColaComanda.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
-          impresorascomandas: impresorascomandas,
+          colascomandas: colascomandas,
           total: conteo
         });
       });
@@ -37,138 +38,138 @@ app.get("/", (req, res, next) => {
 });
 
 // ==========================================
-// Obtener ImpresoraComanda por ID
+// Obtener ColaComanda por ID
 // ==========================================
 app.get("/:id", (req, res) => {
   var id = req.params.id;
-  ImpresoraComanda.findById(id)
+  ColaComanda.findById(id)
     .populate("usuario", "nombre img email")
-    .exec((err, impresoracomanda) => {
+    .exec((err, colacomanda) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error al buscar impresoracomanda",
+          mensaje: "Error al buscar colacomanda",
           errors: err
         });
       }
-      if (!impresoracomanda) {
+      if (!colacomanda) {
         return res.status(400).json({
           ok: false,
-          mensaje: "La impresoracomanda con el id " + id + "no existe",
-          errors: { message: "No existe un impresoracomanda con ese ID" }
+          mensaje: "La cola de comandas con el id " + id + "no existe",
+          errors: { message: "No existe un colacomanda con ese ID" }
         });
       }
       res.status(200).json({
         ok: true,
-        impresoracomanda: impresoracomanda
+        colacomanda: colacomanda
       });
     });
 });
 
 // ==========================================================
-// Actualizar ImpresoraComanda
+// Actualizar ColaComanda
 // ==========================================================
 app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  ImpresoraComanda.findById(id, (err, impresoracomanda) => {
+  ColaComanda.findById(id, (err, colacomanda) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al buscar un impresoracomanda",
+        mensaje: "Error al buscar la cola de comandas",
         errors: err
       });
     }
     // validar si no hay datos para actualizar
-    if (!impresoracomanda) {
+    if (!colacomanda) {
       return res.status(400).json({
         ok: false,
-        mensaje: "El impresoracomanda con el id " + id + " no existe",
-        errors: { message: "No existe un impresoracomanda con ese ID" }
+        mensaje: "La cola de comandas con el id " + id + " no existe",
+        errors: { message: "No existe una cola de comandas con ese ID" }
       });
     }
 
     var body = req.body;
 
-    impresoracomanda.nombre = body.nombre;
-    impresoracomanda.usuario = req.usuario._id;
-    impresoracomanda.clave = body.clave;
+    colacomanda.nombre = body.nombre;
+    colacomanda.usuario = req.usuario._id;
 
-    // Actualizamos la impresoracomanda
-    impresoracomanda.save((err, impresoracomandaGuardado) => {
+    // Actualizamos la colacomanda
+    colacomanda.save((err, colacomandaGuardado) => {
       // Manejo de errores
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error la actualizar el impresoracomanda",
+          mensaje: "Error la actualizar el cola de comanda",
           errors: err
         });
       }
 
       res.status(200).json({
         ok: true,
-        impresoracomanda: impresoracomandaGuardado
+        colacomanda: colacomandaGuardado
       });
     });
   });
 });
 
 // ==========================================================
-// Crear una nueva impresoracomanda
+// Crear una nueva colacomanda
 // ==========================================================
 app.post("/", mdAutentificacion.verificaToken, (req, res) => {
+  console.log('creando cola de impresion de comandas');
+  
   var body = req.body;
 
-  var impresoracomanda = new ImpresoraComanda({
+  var colacomanda = new ColaComanda({
     nombre: body.nombre,
-    usuario: req.usuario._id,
-    clave : body.clave
+    usuario: req.usuario._id
   });
 
-  impresoracomanda.save((err, impresoracomandaGuardado) => {
+  colacomanda.save((err, colacomandaGuardado) => {
     if (err) {
       return res.status(400).json({
         ok: false,
-        mensaje: "Error guardando la impresoracomanda",
+        mensaje: "Error guardando la colacomanda",
         errors: err
       });
     }
 
     res.status(201).json({
       ok: true,
-      impresoracomanda: impresoracomandaGuardado
+      colacomanda: colacomandaGuardado
     });
   });
 });
 
 // ==========================================================
-// Eliminar una impresoracomanda por el Id
+// Eliminar una colacomanda por el Id
 // ==========================================================
 app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  ImpresoraComanda.findByIdAndDelete(id, (err, impresoracomandaBorrado) => {
+  ColaComanda.findByIdAndDelete(id, (err, colacomandaBorrado) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al borrar impresoracomanda",
+        mensaje: "Error al borrar colacomanda",
         errors: err
       });
     }
 
-    if (!impresoracomandaBorrado) {
+    if (!colacomandaBorrado) {
       return res.status(400).json({
         ok: false,
-        mensaje: "No existe la impresoracomanda con ese id para ser borrada",
-        errors: { message: "ImpresoraComanda no encontrada con ese id" }
+        mensaje: "No existe la colacomanda con ese id para ser borrada",
+        errors: { message: "ColaComanda no encontrada con ese id" }
       });
     }
 
     res.status(200).json({
       ok: true,
-      impresoracomanda: impresoracomandaBorrado
+      colacomanda: colacomandaBorrado
     });
   });
 });

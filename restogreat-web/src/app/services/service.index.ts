@@ -13,3 +13,4 @@ export { SidebarService } from './shared/sidebar.service';
 
 export { SeccionService } from './restaurant/seccion.service';
 export { GrupoService } from './restaurant/grupo.service';
+export { ColacomandaService } from './restaurant/colacomanda.service';

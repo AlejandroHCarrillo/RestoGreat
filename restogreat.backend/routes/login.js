@@ -248,6 +248,7 @@ function obtenerMenu(ROLE) {
     // console.log("es un administrador");
     menu[2].submenu.unshift({ titulo: "Secciones", url: "/secciones" });
     menu[2].submenu.push({ titulo: "Grupos", url: "/grupos" });
+    menu[2].submenu.push({ titulo: "Pila de Comandas", url: "/colascomanda" });
 
     menu[1].submenu.unshift({ titulo: "Usuarios", url: "/usuarios" });
     menu[1].submenu.push({ titulo: "Hospitales", url: "/hospitales" });
