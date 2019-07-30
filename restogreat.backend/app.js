@@ -38,6 +38,10 @@ var imagenesRoutes = require('./routes/imagenes')
 
 //Rutas Resto Great
 var seccionRoutes = require('./routes/seccion');
+var grupoRoutes = require('./routes/grupo');
+var colaComandaRoutes = require('./routes/colacomanda');
+var productoRoutes = require('./routes/producto');
+
 var areaventaRoutes = require('./routes/areaventa');
 var bancoRoutes = require('./routes/banco'); 
 var causaCancelacionRoutes = require('./routes/causa-cancelacion');
@@ -48,14 +52,11 @@ var cuentaRoutes = require('./routes/cuenta');
 var desembolsoCajaRoutes = require('./routes/desembolso-caja');
 var facturaRoutes = require('./routes/factura');
 var formaPagoRoutes = require('./routes/forma-pago');
-var grupoRoutes = require('./routes/grupo');
-var colaComandaRoutes = require('./routes/colacomanda');
 var meseroRoutes = require('./routes/mesero');
 var modificadorRubroRoutes = require('./routes/modificador-rubro');
 var turnoRoutes = require('./routes/turno');
 var pagoRoutes = require('./routes/pago');
 var parametroConfiguracionRoutes = require('./routes/parametro-configuracion');
-var productoRoutes = require('./routes/producto');
 var rubroRoutes = require('./routes/rubro');
 
 // Conexion a la base de datos
@@ -66,6 +67,10 @@ mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/' + databas
 
 // Rutas
 app.use('/seccion', seccionRoutes);
+app.use('/grupo', grupoRoutes)
+app.use('/colacomanda', colaComandaRoutes)
+app.use('/producto', productoRoutes)
+
 app.use('/areaventa', areaventaRoutes);
 app.use('/banco', bancoRoutes);
 app.use('/causacancelacion', causaCancelacionRoutes)
@@ -76,14 +81,11 @@ app.use('/cuenta', cuentaRoutes)
 app.use('/desembolsocaja', desembolsoCajaRoutes)
 app.use('/factura', facturaRoutes)
 app.use('/formapago', formaPagoRoutes)
-app.use('/grupo', grupoRoutes)
-app.use('/colacomanda', colaComandaRoutes)
 app.use('/mesero', meseroRoutes)
 app.use('/modificadorrubro', modificadorRubroRoutes)
 app.use('/turno', turnoRoutes)
 app.use('/pago', pagoRoutes)
 app.use('/parametroconfiguracion', parametroConfiguracionRoutes)
-app.use('/producto', productoRoutes)
 app.use('/rubro', rubroRoutes)
 
 app.use('/img', imagenesRoutes)

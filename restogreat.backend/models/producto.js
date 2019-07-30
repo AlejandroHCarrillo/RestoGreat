@@ -9,11 +9,11 @@ var productoSchema =	new Schema({
         descripcion: { type: String, required: [true, 'La descripcion del producto es necesaria']	},
         precio: { type: Number, required: [true, 'El precio del producto es necesario']	},
         tienePrecioAbierto: { type: Boolean },
-        fechaAlta: { type: Date },
-        fechaActualizacion: { type: Date },
         imprimir: { type: Boolean },
         colaComandas: { type: Schema.Types.ObjectId, ref: 'ColaComandas' },
         img: { type: String, required: false },
+        fechaAlta: { type: Date },
+        fechaActualizacion: { type: Date },
         usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' }
 },	{	collection: 'productos' });
 

@@ -27,7 +27,7 @@
             <div class="form-group">
               <label>Seccion</label><br>
               <select (change)="cambioSeccion( $event.target.value );" [(ngModel)]="grupo.seccion" name="seccion" class="formControl" required>
-                <option value="">Seleccione un Seccion</option>
+                <option value="">Seleccione una Seccion</option>
                 <option *ngFor="let seccion of secciones" [value]="seccion._id">{{ seccion.nombre }}</option>
               </select>
             </div>

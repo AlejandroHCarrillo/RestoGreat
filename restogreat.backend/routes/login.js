@@ -249,6 +249,7 @@ function obtenerMenu(ROLE) {
     menu[2].submenu.unshift({ titulo: "Secciones", url: "/secciones" });
     menu[2].submenu.push({ titulo: "Grupos", url: "/grupos" });
     menu[2].submenu.push({ titulo: "Pila de Comandas", url: "/colascomanda" });
+    menu[2].submenu.push({ titulo: "Productos Platillos", url: "/producto" });
 
     menu[1].submenu.unshift({ titulo: "Usuarios", url: "/usuarios" });
     menu[1].submenu.push({ titulo: "Hospitales", url: "/hospitales" });

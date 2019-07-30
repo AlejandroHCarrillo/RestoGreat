@@ -23,6 +23,8 @@ import { GruposComponent } from './restaurant/grupos/grupos.component';
 import { GrupoComponent } from './restaurant/grupos/grupo.component';
 import { SeccionesComponent } from './restaurant/secciones/secciones.component';
 import { ColascomandaComponent } from './restaurant/colascomanda/colascomanda.component';
+import { ProductosComponent } from './restaurant/productos/productos.component';
+import { ProductoComponent } from './restaurant/productos/producto.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -39,6 +41,8 @@ const pagesRoutes: Routes = [
     { path: 'grupos', component: GruposComponent, data: { titulo: 'Mantenimiento de grupos' } },
     { path: 'grupo/:id', component: GrupoComponent, data: { titulo: 'Actualizar grupo' } },
     { path: 'colascomanda', component: ColascomandaComponent, data: { titulo: 'Colas de impresion de comandas' } },
+    { path: 'producto', component: ProductosComponent, data: { titulo: 'Lista de Platillos / productos' } },
+    { path: 'producto/:id', component: ProductoComponent, data: { titulo: 'Mantenimiento de Platillos / productos' } },
 
 
     //  Mantenimiento

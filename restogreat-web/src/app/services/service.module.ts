@@ -17,7 +17,8 @@ import {
 
   SeccionService,
   GrupoService, 
-  ColacomandaService
+  ColacomandaService,
+  ProductoService
  } from './service.index';
 
 @NgModule({
@@ -40,7 +41,8 @@ import {
 
     SeccionService,
     GrupoService,
-    ColacomandaService
+    ColacomandaService,
+    ProductoService
   ],
   declarations: []
 })

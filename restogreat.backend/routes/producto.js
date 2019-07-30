@@ -44,6 +44,7 @@ app.get("/:id", (req, res) => {
   var id = req.params.id;
   Producto.findById(id)
     .populate("usuario", "nombre img email")
+    .populate("grupo", "")
     .exec((err, producto) => {
       if (err) {
         return res.status(500).json({
@@ -97,11 +98,15 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     producto.nombre = body.nombre;
     producto.nombreCorto = body.nombreCorto;
     producto.descripcion = body.descripcion;
-    producto.clave = body.clave;
     producto.precio = body.precio;
     producto.tienePrecioAbierto = body.tienePrecioAbierto;
+    producto.fechaAlta = Date.now;
     producto.fechaActualizacion = Date.now;
     producto.usuario = req.usuario._id;
+
+    producto.imprimir = req.imprimir;
+    producto.colaComandas = req.colaComandas;
+    producto.img = req.img;
 
     // Actualizamos la producto
     producto.save((err, productoGuardado) => {
@@ -139,7 +144,10 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     tienePrecioAbierto : body.tienePrecioAbierto,
     fechaAlta : new Date(),
     fechaActualizacion : new Date(),
-    usuario: req.usuario._id
+    usuario: body.usuario,
+    imprimir = body.imprimir,
+    colaComandas = body.colaComandas
+    // , img = body.img
   });
 
   producto.save((err, productoGuardado) => {

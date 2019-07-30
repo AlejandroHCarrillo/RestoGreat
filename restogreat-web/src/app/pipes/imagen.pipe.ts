@@ -40,6 +40,10 @@ export class ImagenPipe implements PipeTransform {
          url += '/grupos/' + img;
       break;
 
+      case 'producto':
+        url += '/productos/' + img;
+      break;
+
       default:
         console.log('tipo de imagen no existe, usuario, medicos, hospitales');
         url += '/usurios/xxx';

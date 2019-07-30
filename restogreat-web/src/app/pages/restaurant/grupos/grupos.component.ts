@@ -111,7 +111,7 @@ export class GruposComponent implements OnInit {
       showCancelButton: true,
       inputValidator: (value) => {
         if (!value) {
-          return 'Por favor escriba el nombre del seccion'
+          return 'Por favor escriba el nombre del grupo'
         }
       }
     }).then(value => {

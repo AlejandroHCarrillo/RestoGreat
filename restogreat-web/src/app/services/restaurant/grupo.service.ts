@@ -1,10 +1,10 @@
-import { URL_SERVICIOS } from './../../config/config';
+import { URL_SERVICIOS } from "./../../config/config";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Grupo } from "./../../models/grupo.model";
 import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 @Injectable()
 export class GrupoService {
@@ -45,10 +45,17 @@ export class GrupoService {
     return this.http.get(url).map((resp: any) => resp.grupo);
   }
 
-  crearGrupo(grupo: Grupo) {
-    let url = URL_SERVICIOS + "/grupo?token=" + this.token ;
+  obtenerGrupo(id: string) {
+    let url = URL_SERVICIOS + "/grupo/" + id;
+    return this.http.get(url).map((resp: any) => {
+      return resp.grupo;
+    });
+  }
 
-    return this.http.post(url, grupo ).map((resp: any) => {
+  crearGrupo(grupo: Grupo) {
+    let url = URL_SERVICIOS + "/grupo?token=" + this.token;
+
+    return this.http.post(url, grupo).map((resp: any) => {
       Swal.fire("Grupo creado", resp.grupo.nombre, "success");
       return resp.grupo;
     });

@@ -1,0 +1,201 @@
+<div class="row animated fadeIn">
+  <div class="col-md-6">
+    <div class="card card-body">
+      <h3 class="box-title m-b-0">Producto: {{ producto.nombre }}</h3>
+      <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarProducto(f)">
+              <!--  -->
+            <div class="form-group"  >
+              <label>Grupo</label><br />
+              <!-- *ngIf="producto.grupo" -->
+              <select 
+              (change)="cambioGrupo($event.target.value)"
+                [(ngModel)]="grupo._id"
+                name="grupo"
+                class="formControl"
+                required
+              >
+                <option value="">Seleccione un Grupo</option>
+                <option *ngFor="let grupo of grupos" [value]="grupo._id">
+                  {{ grupo.nombre }}</option
+                >
+              </select>
+
+              <!-- <div class="col-md-3" *ngIf="grupo.img" >
+                <div class="card card-body"> -->
+                  <!-- <h4 class="box-title m-b-0">
+                    Grupo: <small>{{ grupo?.nombre }}</small>
+                  </h4> -->
+                  <img
+                    *ngIf="grupo"
+                    src="{{ grupo.img | imagen: 'grupo' }}"
+                    alt="grupo.nombre"
+                    class="img-100 icon-magic-wand pointer"
+                    style="height: 60px;"
+                  />
+                <!-- </div>
+              </div>-->
+            </div> 
+
+            <div class="form-group">
+              <label>Clave</label>
+              <input
+                [(ngModel)]="producto.clave"
+                name="clave"
+                type="text"
+                class="form-control"
+                placeholder="Clave"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Nombre</label>
+              <input
+                [(ngModel)]="producto.nombre"
+                name="nombre"
+                type="text"
+                class="form-control"
+                placeholder="Nombre del Producto"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Nombre Corto</label>
+              <input
+                [(ngModel)]="producto.nombreCorto"
+                name="nombreCorto"
+                type="text"
+                class="form-control"
+                placeholder="Nombre corto del Producto"
+                required
+              />
+            </div>
+
+            <div>
+              <label>Descripcion</label>
+              <input
+                [(ngModel)]="producto.descripcion"
+                name="descripcion"
+                type="text"
+                class="form-control"
+                placeholder="Descripcion del Producto"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Precio</label>
+              <input
+                [(ngModel)]="producto.precio"
+                name="precio"
+                type="text"
+                class="form-control"
+                placeholder="Precio del Producto"
+                required
+              />
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" 
+                name="tienePrecioAbierto"
+                type="checkbox" 
+                class="form-control"
+                id="tienePrecioAbierto"
+                [(ngModel)]="producto.tienePrecioAbierto" >
+                <label class="form-check-label" for="tienePrecioAbierto">
+                  Tiene Precio Abierto
+                </label>
+              </div>
+              
+              <!-- 
+                
+                value="" 
+            <div class="form-group">
+              <label>Precio abierto</label>
+              <input
+                [(ngModel)]="producto.tienePrecioAbierto"
+                name="tienePrecioAbierto"
+                type="text"
+                class="form-control"
+                placeholder="El Producto tiene precio abierto"
+                required
+              />
+            </div> -->
+
+            <!-- <div class="form-group">
+              <label>Imprimir</label>
+              <input
+                [(ngModel)]="producto.imprimir"
+                name="imprimir"
+                type="text"
+                class="form-control"
+                placeholder="Imprimir comanda"
+                required
+              />
+            </div> -->
+
+            <div class="form-check">
+                <input class="form-check-input" 
+                name="imprimir"
+                type="checkbox" 
+                class="form-control"
+                id="imprimir"
+                [(ngModel)]="producto.imprimir" >
+                <label class="form-check-label" for="imprimir">
+                    Imprimir
+                </label>
+              </div>
+
+
+            <div class="form-group">
+              <label>Imprimir en cola de comandas</label>
+              <input
+                [(ngModel)]="producto.colaComandas"
+                name="colaComandas"
+                type="text"
+                class="form-control"
+                placeholder="Cola de comandas"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success waves-effect waves-light m-r-10"
+            >
+              <i class="fa fa-save"></i>
+              Guardar
+            </button>
+            <a
+              [routerLink]="'/producto'"
+              class="btn btn-inverse waves-effect waves-light"
+            >
+              Cancel
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card card-body">
+      <h4 class="box-title m-b-0">
+        Foto: <small>{{ producto.nombre }}</small>
+      </h4>
+      <img
+        *ngIf="producto._id"
+        (click)="cambiarFoto(producto._id)"
+        [src]="producto.img | imagen: 'producto'"
+        alt=""
+        class="rounded img-fluid pointer"
+      />
+    </div>
+  </div>
+</div>
+<pre>
+  
+    {{ producto | json }}
+  </pre
+>
