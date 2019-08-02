@@ -114,7 +114,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error la actualizar el producto",
+          mensaje: "Error al actualizar el producto",
           errors: err
         });
       }
@@ -145,9 +145,9 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     fechaAlta : new Date(),
     fechaActualizacion : new Date(),
     usuario: body.usuario,
-    imprimir = body.imprimir,
-    colaComandas = body.colaComandas
-    // , img = body.img
+    imprimir : body.imprimir,
+    colaComandas : body.colaComandas
+    // , img : body.img
   });
 
   producto.save((err, productoGuardado) => {

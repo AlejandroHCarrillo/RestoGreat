@@ -15,3 +15,4 @@ export { SeccionService } from './restaurant/seccion.service';
 export { GrupoService } from './restaurant/grupo.service';
 export { ColacomandaService } from './restaurant/colacomanda.service';
 export { ProductoService } from './restaurant/producto.service';
+export { MeseroService } from './restaurant/mesero.service';

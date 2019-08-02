@@ -5,6 +5,9 @@ var jwt = require("jsonwebtoken");
 SEED = require("../config/config").SEED;
 TIMETOEXPIRE = require("../config/config").TIMETOEXPIRE;
 
+MENU_USER = require("../config/menu").MENU_USER;
+MENU_ADMIN = require("../config/menu").MENU_ADMIN;
+
 var app = express();
 
 var Usuario = require("../models/usuario");
@@ -219,44 +222,52 @@ app.post("/", (req, res) => {
 });
 
 function obtenerMenu(ROLE) {
-  // console.log('El rol recibido es: ' + ROLE);
-  var menu = [
-    {
-      titulo: "Principal",
-      icono: "mdi mdi-gauge",
-      submenu: [
-        { titulo: "Dashboard", url: "/dashboard" },
-        { titulo: "ProgressBar", url: "/progress" },
-        { titulo: "Gráficas", url: "/graficas1" },
-        { titulo: "Promesas", url: "/promesas" },
-        { titulo: "RxJs", url: "/rxjs" }
-      ]
-    },
-    {
-      titulo: "Mantenimiento",
-      icono: "mdi mdi-folder-lock-open",
-      submenu: []
-    },
-    {
-      titulo: "Catalogos",
-      icono: "mdi mdi-folder-lock-open",
-      submenu: []
-    }
-  ];
-
   if (ROLE === "ADMIN_ROLE") {
-    // console.log("es un administrador");
-    menu[2].submenu.unshift({ titulo: "Secciones", url: "/secciones" });
-    menu[2].submenu.push({ titulo: "Grupos", url: "/grupos" });
-    menu[2].submenu.push({ titulo: "Pila de Comandas", url: "/colascomanda" });
-    menu[2].submenu.push({ titulo: "Productos Platillos", url: "/producto" });
-
-    menu[1].submenu.unshift({ titulo: "Usuarios", url: "/usuarios" });
-    menu[1].submenu.push({ titulo: "Hospitales", url: "/hospitales" });
-    menu[1].submenu.push({ titulo: "Medicos", url: "/medicos" });
+    return MENU_ADMIN;
   }
-  // console.log(menu);
-  return menu;
+  else{
+    return MENU_USER;
+  }
 }
+// function obtenerMenu(ROLE) {
+//   // console.log('El rol recibido es: ' + ROLE);
+//   var menu = [
+//     {
+//       titulo: "Principal",
+//       icono: "mdi mdi-gauge",
+//       submenu: [
+//         { titulo: "Dashboard", url: "/dashboard" },
+//         { titulo: "ProgressBar", url: "/progress" },
+//         { titulo: "Gráficas", url: "/graficas1" },
+//         { titulo: "Promesas", url: "/promesas" },
+//         { titulo: "RxJs", url: "/rxjs" }
+//       ]
+//     },
+//     {
+//       titulo: "Mantenimiento",
+//       icono: "mdi mdi-folder-lock-open",
+//       submenu: []
+//     },
+//     {
+//       titulo: "Catalogos",
+//       icono: "mdi mdi-folder-lock-open",
+//       submenu: []
+//     }
+//   ];
+
+//   if (ROLE === "ADMIN_ROLE") {
+//     // console.log("es un administrador");
+//     menu[2].submenu.unshift({ titulo: "Secciones", url: "/secciones" });
+//     menu[2].submenu.push({ titulo: "Grupos", url: "/grupos" });
+//     menu[2].submenu.push({ titulo: "Pila de Comandas", url: "/colascomanda" });
+//     menu[2].submenu.push({ titulo: "Productos Platillos", url: "/producto" });
+
+//     menu[1].submenu.unshift({ titulo: "Usuarios", url: "/usuarios" });
+//     menu[1].submenu.push({ titulo: "Hospitales", url: "/hospitales" });
+//     menu[1].submenu.push({ titulo: "Medicos", url: "/medicos" });
+//   }
+//   // console.log(menu);
+//   return menu;
+// }
 
 module.exports = app;

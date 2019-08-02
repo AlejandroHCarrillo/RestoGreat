@@ -2,8 +2,10 @@ var mongoose =	require('mongoose');
 var Schema =	mongoose.Schema;
 
 var meseroSchema =	new Schema({
-				numero: { type: Number },
-                nombre: { type: String, required: [true, 'El nombre de la mesero es necesario']	},
+				id: { type: Number },
+                nombre: { type: String, required: [true, 'El nombre del mesero es necesario']	},
+                apaterno: { type: String, required: [true, 'El apellido del mesero es necesario']	},
+                amaterno: { type: String, },
                 nivel:  { type: Number },
                 password:  { type: String },
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },

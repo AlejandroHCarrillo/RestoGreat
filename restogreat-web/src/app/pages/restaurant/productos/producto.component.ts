@@ -1,3 +1,6 @@
+import { Grupo } from 'src/app/models/grupo.model';
+import { ColacomandaService } from './../../../services/restaurant/colacomanda.service';
+import { ColaComanda } from './../../../models/colacomanda.model';
 import { ModalUploadService } from "./../../../components/modal-upload/modal-upload.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Producto } from "src/app/models/producto.model";
@@ -6,7 +9,7 @@ import {
   ProductoService,
   UsuarioService
 } from "src/app/services/service.index";
-import { Grupo } from "./../../../models/grupo.model";
+
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
@@ -20,6 +23,9 @@ import { log } from "util";
 export class ProductoComponent implements OnInit {
   grupo: Grupo = new Grupo("", new Date(), null);
   grupos: Grupo[] = [];
+  colaComandas: ColaComanda = new ColaComanda("", new Date(), "", null, new Date, "");
+  colasComandas: ColaComanda[] = [];
+
   producto: Producto = new Producto();
   idparam: string;
 
@@ -28,6 +34,7 @@ export class ProductoComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _grupoService: GrupoService,
+    public _colaComandaService: ColacomandaService,
     public _productoService: ProductoService,
     public _usuarioService: UsuarioService,
     public _modalUploadService: ModalUploadService
@@ -42,9 +49,18 @@ export class ProductoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.producto.grupo = new Grupo("", new Date(), null);
+    this.producto.colaComandas = new ColaComanda("", new Date())
+
+
     this._grupoService
       .cargarGrupos()
       .subscribe((resp:any) => (this.grupos = resp.grupos));
+
+      this._colaComandaService
+      .cargarColascomanda()
+      .subscribe((resp:any) => (this.colasComandas = resp.colascomandas));
+
   }
 
   cargarProducto(id: string) {
@@ -96,6 +112,19 @@ export class ProductoComponent implements OnInit {
   cambioGrupo(id: string) {
     this._grupoService.obtenerGrupo(id).subscribe(grupo => {
       this.grupo = grupo;
+    });
+  }
+
+  cambioColacomandas(id: string) {
+    console.log("id", id);
+    
+    if(id===""){
+      this.colaComandas = null;
+      return;
+    }
+
+    this._colaComandaService.obtenerColacomanda(id).subscribe(colacomanda => {
+      this.colaComandas = colacomanda;
     });
   }
 

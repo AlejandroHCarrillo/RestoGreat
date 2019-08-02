@@ -101,7 +101,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error la actualizar el seccion",
+          mensaje: "Error al actualizar el seccion",
           errors: err
         });
       }

@@ -101,7 +101,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error la actualizar el cola de comanda",
+          mensaje: "Error al actualizar el cola de comanda",
           errors: err
         });
       }

@@ -12,7 +12,7 @@
               <!-- *ngIf="producto.grupo" -->
               <select 
               (change)="cambioGrupo($event.target.value)"
-                [(ngModel)]="grupo._id"
+                [(ngModel)]="producto.grupo._id"
                 name="grupo"
                 class="formControl"
                 required
@@ -148,7 +148,7 @@
               </div>
 
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label>Imprimir en cola de comandas</label>
               <input
                 [(ngModel)]="producto.colaComandas"
@@ -158,7 +158,27 @@
                 placeholder="Cola de comandas"
                 required
               />
-            </div>
+            </div> -->
+
+            <div class="form-group"  >
+                <label>Imprimir en cola de comandas</label><br />
+                <select 
+                (change)="cambioColacomandas($event.target.value)"
+                  [(ngModel)]="colaComandas._id"
+                  name="colaComandas"
+                  class="formControl"
+                  required
+                >
+                  <option value="">Seleccione la cola de impresion de comandas</option>
+                  <option *ngFor="let cola of colasComandas" [value]="colaComandas._id">
+                    {{ colaComandas._id }} {{ cola.nombre }}</option
+                  >
+                </select>
+<pre>
+  {{ colasComandas | json }}
+</pre>
+              </div> 
+  
 
             <button
               type="submit"

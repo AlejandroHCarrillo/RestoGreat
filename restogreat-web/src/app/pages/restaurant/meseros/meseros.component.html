@@ -1,0 +1,82 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #input
+          (keyup)="buscarMesero( input.value )"
+          type="text"
+          class="form-control"
+          placeholder="Buscar mesero..."
+          name=""
+          id=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br />
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br />
+      <span>Espere un momento por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">          
+          <button (click)="crearMesero()" class="btn waves-effect waves-light btn-rounded btn-primary" > 
+              <i class="fa fa-plus"></i>
+              Crear mesero </button>
+          </div>  
+        <h3 class="card-title">Meseros registrados ( <small>{{ totalRegistros }}</small> )</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Clave</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mesero of meseros" >
+              <td class="w70">
+                <img (click)="mostrarModal( mesero._id )" src="{{ mesero.img | imagen : 'mesero' }}" class="img-50 img-circle pointer" alt="mesero.nombre">  
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="mesero.nombre">
+              </td>
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="mesero.clave">
+              </td>
+              <td>
+                <button (click)="guardarMesero(mesero)" class="btn btn-primary">
+                  <i class="fa fa-save"></i>
+                </button>
+
+                <button (click)="borrarMesero( mesero._id )" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
+            Anteriores
+          </button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">
+              Siguientes
+            </button>
+      </div>
+    </div>
+  </div>
+</div>

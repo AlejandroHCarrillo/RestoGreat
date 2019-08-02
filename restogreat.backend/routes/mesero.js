@@ -21,7 +21,7 @@ app.get("/", (req, res, next) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las meseros",
+          mensaje: "Error cargando los meseros",
           errors: err
         });
       }
@@ -47,14 +47,14 @@ app.get("/:id", (req, res) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error al buscar mesero",
+          mensaje: "Error al buscar el mesero",
           errors: err
         });
       }
       if (!mesero) {
         return res.status(400).json({
           ok: false,
-          mensaje: "La mesero con el id " + id + "no existe",
+          mensaje: "El mesero con el id " + id + "no existe",
           errors: { message: "No existe un mesero con ese ID" }
         });
       }
@@ -104,7 +104,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error la actualizar el mesero",
+          mensaje: "Error al actualizar el mesero",
           errors: err
         });
       }
@@ -137,7 +137,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     if (err) {
       return res.status(400).json({
         ok: false,
-        mensaje: "Error guardando la mesero",
+        mensaje: "Error guardando el mesero",
         errors: err
       });
     }
@@ -160,7 +160,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al borrar mesero",
+        mensaje: "Error al borrar el mesero",
         errors: err
       });
     }
@@ -168,8 +168,8 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
     if (!meseroBorrado) {
       return res.status(400).json({
         ok: false,
-        mensaje: "No existe la mesero con ese id para ser borrada",
-        errors: { message: "Mesero no encontrada con ese id" }
+        mensaje: "No existe el mesero con ese id para ser borrado",
+        errors: { message: "Mesero no encontrado con ese id" }
       });
     }
 
