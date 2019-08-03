@@ -1,0 +1,94 @@
+<div class="row animated fadeIn">
+  <div class="col-md-6">
+    <div class="card card-body">
+      
+      <h3 class="box-title m-b-0"><small># {{ mesero.numero }}</small> Mesero: {{ mesero.nombre }} {{ mesero.apaterno }} {{ mesero.amaterno }} </h3>
+      <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarMesero(f)">
+            <!-- <div class="form-group">
+              <label>Clave</label>
+              <input [(ngModel)]="mesero.clave" name="clave"
+                type="text"
+                class="form-control"
+                placeholder="Clave"
+                required
+              />
+            </div> -->
+            <div class="form-group">
+
+              <label>Nombre</label>
+              <input [(ngModel)]="mesero.nombre" name="nombre"
+                type="text"
+                class="form-control"
+                placeholder="Nombre(s)"
+                required
+              />
+                <label>Apellido Paterno</label>
+                <input [(ngModel)]="mesero.apaterno" name="apaterno"
+                  type="text"
+                  class="form-control"
+                  placeholder="Apellido Paterno"
+                />
+                <label>Apellido Materno</label>
+                <input [(ngModel)]="mesero.amaterno" name="amaterno"
+                  type="text"
+                  class="form-control"
+                  placeholder="Apellido materno"
+                />
+
+                <label>Nombre corto</label>
+                <input [(ngModel)]="mesero.nombrecorto" name="nombrecorto"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre Corto"
+                />
+
+                <label>Rango</label><br>
+                <select [(ngModel)]="mesero.nivel" name="nivel" class="formControl">
+                  <option value="">Seleccione un nivel</option>
+                  <option value="0">Mesero</option>
+                  <option value="1">Capitan</option>
+                  <option value="2">Garrotero</option>
+                  <option value="3">Lavatrastes</option>
+                  <option value="4">Gerente</option>
+                </select>
+              </div>
+  
+            <!-- <div class="form-group">
+              <label>Seccion</label><br>
+              <select (change)="cambioSeccion( $event.target.value );" [(ngModel)]="mesero.seccion" name="seccion" class="formControl" required>
+                <option value="">Seleccione una Seccion</option>
+                <option *ngFor="let seccion of secciones" [value]="seccion._id">{{ seccion.nombre }}</option>
+              </select>
+            </div> -->
+
+            <button type="submit"
+              class="btn btn-success waves-effect waves-light m-r-10">
+              <i class="fa fa-save"></i>
+              Guardar
+            </button>
+            <a
+              [routerLink]="'/meseros'"
+              class="btn btn-inverse waves-effect waves-light">
+              Cancel
+          </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3" >
+    <div class="card card-body">
+      <h4 class="box-title m-b-0">Foto: <small>{{ mesero.nombre }}</small></h4>
+      <img (click)="cambiarFoto( mesero._id )" [src]="mesero.img | imagen : 'mesero'" alt="" class="rounded img-fluid pointer"/>
+    </div>
+  </div>
+</div>
+
+<pre>
+
+  {{mesero|json}}
+</pre>

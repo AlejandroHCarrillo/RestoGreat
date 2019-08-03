@@ -1,16 +1,14 @@
-import { URL_SERVICIOS } from './../../config/config';
+import { URL_SERVICIOS } from "./../../config/config";
 import { Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
-import { Mesero } from './../../models/mesero.model';
+import { Mesero } from "./../../models/mesero.model";
 import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
-// import * from 'sweetalert';
-// declare var swal:any;
 @Injectable()
 export class MeseroService {
-  meseros: Mesero;
+  mesero: Mesero;
   token: string;
 
   constructor(
@@ -34,7 +32,7 @@ export class MeseroService {
     return this.http.get(url);
   }
 
-  obtenerMesero(id: string) {
+  cargarMesero(id: string) {
     let url = URL_SERVICIOS + "/mesero/" + id;
     return this.http.get(url).map((resp: any) => {
       return resp.mesero;
@@ -47,23 +45,31 @@ export class MeseroService {
     return this.http.get(url).map((resp: any) => resp.mesero);
   }
 
-  crearMesero(nombre: string) {
-    console.log('Creando mesero ' + nombre);
-    
-    let url = URL_SERVICIOS + "/mesero?token=" + this.token ;
+  obtenerMesero(id: string) {
+    let url = URL_SERVICIOS + "/mesero/" + id;
+    return this.http.get(url).map((resp: any) => {
+      return resp.mesero;
+    });
+  }
 
-    return this.http.post(url, { nombre }).map((resp: any) => {
-      Swal.fire("Mesero creado", resp.mesero.nombre, "success");
+  crearMesero(mesero: Mesero) {
+    let url = URL_SERVICIOS + "/mesero?token=" + this.token;
+    let nombrecompleto : string = mesero.nombre + ' ' + mesero.apaterno  + ' ' + mesero.amaterno ;
+
+    return this.http.post(url, mesero).map((resp: any) => {
+      Swal.fire("Mesero creado", nombrecompleto, "success");
       return resp.mesero;
     });
   }
 
   actualizarMesero(mesero: Mesero) {
     let url = URL_SERVICIOS + "/mesero/" + mesero._id;
+    let nombrecompleto : string = mesero.nombre + ' ' + mesero.apaterno  + ' ' + mesero.amaterno ;
+
     url += "?token=" + this.token;
 
     return this.http.put(url, mesero).map((resp: any) => {
-      Swal.fire("Mesero actualizado", mesero.nombre, "success");
+      Swal.fire("Mesero actualizado", nombrecompleto, "success");
       return true;
     });
   }

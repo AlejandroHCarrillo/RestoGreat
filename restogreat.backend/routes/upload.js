@@ -13,6 +13,7 @@ var Hospital = require("../models/hospital");
 var Seccion = require("../models/seccion");
 var Grupo = require("../models/grupo");
 var Producto = require("../models/producto");
+var Mesero = require("../models/mesero");
 
 app.put("/:tipo/:id", (req, res) => {  
   var tipo = req.params.tipo;
@@ -32,7 +33,7 @@ app.put("/:tipo/:id", (req, res) => {
   var extensionArchivo = nombreCortado[nombreCortado.length - 1];
 
   // Verifica el tipo de imagenes
-  var coleccionesValidas = ["hospitales", "medicos", "usuarios", "secciones", "grupos", "productos"];
+  var coleccionesValidas = ["hospitales", "medicos", "usuarios", "secciones", "grupos", "productos", "meseros"];
   if (coleccionesValidas.indexOf(tipo) < 0) {
     return res.status(400).json({
       ok: false,
@@ -208,12 +209,32 @@ function subirImagenProducto(id, tipo, nombreArchivo, res){
   });  
 }
 
+function subirImagenMesero(id, tipo, nombreArchivo, res){
+  Mesero.findById(id, (err, mesero) => {
+    if (!mesero) {
+      return retErr400(res, tipo);
+    }
+
+    // Localizamos y borramos la imagen anterior
+    borrarImagenAnterior(tipo, mesero.img);
+
+    mesero.img = nombreArchivo;
+
+    mesero.save((err, dataActualizada) => {
+      if (err) {
+        return retErr500 (res, tipo, err);
+      }      
+      return retOK200(res, tipo, dataActualizada); 
+    });
+  });  
+}
+
 
 function retOK200 (res, tipo, data){
   return res.status(200).json({
     ok: true,
     mensaje: `Imagen (${tipo}) actualizada con exito.`,
-    seccion: data
+    data: data
   });
 }
 
@@ -257,6 +278,10 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
 
   if (tipo === "productos") {
     subirImagenProducto(id, tipo, nombreArchivo, res);
+  }
+
+  if (tipo === "meseros") {
+    subirImagenMesero(id, tipo, nombreArchivo, res);
   }
 
 }

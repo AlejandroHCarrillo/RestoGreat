@@ -93,8 +93,13 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     mesero.numero = body.numero;
     mesero.nombre = body.nombre;
+    mesero.apaterno = body.apaterno;
+    mesero.amaterno = body.amaterno;
+    mesero.nombrecorto = body.nombrecorto;
     mesero.nivel = body.nivel;
-    mesero.password = body.password;
+
+    mesero.img = body.img;
+    
     mesero.usuario = req.usuario._id;
     mesero.fechaActualizacion = new Date()
 
@@ -126,8 +131,13 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var mesero = new Mesero({
     numero : body.numero,
     nombre: body.nombre,
+    apaterno : body.apaterno,
+    amaterno : body.amaterno,
+    nombrecorto : body.nombrecorto,
     nivel: body.nivel,
-    password: body.password,
+
+    // password: body.password,
+    // img : body.img,
     usuario: req.usuario._id,
     fechaAlta : new Date(),
     fechaActualizacion : new Date()

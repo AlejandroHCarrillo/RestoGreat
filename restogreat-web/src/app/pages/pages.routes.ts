@@ -26,6 +26,7 @@ import { ColascomandaComponent } from './restaurant/colascomanda/colascomanda.co
 import { ProductosComponent } from './restaurant/productos/productos.component';
 import { ProductoComponent } from './restaurant/productos/producto.component';
 import { MeserosComponent } from './restaurant/meseros/meseros.component';
+import { MeseroComponent } from './restaurant/meseros/mesero.component';
 
 
 const pagesRoutes: Routes = [
@@ -47,8 +48,7 @@ const pagesRoutes: Routes = [
     { path: 'producto/:id', component: ProductoComponent, data: { titulo: 'Mantenimiento de Platillos / productos' } },
 
     { path: 'meseros', component: MeserosComponent, data: { titulo: 'Lista de  meseros' } },
-    // { path: 'mesero/:id', component: MeseroComponent, data: { titulo: 'Mantenimiento a meseros' } },
-
+    { path: 'mesero/:id', component: MeseroComponent, data: { titulo: 'Mantenimiento a meseros' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

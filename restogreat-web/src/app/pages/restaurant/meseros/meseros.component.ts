@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../../services/usuario/usuario.service';
 import { ModalUploadService } from "./../../../components/modal-upload/modal-upload.service";
 import { MeseroService } from "src/app/services/service.index";
 import { Component, OnInit } from "@angular/core";
@@ -5,9 +6,9 @@ import { Mesero } from "src/app/models/mesero.model";
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: "app-meseros",
-  templateUrl: "./meseros.component.html",
-  styleUrls: []
+  selector: 'app-meseros',
+  templateUrl: './meseros.component.html',
+  styles: []
 })
 export class MeserosComponent implements OnInit {
   meseros: Mesero[] = [];
@@ -19,7 +20,8 @@ export class MeserosComponent implements OnInit {
 
   constructor(
     public _meseroService: MeseroService,
-    public _modalUploadService: ModalUploadService
+    public _modalUploadService: ModalUploadService,
+    public _usuarioService: UsuarioService
   ) {}
 
   ngOnInit() {
@@ -78,8 +80,6 @@ export class MeserosComponent implements OnInit {
 
   borrarMesero(id: string) {
     // console.log(id);
-    // confirm()
-
     Swal.fire({
       title: "¿Estas seguro de eliminar a este mesero?",
       text: "Una vez eliminado no es posible recuperar al mesero",
@@ -88,24 +88,21 @@ export class MeserosComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, eliminarlo'
-    })
-    .then((willDelete) => {
-      // console.log(willDelete);      
-      if (willDelete.value) {
-        // console.log('Ya lo borro');        
+    })!.then(borrar => {
+      // console.log(borrar);
+      if (borrar) {
         this._meseroService.borrarMesero(id).subscribe(resp => {
+          // console.log(resp);
           this.cargarMeseros();
         });
       } else {
-        // console.log('NO BORRADO');
         Swal.fire( "El mesero no fue eliminado", "El mesero no ha sido eliminado" );
+        // alert("El mesero no fue eliminado");
       }
     });
-
   }
 
-  crearMesero() {
-
+  crearMesero(nombre: string) {
     Swal.fire({
       title: 'Alta de nuevo mesero',
       text: 'Por favor escriba el nombre del mesero:',
@@ -117,17 +114,24 @@ export class MeserosComponent implements OnInit {
           return 'Por favor escriba el nombre del mesero'
         }
       }
-    }).then( (value) => {
-      console.log(value);
-      this._meseroService.crearMesero(value.value)
-                           .subscribe(resp => { 
-                             console.log(resp);
-                             Swal.fire('Se ha creado el mesero:', resp.nombre, 'success' );
-                            });
+    }).then(value => {
+      let mesero = new Mesero();
+
+      // mesero.clave = value.value;  
+      mesero.fechaActualizacion = new Date();
+      mesero.usuario =  this._usuarioService.usuario._id;
+
+      this._meseroService.crearMesero(mesero)
+                        .subscribe(resp => {
+                          console.log(resp);
+                          this.cargarMeseros();
+                          Swal.fire('Se ha creado al mesero:', resp.nombre, 'success' );
+                      });
     });
   }
 
   guardarMesero(mesero: Mesero) {
+    mesero.usuario =  this._usuarioService.usuario._id;
     this._meseroService.actualizarMesero(mesero).subscribe(resp => {
       console.log(resp);
     });

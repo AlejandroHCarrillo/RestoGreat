@@ -133,7 +133,7 @@ export class ProductoComponent implements OnInit {
 
     this._modalUploadService.notificacion.subscribe(resp => {
       console.log(resp);
-      this.producto.img = resp.producto.img;
+      this.producto.img = resp.data.img;
     });
   }
 }

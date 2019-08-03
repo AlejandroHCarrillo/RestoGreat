@@ -41,6 +41,7 @@ import { ColascomandaComponent } from './restaurant/colascomanda/colascomanda.co
 import { ProductosComponent } from './restaurant/productos/productos.component';
 import { ProductoComponent } from './restaurant/productos/producto.component';
 import { MeserosComponent } from './restaurant/meseros/meseros.component';
+import { MeseroComponent } from './restaurant/meseros/mesero.component';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import { MeserosComponent } from './restaurant/meseros/meseros.component';
         ColascomandaComponent,
         ProductosComponent,
         ProductoComponent,
-        MeserosComponent
+        MeserosComponent,
+        MeseroComponent
     ],
     exports: [
         DashboardComponent,
