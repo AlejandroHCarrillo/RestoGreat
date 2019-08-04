@@ -19,9 +19,9 @@ import {
   GrupoService, 
   ColacomandaService,
   ProductoService,
-  MeseroService
+  MeseroService,
+  FormaPagoService
  } from './service.index';
-import { Mesero } from '../models/mesero.model';
 
 @NgModule({
   imports: [
@@ -45,7 +45,8 @@ import { Mesero } from '../models/mesero.model';
     GrupoService,
     ColacomandaService,
     ProductoService,
-    MeseroService
+    MeseroService,
+    FormaPagoService
   ],
   declarations: []
 })

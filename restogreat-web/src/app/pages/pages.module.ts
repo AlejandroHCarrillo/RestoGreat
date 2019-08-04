@@ -42,6 +42,8 @@ import { ProductosComponent } from './restaurant/productos/productos.component';
 import { ProductoComponent } from './restaurant/productos/producto.component';
 import { MeserosComponent } from './restaurant/meseros/meseros.component';
 import { MeseroComponent } from './restaurant/meseros/mesero.component';
+import { FormaspagoComponent } from './restaurant/formaspago/formaspago.component';
+import { FormapagoComponent } from './restaurant/formaspago/formapago.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +70,9 @@ import { MeseroComponent } from './restaurant/meseros/mesero.component';
         ProductosComponent,
         ProductoComponent,
         MeserosComponent,
-        MeseroComponent
+        MeseroComponent,
+        FormaspagoComponent,
+        FormapagoComponent
     ],
     exports: [
         DashboardComponent,

@@ -1,6 +1,7 @@
 var menuPrincipal =  [
-    { titulo: "Dashboard", url: "/dashboard" },
-    { titulo: "ProgressBar", url: "/progress" },
+  { titulo: "Dashboard", url: "/dashboard" },
+  { titulo: "ProgressBar", url: "/progress" },
+  { titulo: "Formas de Pago", url: "/formaspago" },
     // { titulo: "Gráficas", url: "/graficas1" },
     // { titulo: "Promesas", url: "/promesas" },
     // { titulo: "RxJs", url: "/rxjs" }
@@ -24,7 +25,7 @@ module.exports.MENU_USER = [
       submenu: []
     }
   ];
-
+  
   module.exports.MENU_ADMIN = [
     {
       titulo: "Principal",
@@ -58,7 +59,6 @@ module.exports.MENU_USER = [
           { titulo: "Causas de Cancelacion", url: "/causascancelacion" },
           { titulo: "Conceptos de descuentos", url: "/conceptosdescuento" },
           { titulo: "Desembolso de Caja", url: "/desembolsoscaja" },
-          { titulo: "Formas de Pago", url: "/formaspago" },
           { titulo: "Meseros", url: "/meseros" },
           { titulo: "Modificadores", url: "/modificadores" },
           { titulo: "Pagos", url: "/pagis" },
