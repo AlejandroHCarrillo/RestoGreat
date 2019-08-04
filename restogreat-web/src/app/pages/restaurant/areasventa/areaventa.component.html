@@ -1,0 +1,85 @@
+<div class="row animated fadeIn">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <h3 class="box-title m-b-0">Area de venta: {{ areaventa.nombre }}</h3>
+        <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarAreaventa(f)">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input
+                  [(ngModel)]="areaventa.nombre"
+                  name="nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre del Areaventa"
+                  required
+                />
+  
+                <label>Clave</label>
+                <input
+                  [(ngModel)]="areaventa.clave"
+                  name="clave"
+                  type="text"
+                  class="form-control"
+                  placeholder="Clave"
+                  required
+                />
+
+                <br />
+                <label>Mesa inicio:</label>
+                <input
+                  [(ngModel)]="areaventa.mesainicio"
+                  name="mesainicio"
+                  type="text"
+                  class="form-control"
+                  placeholder="Mesa de inicio"
+                />
+
+              <label>Mesa fin:</label>
+              <input
+                [(ngModel)]="areaventa.mesafin"
+                name="mesafin"
+                type="text"
+                class="form-control"
+                placeholder="Mesa fin"
+              />
+
+              <br />
+              <label>Cargo por servicio:</label>
+              <input
+                [(ngModel)]="areaventa.cargoservicio"
+                name="cargoservicio"
+                type="text"
+                class="form-control"
+                placeholder="Cargo por servicio"
+              />%
+
+            </div>
+
+              <button
+                type="submit"
+                class="btn btn-success waves-effect waves-light m-r-10"
+              >
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <a
+                [routerLink]="'/areasventa'"
+                class="btn btn-inverse waves-effect waves-light"
+              >
+                Cancel
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <pre>
+    
+      {{ areaventa | json }}
+    </pre>
+  </div>
+  

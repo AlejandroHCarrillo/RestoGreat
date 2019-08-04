@@ -9,7 +9,6 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 
-
 // import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -29,6 +28,8 @@ import { MeserosComponent } from './restaurant/meseros/meseros.component';
 import { MeseroComponent } from './restaurant/meseros/mesero.component';
 import { FormaspagoComponent } from './restaurant/formaspago/formaspago.component';
 import { FormapagoComponent } from './restaurant/formaspago/formapago.component';
+import { AreasventaComponent } from './restaurant/areasventa/areasventa.component';
+import { AreaventaComponent } from './restaurant/areasventa/areaventa.component';
 
 
 const pagesRoutes: Routes = [
@@ -54,6 +55,9 @@ const pagesRoutes: Routes = [
 
     { path: 'formaspago', component: FormaspagoComponent, data: { titulo: 'Lista de formas de pago' } },
     { path: 'formapago/:id', component: FormapagoComponent, data: { titulo: 'Mantenimiento a foma de pago' } },
+
+    { path: 'areasventa', component: AreasventaComponent, data: { titulo: 'Lista de las areas de venta' } },
+    { path: 'areaventa/:id', component: AreaventaComponent, data: { titulo: 'Mantenimiento las areas de venta' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

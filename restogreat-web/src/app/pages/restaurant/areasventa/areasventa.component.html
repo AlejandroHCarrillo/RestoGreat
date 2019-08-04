@@ -1,0 +1,105 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #input
+          (keyup)="buscarAreaventa(input.value)"
+          type="text"
+          class="form-control"
+          placeholder="Buscar area de venta..."
+          name=""
+          id=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br />
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br />
+      <span>Espere un momento por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+          <button
+            [routerLink]="['/areaventa', 'nuevo']"
+            class="btn waves-effect waves-light btn-rounded btn-primary"
+          >
+            <i class="fa fa-plus"></i>
+            Crear area de venta
+          </button>
+        </div>
+        <h3 class="card-title">
+          Areas de venta registradas ( <small>{{ totalRegistros }}</small> )
+        </h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Clave</th>
+              <th>Nombre</th>
+              <th>Mesas</th>
+              <th>Cargo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let areaventa of areasventa">
+              <td>
+                {{ areaventa.clave }}
+              </td>
+              <td>
+                {{ areaventa.nombre }}
+              </td>
+              <td>{{ areaventa.mesainicio }} - {{ areaventa.mesafin }}</td>
+              <td>
+                {{ areaventa.cargoservicio }}
+              </td>
+              <td>
+                <!-- <button (click)="guardarAreaventa(areaventa)" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                  </button> -->
+
+                <button
+                  [routerLink]="['/areaventa', areaventa._id]"
+                  class="btn btn-primary"
+                >
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button
+                  (click)="borrarAreaventa(areaventa._id)"
+                  class="btn btn-danger"
+                >
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
+          Anteriores
+        </button>
+        <button (click)="cambiarPagina(5)" class="btn btn-secondary">
+          Siguientes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre>
+    {{ areasventa | json }}
+  </pre
+>

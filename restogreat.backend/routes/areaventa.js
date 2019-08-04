@@ -4,24 +4,24 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var AreaVenta = require("../models/area-venta");
+var AreaVenta = require("../models/areaventa");
 
 // ==========================================================
-// Obtener todas las areaventaes
+// Obtener todas las areasventa
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  AreaVenta.find({}, "nombre ")
+  AreaVenta.find({}, "nombre clave mesainicio mesafin cargoservicio ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
-    .exec((err, areaventaes) => {
+    .exec((err, areasventa) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las areaventaes",
+          mensaje: "Error cargando las areasventa",
           errors: err
         });
       }
@@ -29,7 +29,7 @@ app.get("/", (req, res, next) => {
       AreaVenta.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
-          areaventaes: areaventaes,
+          areasventa: areasventa,
           total: conteo
         });
       });
@@ -91,9 +91,14 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     var body = req.body;
 
-    areaventa.nombre = body.nombre;
-    areaventa.usuario = req.usuario._id;
     areaventa.clave = body.clave;
+    areaventa.nombre = body.nombre;
+    areaventa.mesainicio = body.mesainicio;
+    areaventa.mesafin = body.mesafin;
+    areaventa.cargoservicio = body.cargoservicio;
+
+    areaventa.usuario = req.usuario._id;
+    areaventa.fechaActualizacion = new Date();
 
     // Actualizamos la areaventa
     areaventa.save((err, areaventaGuardado) => {
@@ -121,9 +126,15 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
   var areaventa = new AreaVenta({
-    nombre: body.nombre,
+    
+    clave :  body.clave,
+    nombre :  body.nombre,
+    mesainicio :  body.mesainicio,
+    mesafin :  body.mesafin,
+    cargoservicio :  body.cargoservicio,
+    
     usuario: req.usuario._id,
-    clave: body.clave
+    fechaActualizacion : new Date()
   });
 
   areaventa.save((err, areaventaGuardado) => {

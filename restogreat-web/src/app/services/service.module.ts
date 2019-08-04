@@ -20,7 +20,8 @@ import {
   ColacomandaService,
   ProductoService,
   MeseroService,
-  FormaPagoService
+  FormaPagoService,
+  AreaventaService
  } from './service.index';
 
 @NgModule({
@@ -46,7 +47,8 @@ import {
     ColacomandaService,
     ProductoService,
     MeseroService,
-    FormaPagoService
+    FormaPagoService,
+    AreaventaService
   ],
   declarations: []
 })
