@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Cliente.find({}, "nombre ")
+  Cliente.find({}, "nombre rfc telefono correoelectronico ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
@@ -91,9 +91,22 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     var body = req.body;
 
+    cliente.rfc = body.rfc;
     cliente.nombre = body.nombre;
+    cliente.direccionCalle = body.direccionCalle;
+    cliente.direccionNumero = body.direccionNumero;
+    cliente.direccionColonia = body.direccionColonia;
+    cliente.direccionMunicipio = body.direccionMunicipio;
+    cliente.direccionEstado = body.direccionEstado;
+    cliente.direccionCP = body.direccionCP;
+    cliente.correoeletronico = body.correoeletronico;
+    cliente.telefono = body.telefono;
+    cliente.usuario = body.usuario;
+    cliente.fechaAlta = body.fechaAlta;
+    cliente.fechaActualizacion = body.fechaActualizacion;
+
     cliente.usuario = req.usuario._id;
-    cliente.clave = body.clave;
+    cliente.fechaActualizacion = new Date();
 
     // Actualizamos la cliente
     cliente.save((err, clienteGuardado) => {
@@ -121,9 +134,21 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
   var cliente = new Cliente({
-    nombre: body.nombre,
-    usuario: req.usuario._id,
-    clave : body.clave
+    rfc : body.rfc,
+    nombre : body.nombre,
+    direccionCalle : body.direccionCalle,
+    direccionNumero : body.direccionNumero,
+    direccionColonia : body.direccionColonia,
+    direccionMunicipio : body.direccionMunicipio,
+    direccionEstado : body.direccionEstado,
+    direccionCP : body.direccionCP,
+    correoeletronico : body.correoeletronico,
+    telefono : body.telefono,
+    usuario : body.usuario,
+    fechaAlta : body.fechaAlta,
+    fechaActualizacion : body.fechaActualizacion,
+    usuario : req.usuario_id,
+    fechaAlta : new Date()
   });
 
   cliente.save((err, clienteGuardado) => {

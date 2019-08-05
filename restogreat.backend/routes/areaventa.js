@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  AreaVenta.find({}, "nombre clave mesainicio mesafin cargoservicio ")
+  AreaVenta.find({}, "nombre clave mesainicio mesafin cargoservicio img")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)

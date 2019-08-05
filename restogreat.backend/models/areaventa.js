@@ -7,9 +7,11 @@ var areaVentaSchema =	new Schema({
 				mesainicio: { type: Number },
 				mesafin: { type: Number },
                 cargoservicio: { type: Number },
+				img: { type: String, required: false },
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },
-                fechaActualizacion: { type: Date }                
+                fechaActualizacion: { type: Date }
+
 },	{	collection: 'areasventa' });
 
 module.exports = mongoose.model('AreaVenta', areaVentaSchema);

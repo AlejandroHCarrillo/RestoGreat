@@ -1,7 +1,8 @@
 var menuPrincipal =  [
   { titulo: "Dashboard", url: "/dashboard" },
   { titulo: "ProgressBar", url: "/progress" },
-  { titulo: "Areas de venta", url: "/areasventa" },
+  { titulo: "Clientes", url: "/clientes" },
+  // { titulo: "Areas de venta", url: "/areasventa" },
     // { titulo: "Gráficas", url: "/graficas1" },
     // { titulo: "Promesas", url: "/promesas" },
     // { titulo: "RxJs", url: "/rxjs" }

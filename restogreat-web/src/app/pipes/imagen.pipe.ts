@@ -48,6 +48,10 @@ export class ImagenPipe implements PipeTransform {
         url += '/meseros/' + img;
       break;
 
+      case 'areaventa':
+        url += '/areasventa/' + img;
+      break;
+      
       default:
         console.log('tipo de imagen no existe, usuario, medicos, hospitales');
         url += '/usurios/xxx';

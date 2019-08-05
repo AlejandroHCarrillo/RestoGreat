@@ -46,6 +46,8 @@ import { FormaspagoComponent } from './restaurant/formaspago/formaspago.componen
 import { FormapagoComponent } from './restaurant/formaspago/formapago.component';
 import { AreasventaComponent } from './restaurant/areasventa/areasventa.component';
 import { AreaventaComponent } from './restaurant/areasventa/areaventa.component';
+import { ClientesComponent } from './restaurant/clientes/clientes.component';
+import { ClienteComponent } from './restaurant/clientes/cliente.component';
 
 @NgModule({
     declarations: [
@@ -76,7 +78,9 @@ import { AreaventaComponent } from './restaurant/areasventa/areaventa.component'
         FormaspagoComponent,
         FormapagoComponent,
         AreasventaComponent,
-        AreaventaComponent
+        AreaventaComponent,
+        ClientesComponent,
+        ClienteComponent
     ],
     exports: [
         DashboardComponent,

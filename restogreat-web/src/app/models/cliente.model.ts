@@ -1,11 +1,19 @@
 export class Cliente {
     constructor(
-        public nombre: string,
-        public fechaAlta: Date,
-
-        public clave?: string,        
-        public usuario?: string,
-        public fechaActualizacion?: Date,
-        public _id?: string
     ) { }
+
+    public rfc: string;
+    public nombre: string;
+    public direccionCalle: string;
+    public direccionNumero: string;
+    public direccionColonia: string;
+    public direccionMunicipio: string;
+    public direccionEstado: string;
+    public direccionCP: string;
+    public correoeletronico: string;
+    public telefono: string;
+    public usuario?: string;
+    public fechaAlta?: Date;
+    public fechaActualizacion?: Date;
+    public _id?: string;
 }

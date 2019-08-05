@@ -2,8 +2,8 @@ var mongoose =	require('mongoose');
 var Schema =	mongoose.Schema;
 
 var clienteSchema =	new Schema({
-				rfc: { type: String, required: [true, 'El RFC del cliente es necesario'] },
 				nombre: { type: String, required: [true, 'El nombre del cliente es necesario'] },
+				rfc: { type: String, required: [true, 'El RFC del cliente es necesario'] },
 				direccionCalle: { type: String, required: [true, 'La calle de la direccion del cliente es necesaria'] },
 				direccionNumero: { type: String },
 				direccionColonia: { type: String, required: [true, 'La Colonia o poblacion del cliente es necesaria'] },
@@ -11,7 +11,7 @@ var clienteSchema =	new Schema({
 				direccionEstado: { type: String, required: [true, 'El estado del cliente es necesario'] },
 				direccionCP: { type: String, required: [true, 'El codigo postal del cliente es necesario'] },
 				correoeletronico: { type: String, required: [true, 'El correo electronico del cliente es necesario'] },
-				telefono: { type: String },
+				telefono: { type: String },				
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },
                 fechaActualizacion: { type: Date }

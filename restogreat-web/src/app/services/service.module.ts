@@ -21,7 +21,8 @@ import {
   ProductoService,
   MeseroService,
   FormaPagoService,
-  AreaventaService
+  AreaventaService, 
+  ClienteService
  } from './service.index';
 
 @NgModule({
@@ -48,7 +49,8 @@ import {
     ProductoService,
     MeseroService,
     FormaPagoService,
-    AreaventaService
+    AreaventaService,
+    ClienteService
   ],
   declarations: []
 })

@@ -47,6 +47,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>Imagen</th>
               <th>Clave</th>
               <th>Nombre</th>
               <th>Mesas</th>
@@ -56,6 +57,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let areaventa of areasventa">
+                <td class="w70">
+                    <img
+                      (click)="mostrarModal(areaventa._id)"
+                      src="{{ areaventa.img | imagen: 'areaventa' }}"
+                      class="img-50 pointer"
+                      alt="areaventa.nombre"
+                    />
+                  </td>    
               <td>
                 {{ areaventa.clave }}
               </td>

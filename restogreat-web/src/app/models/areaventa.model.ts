@@ -8,8 +8,9 @@ export class AreaVenta {
     public mesainicio: Number;
     public mesafin: Number;
     public cargoservicio: Number;
-
-    public fechaAlta: Date;
+    
+    public img?: string;
+    public fechaAlta?: Date;
     public usuario?: string;
     public fechaActualizacion?: Date;
     public _id?: string;

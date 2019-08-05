@@ -6,7 +6,6 @@ import {
   AreaventaService,
   UsuarioService
 } from "src/app/services/service.index";
-import { Seccion } from "./../../../models/seccion.model";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
@@ -18,8 +17,6 @@ import { log } from "util";
   styles: []
 })
 export class AreaventaComponent implements OnInit {
-  seccion: Seccion = new Seccion("", new Date());
-  secciones: Seccion[] = [];
   areaventa: AreaVenta = new AreaVenta();
   idparam: string;
 
@@ -27,7 +24,6 @@ export class AreaventaComponent implements OnInit {
     public http: HttpClient,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public _seccionService: SeccionService,
     public _areaventaService: AreaventaService,
     public _usuarioService: UsuarioService,
     public _modalUploadService: ModalUploadService
@@ -42,9 +38,6 @@ export class AreaventaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._seccionService
-      .cargarSecciones()
-      .subscribe((resp:any) => (this.secciones = resp.secciones));
   }
 
   cargarAreaventa(id: string) {
@@ -84,5 +77,13 @@ export class AreaventaComponent implements OnInit {
   }
 
 
+  cambiarFoto(id: string) {
+    this._modalUploadService.mostrarModal("areasventa", id);
+
+    this._modalUploadService.notificacion.subscribe(resp => {
+      console.log(resp);
+      this.areaventa.img = resp.data.img;
+    });
+  }
 
 }

@@ -1,3 +1,5 @@
+import { ClienteComponent } from './restaurant/clientes/cliente.component';
+import { ClientesComponent } from './restaurant/clientes/clientes.component';
 import { VerificatokenGuard } from '../services/service.index';
 import { AdminGuard } from './../services/guards/admin.guard';
 
@@ -58,6 +60,9 @@ const pagesRoutes: Routes = [
 
     { path: 'areasventa', component: AreasventaComponent, data: { titulo: 'Lista de las areas de venta' } },
     { path: 'areaventa/:id', component: AreaventaComponent, data: { titulo: 'Mantenimiento las areas de venta' } },
+
+    { path: 'clientes', component: ClientesComponent, data: { titulo: 'Lista de clientes' } },
+    { path: 'cliente/:id', component: ClienteComponent, data: { titulo: 'Mantenimiento clientes' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

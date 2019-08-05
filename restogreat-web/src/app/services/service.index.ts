@@ -18,3 +18,4 @@ export { ProductoService } from './restaurant/producto.service';
 export { MeseroService } from './restaurant/mesero.service';
 export { FormaPagoService } from './restaurant/formapago.service';
 export { AreaventaService } from './restaurant/areaventa.service';
+export { ClienteService } from './restaurant/cliente.service';

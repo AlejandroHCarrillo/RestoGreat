@@ -1,0 +1,148 @@
+<div class="row animated fadeIn">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <h3 class="box-title m-b-0">Cliente: {{ cliente.nombre }}</h3>
+        <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCliente(f)">
+              <div class="form-group">
+
+                <label>Nombre</label>
+                <input
+                  [(ngModel)]="cliente.nombre"
+                  name="nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Nombre del Cliente"
+                  required
+                />
+  
+                <label>RFC</label>
+                <input
+                  [(ngModel)]="cliente.rfc"
+                  name="rfc"
+                  type="text"
+                  class="form-control"
+                  placeholder="RFC"
+                  required
+                />
+                
+                <label>Calle </label>
+                <input
+                  [(ngModel)]="cliente.direccionCalle"
+                  name="direccionCalle"
+                  type="text"
+                  class="form-control"
+                  placeholder="Calle"
+                />
+
+                <label>Numero</label>
+                <input
+                  [(ngModel)]="cliente.direccionNumero"
+                  name="direccionNumero"
+                  type="text"
+                  class="form-control"
+                  placeholder="Numero"
+                />
+
+                <label>Colonia</label>
+                <input
+                  [(ngModel)]="cliente.direccionColonia"
+                  name="direccionColonia"
+                  type="text"
+                  class="form-control"
+                  placeholder="Colonia"
+                />
+
+                <label>Municipio</label>
+                <input
+                  [(ngModel)]="cliente.direccionMunicipio"
+                  name="direccionMunicipio"
+                  type="text"
+                  class="form-control"
+                  placeholder="Municipio"
+                />
+              
+                <label>Estado</label>
+                <input
+                  [(ngModel)]="cliente.direccionEstado"
+                  name="direccionEstado"
+                  type="text"
+                  class="form-control"
+                  placeholder="Estado"
+                />
+                
+                <label>CP</label>
+                <input
+                  [(ngModel)]="cliente.direccionCP"
+                  name="direccionCP"
+                  type="text"
+                  class="form-control"
+                  placeholder="Codigo Postal"
+                />
+
+                <label>Email</label>
+                <input
+                  [(ngModel)]="cliente.correoeletronico"
+                  name="correoeletronico"
+                  type="text"
+                  class="form-control"
+                  placeholder="Correo eletronico"
+                />
+
+                <label>Telefono</label>
+                <input
+                  [(ngModel)]="cliente.telefono"
+                  name="telefono"
+                  type="text"
+                  class="form-control"
+                  placeholder="Telefono"
+                />
+
+                <br />
+
+              </div>
+  
+              <button
+                type="submit"
+                class="btn btn-success waves-effect waves-light m-r-10"
+              >
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <a
+                [routerLink]="'/clientes'"
+                class="btn btn-inverse waves-effect waves-light"
+              >
+                Cancel
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-12">
+        <div class="card card-body">
+          <h4 class="box-title m-b-0">
+            Plano: <small>{{ cliente.nombre }}</small>
+          </h4>
+          <img
+            *ngIf="cliente._id"
+            (click)="cambiarFoto(cliente._id)"
+            [src]="cliente.img | imagen: 'cliente'"
+            alt=""
+            class="rounded img-fluid pointer"
+          />
+        </div>
+      </div>
+  
+    </div>
+  
+    <pre>
+      
+        {{ cliente | json }}
+      </pre
+    >
+  </div>
+  
