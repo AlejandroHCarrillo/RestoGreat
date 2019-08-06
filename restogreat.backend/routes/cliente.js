@@ -99,7 +99,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     cliente.direccionMunicipio = body.direccionMunicipio;
     cliente.direccionEstado = body.direccionEstado;
     cliente.direccionCP = body.direccionCP;
-    cliente.correoeletronico = body.correoeletronico;
+    cliente.correoelectronico = body.correoelectronico;
     cliente.telefono = body.telefono;
     cliente.usuario = body.usuario;
     cliente.fechaAlta = body.fechaAlta;
@@ -142,7 +142,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
     direccionMunicipio : body.direccionMunicipio,
     direccionEstado : body.direccionEstado,
     direccionCP : body.direccionCP,
-    correoeletronico : body.correoeletronico,
+    correoelectronico : body.correoelectronico,
     telefono : body.telefono,
     usuario : body.usuario,
     fechaAlta : body.fechaAlta,

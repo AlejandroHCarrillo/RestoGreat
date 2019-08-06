@@ -13,8 +13,9 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Rubro.find({}, "nombre ")
-    .populate("usuario", "nombre email")
+  Rubro.find({}, "nombre clave seccion")
+  .populate("seccion", "")
+  .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, rubros) => {
@@ -42,6 +43,7 @@ app.get("/", (req, res, next) => {
 app.get("/:id", (req, res) => {
   var id = req.params.id;
   Rubro.findById(id)
+    .populate("seccion", "")
     .populate("usuario", "nombre img email")
     .exec((err, rubro) => {
       if (err) {
@@ -92,8 +94,11 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     var body = req.body;
 
     rubro.nombre = body.nombre;
-    rubro.usuario = req.usuario._id;
     rubro.clave = body.clave;
+    rubro.seccion = body.seccion;
+
+    rubro.usuario = req.usuario._id;
+    rubro.fechaActualizacion = new Date();
 
     // Actualizamos la rubro
     rubro.save((err, rubroGuardado) => {
@@ -122,8 +127,11 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 
   var rubro = new Rubro({
     nombre: body.nombre,
-    usuario: req.usuario._id,
-    clave : body.clave
+    clave : body.clave,
+    seccion : body.seccion,
+
+    usuario : req.usuario._id,
+    fechaAlta : new Date()
   });
 
   rubro.save((err, rubroGuardado) => {

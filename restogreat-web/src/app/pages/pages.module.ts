@@ -48,6 +48,10 @@ import { AreasventaComponent } from './restaurant/areasventa/areasventa.componen
 import { AreaventaComponent } from './restaurant/areasventa/areaventa.component';
 import { ClientesComponent } from './restaurant/clientes/clientes.component';
 import { ClienteComponent } from './restaurant/clientes/cliente.component';
+import { RubrosComponent } from './restaurant/rubros/rubros.component';
+import { RubroComponent } from './restaurant/rubros/rubro.component';
+import { ModificadoresComponent } from './restaurant/modificadores/modificadores.component';
+import { ModificadorComponent } from './restaurant/modificadores/modificador.component';
 
 @NgModule({
     declarations: [
@@ -80,7 +84,11 @@ import { ClienteComponent } from './restaurant/clientes/cliente.component';
         AreasventaComponent,
         AreaventaComponent,
         ClientesComponent,
-        ClienteComponent
+        ClienteComponent,
+        RubrosComponent,
+        RubroComponent,
+        ModificadoresComponent,
+        ModificadorComponent
     ],
     exports: [
         DashboardComponent,

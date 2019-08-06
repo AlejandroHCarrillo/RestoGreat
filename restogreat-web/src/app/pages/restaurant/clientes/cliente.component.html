@@ -84,8 +84,8 @@
 
                 <label>Email</label>
                 <input
-                  [(ngModel)]="cliente.correoeletronico"
-                  name="correoeletronico"
+                  [(ngModel)]="cliente.correoelectronico"
+                  name="correoelectronico"
                   type="text"
                   class="form-control"
                   placeholder="Correo eletronico"
@@ -121,22 +121,7 @@
           </div>
         </div>
       </div>
-  
-      <div class="col-md-12">
-        <div class="card card-body">
-          <h4 class="box-title m-b-0">
-            Plano: <small>{{ cliente.nombre }}</small>
-          </h4>
-          <img
-            *ngIf="cliente._id"
-            (click)="cambiarFoto(cliente._id)"
-            [src]="cliente.img | imagen: 'cliente'"
-            alt=""
-            class="rounded img-fluid pointer"
-          />
-        </div>
-      </div>
-  
+    
     </div>
   
     <pre>

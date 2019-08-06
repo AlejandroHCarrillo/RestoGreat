@@ -53,7 +53,7 @@ var desembolsoCajaRoutes = require('./routes/desembolso-caja');
 var facturaRoutes = require('./routes/factura');
 var formaPagoRoutes = require('./routes/forma-pago');
 var meseroRoutes = require('./routes/mesero');
-var modificadorRubroRoutes = require('./routes/modificador-rubro');
+var modificadorRoutes = require('./routes/modificador');
 var turnoRoutes = require('./routes/turno');
 var pagoRoutes = require('./routes/pago');
 var parametroConfiguracionRoutes = require('./routes/parametro-configuracion');
@@ -82,7 +82,7 @@ app.use('/desembolsocaja', desembolsoCajaRoutes)
 app.use('/factura', facturaRoutes)
 app.use('/formapago', formaPagoRoutes)
 app.use('/mesero', meseroRoutes)
-app.use('/modificadorrubro', modificadorRubroRoutes)
+app.use('/modificador', modificadorRoutes)
 app.use('/turno', turnoRoutes)
 app.use('/pago', pagoRoutes)
 app.use('/parametroconfiguracion', parametroConfiguracionRoutes)

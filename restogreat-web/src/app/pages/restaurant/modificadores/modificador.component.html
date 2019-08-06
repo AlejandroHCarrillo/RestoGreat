@@ -1,0 +1,62 @@
+<div class="row animated fadeIn">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <h3 class="box-title m-b-0">Modificador: {{ modificador.nombre }}</h3>
+        <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarModificador(f)">
+                <div class="form-group">
+                  <label>Rubro</label><br>
+                  <div style="flex-flow: row;" >
+                    <img *ngIf="rubro" src="{{ rubro.img | imagen : 'rubro' }}" alt="rubro.nombre" class="img-50 " style="padding: 3px;">
+
+                    <select (change)="cambioRubro( $event.target.value );" [(ngModel)]="modificador.rubro._id" name="rubro" class="formControl" required>
+                      <option value="">Seleccione una Rubro</option>
+                      <option *ngFor="let rubro of rubros" [value]="rubro._id">{{ rubro.nombre }}</option>
+                    </select>
+                  </div>
+                    
+                  </div>
+
+              <div class="form-group">
+                <label>Nombre del Modificador</label>
+                <input [(ngModel)]="modificador.nombre" name="nombre"
+                  type="text"
+                  class="form-control"
+                  placeholder="Modificador"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Clave</label>
+                <input [(ngModel)]="modificador.clave" name="clave"
+                  type="text"
+                  class="form-control"
+                  placeholder="Clave"
+                  required
+                />
+              </div>
+
+              <button type="submit"
+                class="btn btn-success waves-effect waves-light m-r-10">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <a
+                [routerLink]="'/modificadores'"
+                class="btn btn-inverse waves-effect waves-light">
+                Cancel
+            </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  </div>
+  <pre>
+  
+    {{modificador|json}}
+  </pre>

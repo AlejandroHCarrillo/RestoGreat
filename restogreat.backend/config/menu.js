@@ -1,7 +1,7 @@
 var menuPrincipal =  [
   { titulo: "Dashboard", url: "/dashboard" },
   { titulo: "ProgressBar", url: "/progress" },
-  { titulo: "Clientes", url: "/clientes" },
+  { titulo: "Modificadores", url: "/modificadores" },
   // { titulo: "Areas de venta", url: "/areasventa" },
     // { titulo: "Gráficas", url: "/graficas1" },
     // { titulo: "Promesas", url: "/promesas" },
@@ -62,11 +62,11 @@ module.exports.MENU_USER = [
           { titulo: "Desembolso de Caja", url: "/desembolsoscaja" },
           { titulo: "Meseros", url: "/meseros" },
           { titulo: "Formas de Pago", url: "/formaspago" },
-
+          
+          { titulo: "Rubros", url: "/rubros" },
           { titulo: "Modificadores", url: "/modificadores" },
           { titulo: "Pagos", url: "/pagis" },
           { titulo: "Configuracion", url: "/configuracion" },
-          { titulo: "Rubros", url: "/rubros" },
           { titulo: "Turnos", url: "/turnos" }
       ]
     }

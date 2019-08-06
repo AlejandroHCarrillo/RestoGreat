@@ -22,7 +22,9 @@ import {
   MeseroService,
   FormaPagoService,
   AreaventaService, 
-  ClienteService
+  ClienteService,
+  RubroService,
+  ModificadorService
  } from './service.index';
 
 @NgModule({
@@ -50,7 +52,9 @@ import {
     MeseroService,
     FormaPagoService,
     AreaventaService,
-    ClienteService
+    ClienteService,
+    RubroService,
+    ModificadorService
   ],
   declarations: []
 })

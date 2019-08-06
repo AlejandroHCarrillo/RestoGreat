@@ -19,3 +19,5 @@ export { MeseroService } from './restaurant/mesero.service';
 export { FormaPagoService } from './restaurant/formapago.service';
 export { AreaventaService } from './restaurant/areaventa.service';
 export { ClienteService } from './restaurant/cliente.service';
+export { RubroService } from './restaurant/rubro.service';
+export { ModificadorService } from './restaurant/modificador.service';

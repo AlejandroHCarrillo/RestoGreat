@@ -32,7 +32,10 @@ import { FormaspagoComponent } from './restaurant/formaspago/formaspago.componen
 import { FormapagoComponent } from './restaurant/formaspago/formapago.component';
 import { AreasventaComponent } from './restaurant/areasventa/areasventa.component';
 import { AreaventaComponent } from './restaurant/areasventa/areaventa.component';
-
+import { RubrosComponent } from './restaurant/rubros/rubros.component';
+import { RubroComponent } from './restaurant/rubros/rubro.component';
+import { ModificadoresComponent } from './restaurant/modificadores/modificadores.component';
+import { ModificadorComponent } from './restaurant/modificadores/modificador.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -63,6 +66,12 @@ const pagesRoutes: Routes = [
 
     { path: 'clientes', component: ClientesComponent, data: { titulo: 'Lista de clientes' } },
     { path: 'cliente/:id', component: ClienteComponent, data: { titulo: 'Mantenimiento clientes' } },
+
+    { path: 'rubros', component: RubrosComponent, data: { titulo: 'Lista de rubros' } },
+    { path: 'rubro/:id', component: RubroComponent, data: { titulo: 'Mantenimiento rubros' } },
+
+    { path: 'modificadores', component: ModificadoresComponent, data: { titulo: 'Lista de modificadores' } },
+    { path: 'modificador/:id', component: ModificadorComponent, data: { titulo: 'Mantenimiento modificadores' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

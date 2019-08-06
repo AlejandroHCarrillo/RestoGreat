@@ -10,7 +10,7 @@ export class Cliente {
     public direccionMunicipio: string;
     public direccionEstado: string;
     public direccionCP: string;
-    public correoeletronico: string;
+    public correoelectronico: string;
     public telefono: string;
     public usuario?: string;
     public fechaAlta?: Date;

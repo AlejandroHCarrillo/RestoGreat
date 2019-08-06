@@ -4,32 +4,33 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var ModificadorRubro = require("../models/modificador-rubro");
+var Modificador = require("../models/modificador");
 
 // ==========================================================
-// Obtener todas las modificadoresrubro
+// Obtener todos los modificadores
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ModificadorRubro.find({}, "nombre ")
+  Modificador.find({}, "nombre clave rubro")
     .populate("usuario", "nombre email")
+    .populate("rubro", "nombre clave ")
     .skip(desde)
     .limit(PAGESIZE)
-    .exec((err, modificadoresrubro) => {
+    .exec((err, modificadores) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las modificadoresrubro",
+          mensaje: "Error cargando los modificadores",
           errors: err
         });
       }
 
-      ModificadorRubro.countDocuments({}, (err, conteo) => {
+      Modificador.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
-          modificadoresrubro: modificadoresrubro,
+          modificadores: modificadores,
           total: conteo
         });
       });
@@ -37,138 +38,145 @@ app.get("/", (req, res, next) => {
 });
 
 // ==========================================
-// Obtener ModificadorRubro por ID
+// Obtener Modificador por ID
 // ==========================================
 app.get("/:id", (req, res) => {
   var id = req.params.id;
-  ModificadorRubro.findById(id)
+  Modificador.findById(id)
     .populate("usuario", "nombre img email")
-    .exec((err, modificadorrubro) => {
+    .populate("rubro", "clave nombre")
+    .exec((err, modificador) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error al buscar modificadorrubro",
+          mensaje: "Error al buscar modificador",
           errors: err
         });
       }
-      if (!modificadorrubro) {
+      if (!modificador) {
         return res.status(400).json({
           ok: false,
-          mensaje: "La modificadorrubro con el id " + id + "no existe",
-          errors: { message: "No existe un modificadorrubro con ese ID" }
+          mensaje: "La modificador con el id " + id + "no existe",
+          errors: { message: "No existe un modificador con ese ID" }
         });
       }
       res.status(200).json({
         ok: true,
-        modificadorrubro: modificadorrubro
+        modificador: modificador
       });
     });
 });
 
 // ==========================================================
-// Actualizar ModificadorRubro
+// Actualizar Modificador
 // ==========================================================
 app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  ModificadorRubro.findById(id, (err, modificadorrubro) => {
+  Modificador.findById(id, (err, modificador) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al buscar un modificadorrubro",
+        mensaje: "Error al buscar un modificador",
         errors: err
       });
     }
     // validar si no hay datos para actualizar
-    if (!modificadorrubro) {
+    if (!modificador) {
       return res.status(400).json({
         ok: false,
-        mensaje: "El modificadorrubro con el id " + id + " no existe",
-        errors: { message: "No existe un modificadorrubro con ese ID" }
+        mensaje: "El modificador con el id " + id + " no existe",
+        errors: { message: "No existe un modificador con ese ID" }
       });
     }
 
     var body = req.body;
 
-    modificadorrubro.nombre = body.nombre;
-    modificadorrubro.usuario = req.usuario._id;
-    modificadorrubro.clave = body.clave;
+    modificador.nombre = body.nombre;
+    modificador.clave = body.clave;
+    modificador.rubro = body.rubro;
 
-    // Actualizamos la modificadorrubro
-    modificadorrubro.save((err, modificadorrubroGuardado) => {
+    modificador.usuario = req.usuario._id;
+    modificador.fechaActualizacion = new Date();
+
+    // Actualizamos la modificador
+    modificador.save((err, modificadorGuardado) => {
       // Manejo de errores
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error al actualizar el modificadorrubro",
+          mensaje: "Error al actualizar el modificador",
           errors: err
         });
       }
 
       res.status(200).json({
         ok: true,
-        modificadorrubro: modificadorrubroGuardado
+        modificador: modificadorGuardado
       });
     });
   });
 });
 
 // ==========================================================
-// Crear una nueva modificadorrubro
+// Crear una nueva modificador
 // ==========================================================
 app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
-  var modificadorrubro = new ModificadorRubro({
+  var modificador = new Modificador({
     nombre: body.nombre,
+    clave: body.clave,
+    rubro: body.rubro,
+
     usuario: req.usuario._id,
-    clave : body.clave
+    fechaAlta: new Date()
   });
 
-  modificadorrubro.save((err, modificadorrubroGuardado) => {
+  modificador.save((err, modificadorGuardado) => {
     if (err) {
       return res.status(400).json({
         ok: false,
-        mensaje: "Error guardando la modificadorrubro",
+        mensaje: "Error guardando la modificador",
         errors: err
       });
     }
 
     res.status(201).json({
       ok: true,
-      modificadorrubro: modificadorrubroGuardado
+      modificador: modificadorGuardado
     });
   });
 });
 
 // ==========================================================
-// Eliminar una modificadorrubro por el Id
+// Eliminar una modificador por el Id
 // ==========================================================
 app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  ModificadorRubro.findByIdAndDelete(id, (err, modificadorrubroBorrado) => {
+  Modificador.findByIdAndDelete(id, (err, modificadorBorrado) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al borrar modificadorrubro",
+        mensaje: "Error al borrar modificador",
         errors: err
       });
     }
 
-    if (!modificadorrubroBorrado) {
+    if (!modificadorBorrado) {
       return res.status(400).json({
         ok: false,
-        mensaje: "No existe la modificadorrubro con ese id para ser borrada",
-        errors: { message: "ModificadorRubro no encontrada con ese id" }
+        mensaje: "No existe la modificador con ese id para ser borrada",
+        errors: { message: "Modificador no encontrada con ese id" }
       });
     }
 
     res.status(200).json({
       ok: true,
-      modificadorrubro: modificadorrubroBorrado
+      modificador: modificadorBorrado
     });
   });
 });

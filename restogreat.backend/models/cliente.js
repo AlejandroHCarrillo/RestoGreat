@@ -10,7 +10,7 @@ var clienteSchema =	new Schema({
 				direccionMunicipio: { type: String, required: [true, 'El municipio o alcaldia del cliente es necesario'] },
 				direccionEstado: { type: String, required: [true, 'El estado del cliente es necesario'] },
 				direccionCP: { type: String, required: [true, 'El codigo postal del cliente es necesario'] },
-				correoeletronico: { type: String, required: [true, 'El correo electronico del cliente es necesario'] },
+				correoelectronico: { type: String, required: [true, 'El correo electronico del cliente es necesario'] },
 				telefono: { type: String },				
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },

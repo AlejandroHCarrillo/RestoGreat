@@ -1,0 +1,92 @@
+<div class="row animated fadeIn">
+  <div class="col-md-6">
+    <div class="card card-body">
+      <h3 class="box-title m-b-0">Rubro: {{ rubro.nombre }}</h3>
+      <!-- <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p> -->
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+          <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarRubro(f)">
+            <div class="form-group">
+              <label>Seccion</label><br />
+              <div style="flex-flow: row;">
+                <img
+                  *ngIf="seccion"
+                  src="{{ seccion.img | imagen: 'seccion' }}"
+                  alt="seccion.nombre"
+                  class="img-50 "
+                  style="padding: 3px;"
+                />
+
+                <select
+                  (change)="cambioSeccion($event.target.value)"
+                  [(ngModel)]="rubro.seccion._id"
+                  name="seccion"
+                  class="formControl"
+                  required
+                >
+                  <option value="">Seleccione una Seccion</option>
+                  <option
+                    *ngFor="let seccion of secciones"
+                    [value]="seccion._id"
+                    >{{ seccion.nombre }}</option
+                  >
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Nombre del Rubro</label>
+              <input
+                [(ngModel)]="rubro.nombre"
+                name="nombre"
+                type="text"
+                class="form-control"
+                placeholder="Rubro"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Clave</label>
+              <input
+                [(ngModel)]="rubro.clave"
+                name="clave"
+                type="text"
+                class="form-control"
+                placeholder="Clave"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success waves-effect waves-light m-r-10"
+            >
+              <i class="fa fa-save"></i>
+              Guardar
+            </button>
+            <a
+              [routerLink]="'/rubros'"
+              class="btn btn-inverse waves-effect waves-light"
+            >
+              Cancel
+            </a>
+
+            <div class="text-right">
+              <button [routerLink]="['/modificador', 'nuevo']"
+                      class="btn waves-effect waves-light btn-rounded btn-primary" >
+                <i class="fa fa-plus"></i>
+                Crear Modificador
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<pre>
+  
+    {{ rubro | json }}
+  </pre
+>
