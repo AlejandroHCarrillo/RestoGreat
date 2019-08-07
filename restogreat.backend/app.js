@@ -44,7 +44,7 @@ var productoRoutes = require('./routes/producto');
 
 var areaventaRoutes = require('./routes/areaventa');
 var bancoRoutes = require('./routes/banco'); 
-var causaCancelacionRoutes = require('./routes/causa-cancelacion');
+var causaCancelacionRoutes = require('./routes/causacancelacion');
 var clienteRoutes = require('./routes/cliente');
 var conceptoDescuentoRoutes = require('./routes/concepto-descuento');
 var corteCajaRoutes = require('./routes/corte-caja');

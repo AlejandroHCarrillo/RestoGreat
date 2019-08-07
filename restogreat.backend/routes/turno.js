@@ -91,9 +91,13 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     var body = req.body;
 
-    turno.nombre = body.nombre;
+    turno.fecha = body.fecha;
+    turno.numero = body.numero;
+    turno.cajero = body.cajero;
+    turno.fondocaja = body.fondocaja;
+    
     turno.usuario = req.usuario._id;
-    turno.clave = body.clave;
+    turno.fechaActualizacion = new Date();
 
     // Actualizamos la turno
     turno.save((err, turnoGuardado) => {
@@ -121,9 +125,13 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
   var turno = new Turno({
-    nombre: body.nombre,
+    fecha : body.fecha,
+    numero : body.numero,
+    cajero : body.cajero,
+    fondocaja : body.fondocaja,    
+
     usuario: req.usuario._id,
-    clave : body.clave
+    fechaAlta: new DataCue()
   });
 
   turno.save((err, turnoGuardado) => {
@@ -161,7 +169,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
     if (!turnoBorrado) {
       return res.status(400).json({
         ok: false,
-        mensaje: "No existe la turno con ese id para ser borrada",
+        mensaje: "No existe el turno con ese id para ser borrada",
         errors: { message: "Turno no encontrada con ese id" }
       });
     }

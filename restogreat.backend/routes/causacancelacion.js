@@ -4,24 +4,24 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var CausaCancelacion = require("../models/causa-cancelacion");
+var CausaCancelacion = require("../models/causacancelacion");
 
 // ==========================================================
-// Obtener todas las causacancelaciones
+// Obtener todas las causascancelacion
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  CausaCancelacion.find({}, "nombre ")
+  CausaCancelacion.find({}, "nombre clave")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
-    .exec((err, causacancelaciones) => {
+    .exec((err, causascancelacion) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las causacancelaciones",
+          mensaje: "Error cargando las causascancelacion",
           errors: err
         });
       }
@@ -29,7 +29,7 @@ app.get("/", (req, res, next) => {
       CausaCancelacion.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
-          causacancelaciones: causacancelaciones,
+          causascancelacion: causascancelacion,
           total: conteo
         });
       });
@@ -92,8 +92,10 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     var body = req.body;
 
     causacancelacion.nombre = body.nombre;
-    causacancelacion.usuario = req.usuario._id;
     causacancelacion.clave = body.clave;
+    
+    causacancelacion.usuario = req.usuario._id;
+    causacancelacion.fechaActualizacion = new Date();
 
     // Actualizamos la causacancelacion
     causacancelacion.save((err, causacancelacionGuardado) => {
@@ -122,8 +124,9 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 
   var causacancelacion = new CausaCancelacion({
     nombre: body.nombre,
+    clave : body.clave,
     usuario: req.usuario._id,
-    clave : body.clave
+    fechaAlta: new Date()
   });
 
   causacancelacion.save((err, causacancelacionGuardado) => {

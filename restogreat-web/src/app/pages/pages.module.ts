@@ -52,6 +52,9 @@ import { RubrosComponent } from './restaurant/rubros/rubros.component';
 import { RubroComponent } from './restaurant/rubros/rubro.component';
 import { ModificadoresComponent } from './restaurant/modificadores/modificadores.component';
 import { ModificadorComponent } from './restaurant/modificadores/modificador.component';
+import { CausascancelacionComponent } from './restaurant/causascancelacion/causascancelacion.component';
+import { TurnosComponent } from './restaurant/turnos/turnos.component';
+import { TurnoComponent } from './restaurant/turnos/turno.component';
 
 @NgModule({
     declarations: [
@@ -88,7 +91,10 @@ import { ModificadorComponent } from './restaurant/modificadores/modificador.com
         RubrosComponent,
         RubroComponent,
         ModificadoresComponent,
-        ModificadorComponent
+        ModificadorComponent,
+        CausascancelacionComponent,
+        TurnosComponent,
+        TurnoComponent
     ],
     exports: [
         DashboardComponent,

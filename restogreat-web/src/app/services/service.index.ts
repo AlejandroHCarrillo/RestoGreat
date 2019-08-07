@@ -21,3 +21,4 @@ export { AreaventaService } from './restaurant/areaventa.service';
 export { ClienteService } from './restaurant/cliente.service';
 export { RubroService } from './restaurant/rubro.service';
 export { ModificadorService } from './restaurant/modificador.service';
+export { CausacancelacionService } from './restaurant/causacancelacion.service';

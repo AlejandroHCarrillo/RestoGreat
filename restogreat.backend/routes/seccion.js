@@ -91,9 +91,12 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     var body = req.body;
 
-    seccion.nombre = body.nombre;
-    seccion.usuario = req.usuario._id;
     seccion.clave = body.clave;
+    seccion.nombre = body.nombre;
+
+    seccion.usuario = req.usuario._id;
+    seccion.fechaActualizacion = new Date();
+
 
     // Actualizamos la seccion
     seccion.save((err, seccionGuardado) => {
@@ -122,8 +125,9 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 
   var seccion = new Seccion({
     nombre: body.nombre,
+    clave : body.clave,
     usuario: req.usuario._id,
-    clave : body.clave
+    fechaAlta: new Date()
   });
 
   seccion.save((err, seccionGuardado) => {

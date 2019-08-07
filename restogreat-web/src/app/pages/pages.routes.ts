@@ -1,5 +1,3 @@
-import { ClienteComponent } from './restaurant/clientes/cliente.component';
-import { ClientesComponent } from './restaurant/clientes/clientes.component';
 import { VerificatokenGuard } from '../services/service.index';
 import { AdminGuard } from './../services/guards/admin.guard';
 
@@ -32,10 +30,13 @@ import { FormaspagoComponent } from './restaurant/formaspago/formaspago.componen
 import { FormapagoComponent } from './restaurant/formaspago/formapago.component';
 import { AreasventaComponent } from './restaurant/areasventa/areasventa.component';
 import { AreaventaComponent } from './restaurant/areasventa/areaventa.component';
+import { ClienteComponent } from './restaurant/clientes/cliente.component';
+import { ClientesComponent } from './restaurant/clientes/clientes.component';
 import { RubrosComponent } from './restaurant/rubros/rubros.component';
 import { RubroComponent } from './restaurant/rubros/rubro.component';
 import { ModificadoresComponent } from './restaurant/modificadores/modificadores.component';
 import { ModificadorComponent } from './restaurant/modificadores/modificador.component';
+import { CausascancelacionComponent } from './restaurant/causascancelacion/causascancelacion.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -72,6 +73,8 @@ const pagesRoutes: Routes = [
 
     { path: 'modificadores', component: ModificadoresComponent, data: { titulo: 'Lista de modificadores' } },
     { path: 'modificador/:id', component: ModificadorComponent, data: { titulo: 'Mantenimiento modificadores' } },
+
+    { path: 'causascancelacion', component: CausascancelacionComponent, data: { titulo: 'Lista de causas de cancelacion' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

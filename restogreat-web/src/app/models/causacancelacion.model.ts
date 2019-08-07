@@ -1,4 +1,4 @@
-export class CausaCancelacion {
+export class Causacancelacion {
     constructor(
         public nombre: string,
         public fechaAlta: Date,
