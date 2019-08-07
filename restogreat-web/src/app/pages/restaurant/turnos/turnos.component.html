@@ -1,3 +1,114 @@
-<p>
-  turnos works!
-</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <input
+            #input
+            (keyup)="buscarTurno(input.value)"
+            type="text"
+            class="form-control"
+            placeholder="Buscar turno..."
+            name=""
+            id=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+      <div class="alert alert-warning text-center">
+        <strong>Cargando</strong>
+        <br />
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+        <br />
+        <span>Espere un momento por favor</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row animated fadeIn">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-right">
+            <!-- (click)="crearTurno()" -->
+            <button
+              [routerLink]="['/turno', 'nuevo']"
+              class="btn waves-effect waves-light btn-rounded btn-primary"
+            >
+              <i class="fa fa-plus"></i>
+              Crear turno
+            </button>
+          </div>
+          <h3 class="card-title">
+            Turnos registrados ( <small>{{ totalRegistros }}</small> )
+          </h3>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Clave</th>
+                <th>Seccion</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let turno of turnos">
+                <td class="w70">
+                  <img
+                    (click)="mostrarModal(turno._id)"
+                    src="{{ turno.img | imagen: 'turno' }}"
+                    class="img-50 img-circle pointer"
+                    alt="turno.nombre"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="turno.nombre"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="turno.clave"
+                  />
+                </td>
+                <td>{{ turno.seccion?.nombre }}</td>
+                <td>
+                  <button (click)="guardarTurno(turno)" class="btn btn-primary">
+                    <i class="fa fa-save"></i>
+                  </button>
+                  <button
+                    [routerLink]="['/turno', turno._id]"
+                    class="btn btn-primary"
+                  >
+                    <i class="fa fa-edit"></i>
+                  </button>
+  
+                  <button (click)="borrarTurno(turno._id)" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
+            Anteriores
+          </button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">
+            Siguientes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pre>
+    {{ turnos | json }}
+  </pre>
+  

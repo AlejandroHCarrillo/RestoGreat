@@ -1,7 +1,7 @@
 var menuPrincipal =  [
   { titulo: "Dashboard", url: "/dashboard" },
   { titulo: "ProgressBar", url: "/progress" },
-  { titulo: "Causas de Cancelacion", url: "/causascancelacion" },
+  { titulo: "Turnos", url: "/turnos" },
   // { titulo: "Areas de venta", url: "/areasventa" },
     // { titulo: "Gráficas", url: "/graficas1" },
     // { titulo: "Promesas", url: "/promesas" },

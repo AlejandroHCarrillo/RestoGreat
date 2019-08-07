@@ -22,3 +22,4 @@ export { ClienteService } from './restaurant/cliente.service';
 export { RubroService } from './restaurant/rubro.service';
 export { ModificadorService } from './restaurant/modificador.service';
 export { CausacancelacionService } from './restaurant/causacancelacion.service';
+export { TurnoService } from './restaurant/turno.service';

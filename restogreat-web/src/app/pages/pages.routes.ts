@@ -37,6 +37,8 @@ import { RubroComponent } from './restaurant/rubros/rubro.component';
 import { ModificadoresComponent } from './restaurant/modificadores/modificadores.component';
 import { ModificadorComponent } from './restaurant/modificadores/modificador.component';
 import { CausascancelacionComponent } from './restaurant/causascancelacion/causascancelacion.component';
+import { TurnosComponent } from './restaurant/turnos/turnos.component';
+import { TurnoComponent } from './restaurant/turnos/turno.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -75,6 +77,9 @@ const pagesRoutes: Routes = [
     { path: 'modificador/:id', component: ModificadorComponent, data: { titulo: 'Mantenimiento modificadores' } },
 
     { path: 'causascancelacion', component: CausascancelacionComponent, data: { titulo: 'Lista de causas de cancelacion' } },
+
+    { path: 'turnos', component:    TurnosComponent, data: { titulo: 'Lista de turnos' } },
+    { path: 'turno/:id', component: TurnoComponent, data: { titulo: 'Mantenimiento turnos' } },
 
     //  Mantenimiento
     {   path: 'usuarios', 

@@ -6,8 +6,8 @@ import { Injectable } from "@angular/core";
 import { SubirArchivoService } from "../subir-archivo/subir-archivo.service";
 import Swal from 'sweetalert2'
 
-// import * from 'sweetalert';
-// declare var swal:any;
+
+
 @Injectable()
 export class SeccionService {
   seccion: Seccion;

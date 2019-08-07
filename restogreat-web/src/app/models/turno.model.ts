@@ -1,11 +1,23 @@
 export class Turno {
-    constructor(
-        public nombre: string,
-        public fechaAlta: Date,
+    constructor() {
+        this.fecha = new Date(),
+        this.numero = 1,
+        this.fondocaja = 0,
+        this.cajero = ""
+     }
 
-        public clave?: string,        
-        public usuario?: string,
-        public fechaActualizacion?: Date,
-        public _id?: string
-    ) { }
+    //  constructor( fecha, numero ) {
+    //     this.fecha = fecha,
+    //     this.numero = numero
+    //  }
+
+    public fecha: Date;
+    public numero: Number;
+    public cajero: string;
+    public fondocaja: Number;
+    
+    public usuario?: string;
+    public fechaActualizacion?: Date;
+    public fechaAlta?: Date;
+    public _id?: string
 }
