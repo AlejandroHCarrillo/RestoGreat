@@ -13,8 +13,9 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Turno.find({}, "nombre ")
-    .populate("usuario", "nombre email")
+  Turno.find({}, "fecha numero cajero fondocaja")
+    .populate("usuario", "nombre")
+    .populate("cajero", "nombre apaterno amaterno")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, turnos) => {
@@ -42,7 +43,8 @@ app.get("/", (req, res, next) => {
 app.get("/:id", (req, res) => {
   var id = req.params.id;
   Turno.findById(id)
-    .populate("usuario", "nombre img email")
+    .populate("usuario", "nombre")
+    .populate("cajero", "nombre apaterno amaterno nivel")
     .exec((err, turno) => {
       if (err) {
         return res.status(500).json({
@@ -57,7 +59,7 @@ app.get("/:id", (req, res) => {
           mensaje: "La turno con el id " + id + "no existe",
           errors: { message: "No existe un turno con ese ID" }
         });
-      }
+      }      
       res.status(200).json({
         ok: true,
         turno: turno
@@ -125,13 +127,13 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
   var turno = new Turno({
-    fecha : body.fecha,
-    numero : body.numero,
-    cajero : body.cajero,
-    fondocaja : body.fondocaja,    
+    fecha : body.turno.fecha,
+    numero : body.turno.numero,
+    cajero : body.turno.cajero,
+    fondocaja : body.turno.fondocaja,
 
     usuario: req.usuario._id,
-    fechaAlta: new DataCue()
+    fechaAlta: new Date()
   });
 
   turno.save((err, turnoGuardado) => {

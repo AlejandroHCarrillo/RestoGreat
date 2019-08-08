@@ -48,38 +48,23 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Clave</th>
-                <th>Seccion</th>
+                <th>Fecha</th>
+                <th>Cajero</th>
+                <th>Turno</th>
+                <th>Fondo Caja</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let turno of turnos">
-                <td class="w70">
-                  <img
-                    (click)="mostrarModal(turno._id)"
-                    src="{{ turno.img | imagen: 'turno' }}"
-                    class="img-50 img-circle pointer"
-                    alt="turno.nombre"
-                  />
+                <td>
+                  {{ turno.fecha | date:shortDate }}
                 </td>
                 <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="turno.nombre"
-                  />
+                    {{ turno.cajero.nombre }} {{ turno.cajero.apaterno }} {{ turno.cajero.amaterno }}
                 </td>
-                <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="turno.clave"
-                  />
-                </td>
-                <td>{{ turno.seccion?.nombre }}</td>
+                <td>{{ turno.numero }}</td>
+                <td>{{ turno.fondocaja }}</td>
                 <td>
                   <button (click)="guardarTurno(turno)" class="btn btn-primary">
                     <i class="fa fa-save"></i>

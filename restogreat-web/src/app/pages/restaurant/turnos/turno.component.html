@@ -8,6 +8,13 @@
             <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarTurno(f)">              
               <div class="form-group">
                 <label>Fecha: {{ turno.fecha | date:shortDate }} </label><br>
+                <input [(ngModel)]="turno.fecha" name="fecha"
+                  type="hidden"
+                  class="form-control"
+                  placeholder="fecha"
+                  required
+                />
+
                 <label>Turno:&nbsp; </label>                
                 <select [(ngModel)]="turno.numero" name="numero" class="formControl" required>
                   <option value="">Seleccione un turno</option>
@@ -17,17 +24,15 @@
                 </select>
 
                 <br>
-                <label>Cajero</label>
-                <input [(ngModel)]="turno.cajero" name="cajero"
-                  type="text"
-                  class="form-control"
-                  placeholder="Cajero"
-                  required
-                />
-
+                <div class="form-group">
+                  <label>Cajero</label><br>
+                  <select [(ngModel)]="turno.cajero" name="cajero" class="formControl" required>
+                    <option value="">Seleccione un cajero</option>
+                    <option *ngFor="let cajero of meseros" [value]="cajero._id">{{ cajero.nombre }} {{ cajero.apaterno }} {{ cajero.amaterno }}</option>
+                  </select>
+                </div>
               </div>
 
-              
               <div class="form-group">
                 <label>Fondo de Caja</label>
                 <input [(ngModel)]="turno.fondocaja" name="fondocaja"
@@ -55,7 +60,11 @@
     </div>
     
   </div>
-  <pre>
+  <pre>  
+    {{ turno |json}}
+  </pre>
+
   
-    {{turno|json}}
+  <pre>  
+    {{ meseros |json}}
   </pre>

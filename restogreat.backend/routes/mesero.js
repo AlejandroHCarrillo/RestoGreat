@@ -7,7 +7,7 @@ var app = express();
 var Mesero = require("../models/mesero");
 
 // ==========================================================
-// Obtener todas las meseros
+// Obtener todos los meseros
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
@@ -22,6 +22,36 @@ app.get("/", (req, res, next) => {
         return res.status(500).json({
           ok: false,
           mensaje: "Error cargando los meseros",
+          errors: err
+        });
+      }
+
+      Mesero.countDocuments({}, (err, conteo) => {
+        res.status(200).json({
+          ok: true,
+          meseros: meseros,
+          total: conteo
+        });
+      });
+    });
+});
+
+// ==========================================================
+// Obtener los cajeros
+// ==========================================================
+app.get("/cajeros", (req, res, next) => {
+  var desde = req.query.desde || 0;
+  desde = Number(desde);
+
+  Mesero.find( { "nivel": 5 }, "nombre apaterno amaterno")
+    // .populate("usuario", "nombre email")
+    // .skip(desde)
+    // .limit(PAGESIZE)
+    .exec((err, meseros) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: "Error cargando los cajeros",
           errors: err
         });
       }

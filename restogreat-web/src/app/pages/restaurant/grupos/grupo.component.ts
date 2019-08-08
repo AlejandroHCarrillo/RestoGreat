@@ -49,7 +49,7 @@ export class GrupoComponent implements OnInit {
 
   cargarGrupo(id: string) {
     this._grupoService.cargarGrupo(id).subscribe(grupo => {
-      console.log(grupo);
+      // console.log(grupo);
 
       this.grupo = grupo;
       this.grupo.seccion = grupo.seccion._id;
