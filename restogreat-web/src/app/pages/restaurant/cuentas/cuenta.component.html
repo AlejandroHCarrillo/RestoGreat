@@ -1,0 +1,72 @@
+<div class="row animated fadeIn">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <h3 class="box-title m-b-0">Cuenta: {{ cuenta.nombre }}</h3>
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCuenta(f)">
+              <div class="form-group">
+                <label>Fecha</label>
+                <input [(ngModel)]="cuenta.fecha" name="fecha"
+                  type="text"
+                  class="form-control"
+                  placeholder="Fecha"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Mesa:</label>
+                <input [(ngModel)]="cuenta.numeromesa" name="numeromesa"
+                  type="text"
+                  class="form-control"
+                  placeholder="Numero de mesa"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                  <label>Numero comensales:</label>
+                  <input [(ngModel)]="cuenta.numerocomensales" name="numerocomensales"
+                    type="text"
+                    class="form-control"
+                    placeholder="Numero de comensales"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                    <label>Mesero:</label>
+                    <input [(ngModel)]="cuenta.mesero.nombre" name="nombre"
+                      type="text"
+                      class="form-control"
+                      placeholder="Mesero"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                      <label>Estatus:</label>
+                      <input [(ngModel)]="cuenta.estatus" name="estatus"
+                        type="text"
+                        class="form-control"
+                        placeholder="Estatus"
+                        required
+                      />
+                    </div>
+              <button type="submit"
+                class="btn btn-success waves-effect waves-light m-r-10">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+              <a
+                [routerLink]="'/cuentas'"
+                class="btn btn-inverse waves-effect waves-light">
+                Cancel
+            </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+  <pre>
+    {{cuenta|json}}
+  </pre>

@@ -39,6 +39,10 @@ import { ModificadorComponent } from './restaurant/modificadores/modificador.com
 import { CausascancelacionComponent } from './restaurant/causascancelacion/causascancelacion.component';
 import { TurnosComponent } from './restaurant/turnos/turnos.component';
 import { TurnoComponent } from './restaurant/turnos/turno.component';
+import { CuentasComponent } from './restaurant/cuentas/cuentas.component';
+import { CuentaComponent } from './restaurant/cuentas/cuenta.component';
+import { BancosComponent } from './restaurant/bancos/bancos.component';
+import { BancoComponent } from './restaurant/bancos/banco.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -79,7 +83,14 @@ const pagesRoutes: Routes = [
     { path: 'causascancelacion', component: CausascancelacionComponent, data: { titulo: 'Lista de causas de cancelacion' } },
 
     { path: 'turnos', component:    TurnosComponent, data: { titulo: 'Lista de turnos' } },
-    { path: 'turno/:id', component: TurnoComponent, data: { titulo: 'Mantenimiento turnos' } },
+    { path: 'turno/:id', component: TurnoComponent, data: { titulo: 'Abrir turno caja' } },
+
+    { path: 'cuentas', component:    CuentasComponent, data: { titulo: 'Lista de cuentas' } },
+    { path: 'cuenta/:id', component: CuentaComponent, data: { titulo: 'Abrir cuenta' } },
+
+    { path: 'bancos', component:    BancosComponent, data: { titulo: 'Lista de bancos' } },
+    { path: 'banco/:id', component: BancoComponent, data: { titulo: 'Mantenimiento a bancos' } },
+
 
     //  Mantenimiento
     {   path: 'usuarios', 

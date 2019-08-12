@@ -55,6 +55,10 @@ import { ModificadorComponent } from './restaurant/modificadores/modificador.com
 import { CausascancelacionComponent } from './restaurant/causascancelacion/causascancelacion.component';
 import { TurnosComponent } from './restaurant/turnos/turnos.component';
 import { TurnoComponent } from './restaurant/turnos/turno.component';
+import { CuentasComponent } from './restaurant/cuentas/cuentas.component';
+import { CuentaComponent } from './restaurant/cuentas/cuenta.component';
+import { BancosComponent } from './restaurant/bancos/bancos.component';
+import { BancoComponent } from './restaurant/bancos/banco.component';
 
 @NgModule({
     declarations: [
@@ -94,7 +98,11 @@ import { TurnoComponent } from './restaurant/turnos/turno.component';
         ModificadorComponent,
         CausascancelacionComponent,
         TurnosComponent,
-        TurnoComponent
+        TurnoComponent,
+        CuentasComponent,
+        CuentaComponent,
+        BancosComponent,
+        BancoComponent
     ],
     exports: [
         DashboardComponent,

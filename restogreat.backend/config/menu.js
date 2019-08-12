@@ -1,7 +1,8 @@
 var menuPrincipal =  [
   { titulo: "Dashboard", url: "/dashboard" },
   { titulo: "ProgressBar", url: "/progress" },
-  { titulo: "Turnos", url: "/turnos" },
+  { titulo: "Bancos", url: "/bancos" },
+  { titulo: "Abrir Cuenta", url: "/cuentas" },
   // { titulo: "Areas de venta", url: "/areasventa" },
     // { titulo: "Gráficas", url: "/graficas1" },
     // { titulo: "Promesas", url: "/promesas" },
@@ -62,12 +63,14 @@ module.exports.MENU_USER = [
           { titulo: "Desembolso de Caja", url: "/desembolsoscaja" },
           { titulo: "Meseros", url: "/meseros" },
           { titulo: "Formas de Pago", url: "/formaspago" },
+          { titulo: "Abrir Cuenta", url: "/cuentas" },
           
           { titulo: "Rubros", url: "/rubros" },
           { titulo: "Modificadores", url: "/modificadores" },
-          { titulo: "Pagos", url: "/pagis" },
+          { titulo: "Pagos", url: "/pagos" },
           { titulo: "Configuracion", url: "/configuracion" },
-          { titulo: "Turnos", url: "/turnos" }
+          { titulo: "Turnos", url: "/turnos" },
+          { titulo: "Abrir Turno", url: "/turno/nuevo" }
       ]
     }
   ];

@@ -26,9 +26,9 @@
                 <br>
                 <div class="form-group">
                   <label>Cajero</label><br>
-                  <select [(ngModel)]="turno.cajero" name="cajero" class="formControl" required>
+                  <select [(ngModel)]="turno.mesero._id" name="mesero" class="formControl" required>
                     <option value="">Seleccione un cajero</option>
-                    <option *ngFor="let cajero of meseros" [value]="cajero._id">{{ cajero.nombre }} {{ cajero.apaterno }} {{ cajero.amaterno }}</option>
+                    <option *ngFor="let mesero of meseros" [value]="mesero._id">{{ mesero.nombre }} {{ mesero.apaterno }} {{ mesero.amaterno }}</option>
                   </select>
                 </div>
               </div>

@@ -48,7 +48,7 @@ export class CausacancelacionService {
   }
 
   crearCausacancelacion(nombre: string) {
-    console.log('Creando causa de cancelacion ' + nombre);
+    // console.log('Creando causa de cancelacion ' + nombre);
     
     let url = URL_SERVICIOS + "/causacancelacion?token=" + this.token ;
 

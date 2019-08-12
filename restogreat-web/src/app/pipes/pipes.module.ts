@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { ImagenPipe } from './imagen.pipe';
+import { TurnoPipe } from './turno.pipe';
 
 
 
 @NgModule({
   imports: [ ],
   declarations: [
-    ImagenPipe
+    ImagenPipe,
+    TurnoPipe
   ],
   exports: [
-    ImagenPipe
+    ImagenPipe,
+    TurnoPipe
   ]
 })
 export class PipesModule { }

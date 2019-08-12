@@ -50,7 +50,7 @@ export class ColacomandaService {
     let url = URL_SERVICIOS + "/colacomanda?token=" + this.token ;
 
     return this.http.post(url, { nombre }).map((resp: any) => {
-      console.log(resp);
+      // console.log(resp);
       
       Swal.fire("Cola de comandas creada", resp.colacomanda.nombre, "success");
       return resp.colacomanda;

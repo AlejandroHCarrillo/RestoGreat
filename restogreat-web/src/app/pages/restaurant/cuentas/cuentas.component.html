@@ -4,10 +4,10 @@
         <div class="card-body">
           <input
             #input
-            (keyup)="buscarTurno(input.value)"
+            (keyup)="buscarCuenta(input.value)"
             type="text"
             class="form-control"
-            placeholder="Buscar turno..."
+            placeholder="Buscar cuenta..."
             name=""
             id=""
           />
@@ -33,50 +33,65 @@
       <div class="card">
         <div class="card-body">
           <div class="text-right">
-            <!-- (click)="crearTurno()" -->
+            <!-- (click)="crearCuenta()" -->
             <button
-              [routerLink]="['/turno', 'nuevo']"
+              [routerLink]="['/cuenta', 'nuevo']"
               class="btn waves-effect waves-light btn-rounded btn-primary"
             >
               <i class="fa fa-plus"></i>
-              Crear turno
+              Crear cuenta
             </button>
           </div>
           <h3 class="card-title">
-            Turnos registrados ( <small>{{ totalRegistros }}</small> )
+            Cuentas registrados ( <small>{{ totalRegistros }}</small> )
           </h3>
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Fecha</th>
-                <th>Cajero</th>
-                <th>Turno</th>
-                <th>Fondo Caja</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Clave</th>
+                <th>Seccion</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let turno of turnos">
-                <td>
-                  {{ turno.fecha | date:shortDate }}
+              <tr *ngFor="let cuenta of cuentas">
+                <td class="w70">
+                  <img
+                    (click)="mostrarModal(cuenta._id)"
+                    src="{{ cuenta.img | imagen: 'cuenta' }}"
+                    class="img-50 img-circle pointer"
+                    alt="cuenta.nombre"
+                  />
                 </td>
                 <td>
-                    {{ turno.mesero.nombre }} {{ turno.mesero.apaterno }} {{ turno.mesero.amaterno }}
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="cuenta.nombre"
+                  />
                 </td>
-                <td> {{ turno.numero | turno }}</td>
-                <td>{{ turno.fondocaja }}</td>
                 <td>
-                  <button (click)="guardarTurno(turno)" class="btn btn-primary">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="cuenta.clave"
+                  />
+                </td>
+                <td>{{ cuenta.seccion?.nombre }}</td>
+                <td>
+                  <button (click)="guardarCuenta(cuenta)" class="btn btn-primary">
                     <i class="fa fa-save"></i>
                   </button>
                   <button
-                    [routerLink]="['/turno', turno._id]"
+                    [routerLink]="['/cuenta', cuenta._id]"
                     class="btn btn-primary"
                   >
                     <i class="fa fa-edit"></i>
                   </button>
   
-                  <button (click)="borrarTurno(turno._id)" class="btn btn-danger">
+                  <button (click)="borrarCuenta(cuenta._id)" class="btn btn-danger">
                     <i class="fa fa-trash-o"></i>
                   </button>
                 </td>
@@ -94,6 +109,6 @@
     </div>
   </div>
   <pre>
-    {{ turnos | json }}
+    {{ cuentas | json }}
   </pre>
   

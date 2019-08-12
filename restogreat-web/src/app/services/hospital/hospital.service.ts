@@ -48,7 +48,7 @@ export class HospitalService {
   }
 
   crearHospital(nombre: string) {
-    console.log('Creando hospital ' + nombre);
+    // console.log('Creando hospital ' + nombre);
     
     let url = URL_SERVICIOS + "/hospital?token=" + this.token ;
 

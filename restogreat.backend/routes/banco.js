@@ -13,8 +13,8 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Banco.find({}, "nombre ")
-    .populate("usuario", "nombre email")
+  Banco.find({}, "nombre clave")
+    .populate("usuario", "nombre")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, bancos) => {
@@ -42,7 +42,7 @@ app.get("/", (req, res, next) => {
 app.get("/:id", (req, res) => {
   var id = req.params.id;
   Banco.findById(id)
-    .populate("usuario", "nombre img email")
+    .populate("usuario", "nombre")
     .exec((err, banco) => {
       if (err) {
         return res.status(500).json({
@@ -92,8 +92,10 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     var body = req.body;
 
     banco.nombre = body.nombre;
-    banco.usuario = req.usuario._id;
     banco.clave = body.clave;
+
+    banco.usuario = req.usuario._id;
+    banco.fechaActualizacion = new Date();
 
     // Actualizamos la banco
     banco.save((err, bancoGuardado) => {
@@ -122,8 +124,10 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 
   var banco = new Banco({
     nombre: body.nombre,
+    clave : body.clave,
+
     usuario: req.usuario._id,
-    clave : body.clave
+    fechaAlta: new Date()
   });
 
   banco.save((err, bancoGuardado) => {

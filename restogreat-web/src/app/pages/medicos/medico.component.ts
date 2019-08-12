@@ -85,7 +85,7 @@ export class MedicoComponent implements OnInit {
     this._hospitalService.obtenerHospital(id).subscribe(hospital => {
       this.hospital = hospital;
       if (this.hospital) {
-        console.log(this.hospital.img);
+        // console.log(this.hospital.img);
       }
     });
   }

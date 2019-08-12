@@ -23,3 +23,5 @@ export { RubroService } from './restaurant/rubro.service';
 export { ModificadorService } from './restaurant/modificador.service';
 export { CausacancelacionService } from './restaurant/causacancelacion.service';
 export { TurnoService } from './restaurant/turno.service';
+export { CuentaService } from './restaurant/cuenta.service';
+export { BancoService } from './restaurant/banco.service';

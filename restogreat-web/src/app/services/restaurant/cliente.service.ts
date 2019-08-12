@@ -35,7 +35,7 @@ export class ClienteService {
   cargarCliente(id: string) {
     let url = URL_SERVICIOS + "/cliente/" + id;
     return this.http.get(url).map((resp: any) => {
-      console.log(resp);
+      // console.log(resp);
       
       return resp.cliente;
     });

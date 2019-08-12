@@ -4,7 +4,7 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var Seccion = require("../models/cuenta");
+var Cuenta = require("../models/cuenta");
 
 // ==========================================================
 // Obtener todas las cuentas
@@ -13,8 +13,9 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Seccion.find({}, "nombre ")
-    .populate("usuario", "nombre email")
+  Cuenta.find({}, "fecha numeromesa numerocomensales mesero estatus")
+    .populate("usuario", "nombre")
+    .populate("mesero", "nombre apaterno amaterno")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, cuentas) => {
@@ -26,7 +27,7 @@ app.get("/", (req, res, next) => {
         });
       }
 
-      Seccion.countDocuments({}, (err, conteo) => {
+      Cuenta.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
           cuentas: cuentas,
@@ -37,12 +38,13 @@ app.get("/", (req, res, next) => {
 });
 
 // ==========================================
-// Obtener Seccion por ID
+// Obtener Cuenta por ID
 // ==========================================
 app.get("/:id", (req, res) => {
   var id = req.params.id;
-  Seccion.findById(id)
-    .populate("usuario", "nombre img email")
+  Cuenta.findById(id)
+    .populate("usuario", "nombre ")
+    .populate("mesero", "nombre apaterno amaterno")
     .exec((err, cuenta) => {
       if (err) {
         return res.status(500).json({
@@ -66,12 +68,12 @@ app.get("/:id", (req, res) => {
 });
 
 // ==========================================================
-// Actualizar Seccion
+// Actualizar Cuenta
 // ==========================================================
 app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  Seccion.findById(id, (err, cuenta) => {
+  Cuenta.findById(id, (err, cuenta) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
@@ -90,10 +92,16 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     }
 
     var body = req.body;
+    // TODO implementar funcion para obtener el consecutivo autonumerico
+    cuenta.consecutivo = 1;
+    cuenta.fecha = body.fecha;
+    cuenta.numeromesa = body.numeromesa;
+    cuenta.numerocomensales = body.numerocomensales;
+    cuenta.mesero = body.mesero;
+    cuenta.estatus = body.estatus;
 
-    cuenta.nombre = body.nombre;
     cuenta.usuario = req.usuario._id;
-    cuenta.clave = body.clave;
+    cuenta.fechaActualizacion = new Date();
 
     // Actualizamos la cuenta
     cuenta.save((err, cuentaGuardado) => {
@@ -101,7 +109,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
       if (err) {
         return res.status(400).json({
           ok: false,
-          mensaje: "Error al actualizar el cuenta",
+          mensaje: "Error al actualizar la cuenta",
           errors: err
         });
       }
@@ -120,10 +128,17 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
-  var cuenta = new Seccion({
-    nombre: body.nombre,
-    usuario: req.usuario._id,
-    clave : body.clave
+  var cuenta = new Cuenta({
+       // TODO implementar funcion para obtener el consecutivo autonumerico
+      consecutivo : 2,
+      fecha : body.fecha,
+      numeromesa : body.numeromesa,
+      numerocomensales : body.numerocomensales,
+      mesero : body.mesero,
+      estatus : body.estatus,
+
+      usuario : req.usuario._id,
+      fechaAlta : new Date()
   });
 
   cuenta.save((err, cuentaGuardado) => {
@@ -148,7 +163,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  Seccion.findByIdAndDelete(id, (err, cuentaBorrado) => {
+  Cuenta.findByIdAndDelete(id, (err, cuentaBorrado) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
@@ -162,7 +177,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
       return res.status(400).json({
         ok: false,
         mensaje: "No existe la cuenta con ese id para ser borrada",
-        errors: { message: "Seccion no encontrada con ese id" }
+        errors: { message: "Cuenta no encontrada con ese id" }
       });
     }
 

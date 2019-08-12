@@ -4,7 +4,7 @@ export class Turno {
         this.fecha = new Date(),
         this.numero = 1,
         this.fondocaja = 0,
-        this.cajero = new Mesero();
+        this.mesero = new Mesero();
      }
 
     //  constructor( fecha, numero ) {
@@ -14,7 +14,7 @@ export class Turno {
 
     public fecha: Date;
     public numero: Number;
-    public cajero: Mesero;
+    public mesero: Mesero;
     public fondocaja: Number;
     
     public usuario?: string;

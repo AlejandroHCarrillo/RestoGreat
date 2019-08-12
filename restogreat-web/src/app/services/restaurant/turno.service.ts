@@ -35,6 +35,8 @@ export class TurnoService {
   obtenerTurno(id: string) {
     let url = URL_SERVICIOS + "/turno/" + id;
     return this.http.get(url).map((resp: any) => {
+      console.log(resp);
+      
       return resp.turno;
     });
   }

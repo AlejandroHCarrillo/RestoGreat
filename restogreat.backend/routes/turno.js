@@ -13,9 +13,9 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Turno.find({}, "fecha numero cajero fondocaja")
+  Turno.find({}, "fecha numero mesero fondocaja")
     .populate("usuario", "nombre")
-    .populate("cajero", "nombre apaterno amaterno")
+    .populate("mesero", "nombre apaterno amaterno")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, turnos) => {
@@ -44,7 +44,7 @@ app.get("/:id", (req, res) => {
   var id = req.params.id;
   Turno.findById(id)
     .populate("usuario", "nombre")
-    .populate("cajero", "nombre apaterno amaterno nivel")
+    .populate("mesero", "nombre apaterno amaterno nivel")
     .exec((err, turno) => {
       if (err) {
         return res.status(500).json({
@@ -56,10 +56,11 @@ app.get("/:id", (req, res) => {
       if (!turno) {
         return res.status(400).json({
           ok: false,
-          mensaje: "La turno con el id " + id + "no existe",
+          mensaje: "El turno con el id " + id + "no existe",
           errors: { message: "No existe un turno con ese ID" }
         });
       }      
+      
       res.status(200).json({
         ok: true,
         turno: turno
@@ -95,7 +96,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     turno.fecha = body.fecha;
     turno.numero = body.numero;
-    turno.cajero = body.cajero;
+    turno.mesero = body.mesero;
     turno.fondocaja = body.fondocaja;
     
     turno.usuario = req.usuario._id;
@@ -129,7 +130,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var turno = new Turno({
     fecha : body.turno.fecha,
     numero : body.turno.numero,
-    cajero : body.turno.cajero,
+    mesero : body.turno.mesero,
     fondocaja : body.turno.fondocaja,
 
     usuario: req.usuario._id,

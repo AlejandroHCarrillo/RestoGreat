@@ -7,7 +7,5 @@ var bancoSchema =	new Schema({
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },
                 fechaActualizacion: { type: Date }
-
 },	{	collection: 'bancos' });
-
 module.exports = mongoose.model('Banco', bancoSchema);

@@ -118,10 +118,10 @@ export class HospitalesComponent implements OnInit {
         }
       }
     }).then( (value) => {
-      console.log(value);
+      // console.log(value);
       this._hospitalService.crearHospital(value.value)
                            .subscribe(resp => { 
-                             console.log(resp);
+                            //  console.log(resp);
                              Swal.fire('Se ha creado el hospital:', resp.nombre, 'success' );
                             });
     });
@@ -129,7 +129,7 @@ export class HospitalesComponent implements OnInit {
 
   guardarHospital(hospital: Hospital) {
     this._hospitalService.actualizarHospital(hospital).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
     });
   }
 }

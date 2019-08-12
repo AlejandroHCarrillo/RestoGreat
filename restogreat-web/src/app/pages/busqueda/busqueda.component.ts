@@ -24,7 +24,7 @@ export class BusquedaComponent implements OnInit {
     ) { 
     activatedRoute.params.subscribe(params => {      
       this.termino = params.termino;
-      console.log(this.termino);
+      // console.log(this.termino);
       this.buscar(this.termino);
     });
   }

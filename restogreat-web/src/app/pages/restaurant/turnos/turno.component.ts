@@ -18,7 +18,7 @@ import { log } from "util";
   styles: []
 })
 export class TurnoComponent implements OnInit {
-  cajero: Mesero = new Mesero();
+  mesero: Mesero = new Mesero();
   meseros: Mesero[] = [];
 
   turno: Turno = new Turno();
@@ -43,7 +43,7 @@ export class TurnoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.turno.cajero.nombre = this._usuarioService.usuario.nombre;
+    this.turno.mesero.nombre = this._usuarioService.usuario.nombre;
 
     this._meseroService
     .cargarCajeros()
@@ -57,10 +57,10 @@ export class TurnoComponent implements OnInit {
       console.log(turno);
 
       this.turno = turno;
-      this.turno.cajero = turno.mesero;
-      this.cajero = turno.mesero;
+      this.turno.mesero = turno.mesero;
+      this.mesero = turno.mesero;
 
-      this.cambioCajero(this.turno.cajero._id);
+      this.cambioCajero(this.turno.mesero._id);
 
     });
   }
@@ -86,6 +86,7 @@ export class TurnoComponent implements OnInit {
       });
     } else {
       // console.log('Actualizando Turno');
+      // console.log("this.turno", this.turno);      
       this._turnoService.actualizarTurno(this.turno).subscribe(turno => {
         this.router.navigate(["/turno", this.idparam]);
       });
@@ -94,7 +95,7 @@ export class TurnoComponent implements OnInit {
 
   cambioCajero(id: string) {
     this._meseroService.obtenerMesero(id).subscribe(mesero => {
-      this.cajero = mesero;
+      this.mesero = mesero;
       // if (this.seccion) {
       //   console.log(this.seccion.img);
       // }
