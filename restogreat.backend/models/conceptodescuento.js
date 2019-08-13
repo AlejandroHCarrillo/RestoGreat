@@ -7,6 +7,6 @@ var conceptodescuentoSchema =	new Schema({
                 usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' },
                 fechaAlta: { type: Date },
                 fechaActualizacion: { type: Date }
-},	{	collection: 'conceptosdescuentos' });
+},	{	collection: 'conceptosdescuento' });
 
-module.exports = mongoose.model('ConceptoDescuento', conceptodescuentoSchema);
+module.exports = mongoose.model('Conceptodescuento', conceptodescuentoSchema);

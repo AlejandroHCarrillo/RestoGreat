@@ -1,7 +1,7 @@
 var menuPrincipal =  [
   { titulo: "Dashboard", url: "/dashboard" },
   { titulo: "ProgressBar", url: "/progress" },
-  { titulo: "Bancos", url: "/bancos" },
+  { titulo: "Concepto descuento", url: "/conceptosdescuento" },
   { titulo: "Abrir Cuenta", url: "/cuentas" },
   // { titulo: "Areas de venta", url: "/areasventa" },
     // { titulo: "Gráficas", url: "/graficas1" },

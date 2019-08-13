@@ -4,32 +4,32 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var ConceptoDescuento = require("../models/concepto-descuento");
+var Conceptodescuento = require("../models/conceptodescuento");
 
 // ==========================================================
-// Obtener todas las ConceptosDescuento
+// Obtener todas los Conceptos de descuento
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  ConceptoDescuento.find({}, "nombre ")
+  Conceptodescuento.find({}, "nombre clave")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
-    .exec((err, ConceptosDescuento) => {
+    .exec((err, conceptosdescuento) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las ConceptosDescuento",
+          mensaje: "Error cargando los Conceptos de descuento",
           errors: err
         });
       }
 
-      ConceptoDescuento.countDocuments({}, (err, conteo) => {
+      Conceptodescuento.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
-          ConceptosDescuento: ConceptosDescuento,
+          conceptosdescuento: conceptosdescuento,
           total: conteo
         });
       });
@@ -37,12 +37,12 @@ app.get("/", (req, res, next) => {
 });
 
 // ==========================================
-// Obtener ConceptoDescuento por ID
+// Obtener Conceptodescuento por ID
 // ==========================================
 app.get("/:id", (req, res) => {
   var id = req.params.id;
-  ConceptoDescuento.findById(id)
-    .populate("usuario", "nombre img email")
+  Conceptodescuento.findById(id)
+    .populate("usuario", "nombre")
     .exec((err, conceptodescuento) => {
       if (err) {
         return res.status(500).json({
@@ -66,12 +66,12 @@ app.get("/:id", (req, res) => {
 });
 
 // ==========================================================
-// Actualizar ConceptoDescuento
+// Actualizar Conceptodescuento
 // ==========================================================
 app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  ConceptoDescuento.findById(id, (err, conceptodescuento) => {
+  Conceptodescuento.findById(id, (err, conceptodescuento) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
@@ -120,7 +120,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
-  var conceptodescuento = new ConceptoDescuento({
+  var conceptodescuento = new Conceptodescuento({
     nombre: body.nombre,
     usuario: req.usuario._id,
     clave : body.clave
@@ -148,7 +148,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  ConceptoDescuento.findByIdAndDelete(id, (err, conceptodescuentoBorrado) => {
+  Conceptodescuento.findByIdAndDelete(id, (err, conceptodescuentoBorrado) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
@@ -162,7 +162,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
       return res.status(400).json({
         ok: false,
         mensaje: "No existe la conceptodescuento con ese id para ser borrada",
-        errors: { message: "ConceptoDescuento no encontrada con ese id" }
+        errors: { message: "Conceptodescuento no encontrada con ese id" }
       });
     }
 

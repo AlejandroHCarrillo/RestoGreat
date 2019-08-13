@@ -28,7 +28,8 @@ import {
   CausacancelacionService,
   TurnoService,
   CuentaService, 
-  BancoService
+  BancoService,
+  ConceptodescuentoService
  } from './service.index';
 
 @NgModule({
@@ -62,7 +63,8 @@ import {
     CausacancelacionService,
     TurnoService,
     CuentaService,
-    BancoService
+    BancoService, 
+    ConceptodescuentoService
   ],
   declarations: []
 })

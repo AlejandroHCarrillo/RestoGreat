@@ -1,0 +1,102 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          #input
+          (keyup)="buscarConceptodescuento(input.value)"
+          type="text"
+          class="form-control"
+          placeholder="Buscar conceptodescuento..."
+          name=""
+          id=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br />
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+      <br />
+      <span>Espere un momento por favor</span>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-right">
+          <!-- (click)="crearConceptodescuento()" -->
+          <button
+            [routerLink]="['/conceptodescuento', 'nuevo']"
+            class="btn waves-effect waves-light btn-rounded btn-primary"
+          >
+            <i class="fa fa-plus"></i>
+            Crear conceptodescuento
+          </button>
+        </div>
+        <h3 class="card-title">
+          Conceptosdescuento registrados ( <small>{{ totalRegistros }}</small> )
+        </h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Clave</th>
+              <th>Nombre</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let conceptodescuento of conceptosdescuento">
+              <td class="w-25">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="conceptodescuento.clave"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="conceptodescuento.nombre"
+                />
+              </td>
+              <td>
+                <button (click)="guardarConceptodescuento(conceptodescuento)" class="btn btn-primary">
+                  <i class="fa fa-save"></i>
+                </button>
+                <button
+                  [routerLink]="['/conceptodescuento', conceptodescuento._id]"
+                  class="btn btn-primary"
+                >
+                  <i class="fa fa-edit"></i>
+                </button>
+
+                <button (click)="borrarConceptodescuento(conceptodescuento._id)" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="cambiarPagina(-5)" class="btn btn-secondary">
+          Anteriores
+        </button>
+        <button (click)="cambiarPagina(5)" class="btn btn-secondary">
+          Siguientes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<pre>
+  {{ conceptosdescuento | json }}
+</pre>

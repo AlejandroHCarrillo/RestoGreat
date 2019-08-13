@@ -1,4 +1,4 @@
-export class ConceptoDescuento {
+export class Conceptodescuento {
     constructor(
         public nombre: string,
         public fechaAlta: Date,
