@@ -1,9 +1,11 @@
 PAGESIZE = require("../config/config").PAGESIZE;
 var express = require("express");
 
+var ObjectId = require('mongoose').Types.ObjectId; 
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
+var Usuario = require("../models/usuario");
 var Mesero = require("../models/mesero");
 
 // ==========================================================
@@ -43,7 +45,7 @@ app.get("/cajeros", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Mesero.find( { "nivel": 5 }, "nombre apaterno amaterno")
+  Mesero.find({ "nivel": 5 }, "nombre apaterno amaterno")
     // .populate("usuario", "nombre email")
     // .skip(desde)
     // .limit(PAGESIZE)
@@ -95,6 +97,61 @@ app.get("/:id", (req, res) => {
     });
 });
 
+// ==========================================
+// Obtener Mesero por Usuario ID
+// ==========================================
+app.get("/usuario/:id", (req, res) => {
+  var id = req.params.id;
+
+  console.log("Usuario ID:", id);
+
+  Usuario.findById(id)
+    .exec((err, usuario) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: "Error al buscar el usuario",
+          errors: err
+        });
+      }
+      if (!usuario) {
+        return res.status(400).json({
+          ok: false,
+          mensaje: "El usuario con el id " + id + "no existe",
+          errors: { message: "No existe un usuario con ese ID" }
+        });
+      }
+      console.log("usuario encontrado", usuario);
+
+      // Mesero.find({ "nivel": 5 }, "nombre apaterno amaterno")
+      var query = { user: new ObjectId(usuario._id) };
+
+      Mesero.find(query, "")
+        // .populate("usuario", "nombre img email")
+        .exec((err, mesero) => {
+          if (err) {
+            return res.status(500).json({
+              ok: false,
+              mensaje: "Error al buscar el mesero",
+              errors: err
+            });
+          }
+          if (!mesero) {
+            return res.status(400).json({
+              ok: false,
+              mensaje: "El mesero con el id " + id + "no existe",
+              errors: { message: "No existe un mesero con ese ID" }
+            });
+          }
+          console.log("Mesero: ", mesero);          
+          res.status(200).json({
+            ok: true,
+            mesero: mesero
+          });
+        });
+    });
+});
+
 // ==========================================================
 // Actualizar Mesero
 // ==========================================================
@@ -129,7 +186,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     mesero.nivel = body.nivel;
 
     mesero.img = body.img;
-    
+
     mesero.usuario = req.usuario._id;
     mesero.fechaActualizacion = new Date()
 
@@ -159,18 +216,18 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
   var mesero = new Mesero({
-    numero : body.numero,
+    numero: body.numero,
     nombre: body.nombre,
-    apaterno : body.apaterno,
-    amaterno : body.amaterno,
-    nombrecorto : body.nombrecorto,
+    apaterno: body.apaterno,
+    amaterno: body.amaterno,
+    nombrecorto: body.nombrecorto,
     nivel: body.nivel,
 
     // password: body.password,
     // img : body.img,
     usuario: req.usuario._id,
-    fechaAlta : new Date(),
-    fechaActualizacion : new Date()
+    fechaAlta: new Date(),
+    fechaActualizacion: new Date()
   });
 
   mesero.save((err, meseroGuardado) => {

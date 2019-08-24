@@ -29,7 +29,8 @@ import {
   TurnoService,
   CuentaService, 
   BancoService,
-  ConceptodescuentoService
+  ConceptodescuentoService,
+  PagoService
  } from './service.index';
 
 @NgModule({
@@ -64,7 +65,8 @@ import {
     TurnoService,
     CuentaService,
     BancoService, 
-    ConceptodescuentoService
+    ConceptodescuentoService,
+    PagoService
   ],
   declarations: []
 })

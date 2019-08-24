@@ -26,3 +26,4 @@ export { TurnoService } from './restaurant/turno.service';
 export { CuentaService } from './restaurant/cuenta.service';
 export { BancoService } from './restaurant/banco.service';
 export { ConceptodescuentoService } from './restaurant/conceptodescuento.service';
+export { PagoService } from './restaurant/pago.service';

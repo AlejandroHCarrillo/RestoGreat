@@ -4,32 +4,32 @@ var express = require("express");
 var mdAutentificacion = require("../middlewares/autenticacion");
 
 var app = express();
-var CorteCaja = require("../models/corte-caja");
+var Cortecaja = require("../models/cortecaja");
 
 // ==========================================================
-// Obtener todas las CortesCaja
+// Obtener todas las Cortescaja
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  CorteCaja.find({}, "nombre ")
+  Cortecaja.find({}, "nombre ")
     .populate("usuario", "nombre email")
     .skip(desde)
     .limit(PAGESIZE)
-    .exec((err, CortesCaja) => {
+    .exec((err, Cortescaja) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las CortesCaja",
+          mensaje: "Error cargando las Cortescaja",
           errors: err
         });
       }
 
-      CorteCaja.countDocuments({}, (err, conteo) => {
+      Cortecaja.countDocuments({}, (err, conteo) => {
         res.status(200).json({
           ok: true,
-          CortesCaja: CortesCaja,
+          Cortescaja: Cortescaja,
           total: conteo
         });
       });
@@ -37,11 +37,11 @@ app.get("/", (req, res, next) => {
 });
 
 // ==========================================
-// Obtener CorteCaja por ID
+// Obtener Cortecaja por ID
 // ==========================================
 app.get("/:id", (req, res) => {
   var id = req.params.id;
-  CorteCaja.findById(id)
+  Cortecaja.findById(id)
     .populate("usuario", "nombre img email")
     .exec((err, cortecaja) => {
       if (err) {
@@ -66,12 +66,12 @@ app.get("/:id", (req, res) => {
 });
 
 // ==========================================================
-// Actualizar CorteCaja
+// Actualizar Cortecaja
 // ==========================================================
 app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  CorteCaja.findById(id, (err, cortecaja) => {
+  Cortecaja.findById(id, (err, cortecaja) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
@@ -120,7 +120,7 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
-  var cortecaja = new CorteCaja({
+  var cortecaja = new Cortecaja({
     nombre: body.nombre,
     usuario: req.usuario._id,
     clave : body.clave
@@ -148,7 +148,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
 
-  CorteCaja.findByIdAndDelete(id, (err, cortecajaBorrado) => {
+  Cortecaja.findByIdAndDelete(id, (err, cortecajaBorrado) => {
     // validar si ocurrio un error
     if (err) {
       return res.status(500).json({
@@ -162,7 +162,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
       return res.status(400).json({
         ok: false,
         mensaje: "No existe la cortecaja con ese id para ser borrada",
-        errors: { message: "CorteCaja no encontrada con ese id" }
+        errors: { message: "Cortecaja no encontrada con ese id" }
       });
     }
 

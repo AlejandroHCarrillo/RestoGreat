@@ -1,14 +1,14 @@
 import { Router, ActivatedRoute } from "@angular/router";
 import { Cuenta } from "src/app/models/cuenta.model";
 import {
-  SeccionService,
+  MeseroService,
   CuentaService,
   UsuarioService
 } from "src/app/services/service.index";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
-import { log } from "util";
+import { Mesero } from "src/app/models/mesero.model";
 
 @Component({
   selector: "app-cuenta",
@@ -24,6 +24,7 @@ export class CuentaComponent implements OnInit {
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _cuentaService: CuentaService,
+    public _meseroService: MeseroService,
     public _usuarioService: UsuarioService
   ) {
     activatedRoute.params.subscribe(params => {
@@ -35,6 +36,23 @@ export class CuentaComponent implements OnInit {
 
       if (id !== "nuevo") {
         this.cargarCuenta(id);
+      } else{
+        // console.log("Usuario Id:", _usuarioService.usuario._id );
+        this.cuenta = new Cuenta();
+        this.cuenta.fecha = new Date(Date.now());
+        this.cuenta.numeromesa = 1;
+        this.cuenta.numerocomensales = 1;
+        this.cuenta.estatus = 1;
+
+        this.cuenta.mesero = new Mesero();
+        _meseroService.cargarMeseroPorUsuarioId(_usuarioService.usuario._id).subscribe((meseroResp:Mesero) => {
+          this.cuenta.mesero = meseroResp;
+          // console.log('Mesero Asignado: ', meseroResp);
+        })
+
+        // this.cuenta.mesero.nombre = _usuarioService.usuario.nombre;
+        // this.cuenta.mesero.apaterno = _usuarioService.usuario.;
+        // this.cuenta.mesero.apaterno = _usuarioService.usuario.nombre;
       }
     });
   }

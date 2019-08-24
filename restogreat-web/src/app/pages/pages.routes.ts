@@ -45,6 +45,8 @@ import { BancosComponent } from './restaurant/bancos/bancos.component';
 import { BancoComponent } from './restaurant/bancos/banco.component';
 import { ConceptosdescuentoComponent } from './restaurant/conceptosdescuento/conceptosdescuento.component';
 import { ConceptodescuentoComponent } from './restaurant/conceptosdescuento/conceptodescuento.component';
+import { PagoComponent } from './restaurant/pagos/pago.component';
+import { PagosComponent } from './restaurant/pagos/pagos.component';
 
 const pagesRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [ VerificatokenGuard ], data: { titulo: 'Dashboard' } },
@@ -95,6 +97,9 @@ const pagesRoutes: Routes = [
 
     { path: 'conceptosdescuento', component: ConceptosdescuentoComponent, data: { titulo: 'Lista de conceptos de descuento' } },
     { path: 'conceptodescuento/:id', component: ConceptodescuentoComponent, data: { titulo: 'Mantenimiento a conceptos de descuento' } },
+
+    { path: 'pagos', component: PagosComponent, data: { titulo: 'Lista de conceptos de pagos' } },
+    { path: 'pago/:id', component: PagoComponent, data: { titulo: 'Cambios a los pagos' } },
 
 
     //  Mantenimiento

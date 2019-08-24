@@ -61,6 +61,8 @@ import { BancosComponent } from './restaurant/bancos/bancos.component';
 import { BancoComponent } from './restaurant/bancos/banco.component';
 import { ConceptosdescuentoComponent } from './restaurant/conceptosdescuento/conceptosdescuento.component';
 import { ConceptodescuentoComponent } from './restaurant/conceptosdescuento/conceptodescuento.component';
+import { PagosComponent } from './restaurant/pagos/pagos.component';
+import { PagoComponent } from './restaurant/pagos/pago.component';
 
 @NgModule({
     declarations: [
@@ -106,7 +108,9 @@ import { ConceptodescuentoComponent } from './restaurant/conceptosdescuento/conc
         BancosComponent,
         BancoComponent,
         ConceptosdescuentoComponent,
-        ConceptodescuentoComponent
+        ConceptodescuentoComponent,
+        PagosComponent,
+        PagoComponent
     ],
     exports: [
         DashboardComponent,

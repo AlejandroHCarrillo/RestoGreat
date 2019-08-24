@@ -7,21 +7,22 @@ var app = express();
 var Pago = require("../models/pago");
 
 // ==========================================================
-// Obtener todas las pagos
+// Obtener todos los pagos
 // ==========================================================
 app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Pago.find({}, "nombre ")
+  Pago.find({}, "cuenta formaPago monto referencia observaciones")
     .populate("usuario", "nombre email")
+    .populate("formaPago", "nombre clave")
     .skip(desde)
     .limit(PAGESIZE)
     .exec((err, pagos) => {
       if (err) {
         return res.status(500).json({
           ok: false,
-          mensaje: "Error cargando las pagos",
+          mensaje: "Error cargando los pagos",
           errors: err
         });
       }
@@ -42,7 +43,8 @@ app.get("/", (req, res, next) => {
 app.get("/:id", (req, res) => {
   var id = req.params.id;
   Pago.findById(id)
-    .populate("usuario", "nombre img email")
+    .populate("cuenta", "consecutivo fecha numeromesa numerocomensales estatus")
+    .populate("formaPago", "nombre clave")
     .exec((err, pago) => {
       if (err) {
         return res.status(500).json({
@@ -54,7 +56,7 @@ app.get("/:id", (req, res) => {
       if (!pago) {
         return res.status(400).json({
           ok: false,
-          mensaje: "La pago con el id " + id + "no existe",
+          mensaje: "El pago con el id " + id + "no existe",
           errors: { message: "No existe un pago con ese ID" }
         });
       }
@@ -91,11 +93,15 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 
     var body = req.body;
 
-    pago.nombre = body.nombre;
-    pago.usuario = req.usuario._id;
-    pago.clave = body.clave;
+    pago.cuenta = body.cuenta;
+    pago.formaPago  = body.formaPago;
+    pago.monto = body.monto;
+    pago.referencia = body.referencia;
+    pago.observaciones = body.observaciones;
+    pago.usuario = req.usuario;
+    pago.fechaActualizacion = new Date();
 
-    // Actualizamos la pago
+    // Actualizamos el pago
     pago.save((err, pagoGuardado) => {
       // Manejo de errores
       if (err) {
@@ -115,22 +121,25 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
 });
 
 // ==========================================================
-// Crear una nueva pago
+// Crear un nuevo pago
 // ==========================================================
 app.post("/", mdAutentificacion.verificaToken, (req, res) => {
-  var body = req.body;
-
+  var body = req.body;  
   var pago = new Pago({
-    nombre: body.nombre,
-    usuario: req.usuario._id,
-    clave : body.clave
+    cuenta : body.cuenta,
+    formaPago : body.formaPago,
+    monto : body.monto,
+    referencia : body.referencia,
+    observaciones : body.observaciones,
+    usuario : req.usuario,
+    fechaAlta : new Date()
   });
 
   pago.save((err, pagoGuardado) => {
     if (err) {
       return res.status(400).json({
         ok: false,
-        mensaje: "Error guardando la pago",
+        mensaje: "Error guardando el pago",
         errors: err
       });
     }
@@ -143,7 +152,7 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
 });
 
 // ==========================================================
-// Eliminar una pago por el Id
+// Eliminar un pago por el Id
 // ==========================================================
 app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
   var id = req.params.id;
@@ -153,7 +162,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: "Error al borrar pago",
+        mensaje: "Error al borrar el pago",
         errors: err
       });
     }
@@ -161,7 +170,7 @@ app.delete("/:id", mdAutentificacion.verificaToken, (req, res) => {
     if (!pagoBorrado) {
       return res.status(400).json({
         ok: false,
-        mensaje: "No existe la pago con ese id para ser borrada",
+        mensaje: "No existe el pago con ese id para ser borrado",
         errors: { message: "Pago no encontrada con ese id" }
       });
     }

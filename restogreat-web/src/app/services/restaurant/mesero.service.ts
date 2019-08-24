@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 
 @Injectable()
 export class MeseroService {
-  mesero: Mesero;
   token: string;
 
   constructor(
@@ -43,6 +42,14 @@ export class MeseroService {
       return resp.mesero;
     });
   }
+
+  cargarMeseroPorUsuarioId(id: string) {
+    let url = URL_SERVICIOS + "/mesero/usuario/" + id;
+    return this.http.get(url).map((resp: any) => {
+      return resp.mesero[0];
+    });
+  }
+
 
   buscarMeseros(termino: string) {
     let url = URL_SERVICIOS + "/busqueda/coleccion/mesero/" + termino;
