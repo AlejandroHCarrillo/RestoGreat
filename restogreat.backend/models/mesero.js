@@ -1,5 +1,9 @@
-var mongoose =	require('mongoose');
-var Schema =	mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
+	
+autoIncrement.initialize(mongoose.connection);
+
 
 var meseroSchema =	new Schema({
 				numero: { type: Number },
@@ -19,4 +23,5 @@ var meseroSchema =	new Schema({
                 fechaActualizacion: { type: Date }
 },	{	collection: 'meseros' });
 
+meseroSchema.plugin(autoIncrement.plugin, { model: 'mesero', field: 'numero' });
 module.exports = mongoose.model('Mesero', meseroSchema);

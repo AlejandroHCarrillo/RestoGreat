@@ -92,8 +92,6 @@ app.put("/:id", mdAutentificacion.verificaToken, (req, res) => {
     }
 
     var body = req.body;
-    // TODO implementar funcion para obtener el consecutivo autonumerico
-    cuenta.consecutivo = 1;
     cuenta.fecha = body.fecha;
     cuenta.numeromesa = body.numeromesa;
     cuenta.numerocomensales = body.numerocomensales;
@@ -129,8 +127,6 @@ app.post("/", mdAutentificacion.verificaToken, (req, res) => {
   var body = req.body;
 
   var cuenta = new Cuenta({
-       // TODO implementar funcion para obtener el consecutivo autonumerico
-      consecutivo : 2,
       fecha : body.fecha,
       numeromesa : body.numeromesa,
       numerocomensales : body.numerocomensales,

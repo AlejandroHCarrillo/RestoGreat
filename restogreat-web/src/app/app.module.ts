@@ -42,7 +42,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       customClass: 'modal-content',
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
-  })
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

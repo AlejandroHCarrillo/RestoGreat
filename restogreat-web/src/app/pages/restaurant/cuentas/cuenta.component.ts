@@ -16,8 +16,15 @@ import { Mesero } from "src/app/models/mesero.model";
   styles: []
 })
 export class CuentaComponent implements OnInit {
+  cargando : boolean;
+
   cuenta: Cuenta = new Cuenta();
   idparam: string;
+
+  showDatePicker: boolean = false;
+
+  mesero: Mesero;
+  meseros: Mesero[] = [];
 
   constructor(
     public http: HttpClient,
@@ -27,46 +34,49 @@ export class CuentaComponent implements OnInit {
     public _meseroService: MeseroService,
     public _usuarioService: UsuarioService
   ) {
+
     activatedRoute.params.subscribe(params => {
       let id = params.id;
       this.idparam = id;
-      
-      // Obtener el mesero automaticamente
-//      this.cuenta.mesero = _usuarioService.usuario;
 
       if (id !== "nuevo") {
         this.cargarCuenta(id);
-      } else{
-        // console.log("Usuario Id:", _usuarioService.usuario._id );
+      } else {
         this.cuenta = new Cuenta();
         this.cuenta.fecha = new Date(Date.now());
+
         this.cuenta.numeromesa = 1;
         this.cuenta.numerocomensales = 1;
         this.cuenta.estatus = 1;
 
-        this.cuenta.mesero = new Mesero();
-        _meseroService.cargarMeseroPorUsuarioId(_usuarioService.usuario._id).subscribe((meseroResp:Mesero) => {
-          this.cuenta.mesero = meseroResp;
-          // console.log('Mesero Asignado: ', meseroResp);
-        })
-
-        // this.cuenta.mesero.nombre = _usuarioService.usuario.nombre;
-        // this.cuenta.mesero.apaterno = _usuarioService.usuario.;
-        // this.cuenta.mesero.apaterno = _usuarioService.usuario.nombre;
+        this.asignarMeseroActual();
       }
     });
   }
 
   ngOnInit() {
+    this.cargarMeseros();
   }
 
   cargarCuenta(id: string) {
-    this._cuentaService.cargarCuenta(id).subscribe(cuenta => {
-      // console.log(cuenta);
+    this._cuentaService.cargarCuenta(id).subscribe(cuenta => {      
+      if(!cuenta.mesero){
+        console.log("No tiene mesero asignado");
+        this.asignarMeseroActual();
+      }      
+      this.mesero = cuenta.mesero;
       this.cuenta = cuenta;
     });
   }
 
+  asignarMeseroActual(){
+  this._meseroService.cargarMeseroPorUsuarioId(this._usuarioService.usuario._id)
+    .subscribe((meseroResp: Mesero) => {
+      this.mesero = meseroResp;
+      this.cuenta.mesero = meseroResp;
+      console.log("Mesero Asignado: ", meseroResp);
+    });
+  }
   guardarCuenta(f: NgForm) {
     if (f.invalid) {
       return;
@@ -79,12 +89,9 @@ export class CuentaComponent implements OnInit {
       // console.log('Creando Cuenta');
       this._cuentaService.crearCuenta(this.cuenta).subscribe(cuenta => {
         this.cuenta = cuenta;
-        this.router.navigate(["/cuenta", this.cuenta._id])
-        .catch( err => {
-            console.log(err);
-        }
-
-        );
+        this.router.navigate(["/cuenta", this.cuenta._id]).catch(err => {
+          console.log(err);
+        });
       });
     } else {
       // console.log('Actualizando Cuenta');
@@ -92,6 +99,27 @@ export class CuentaComponent implements OnInit {
         this.router.navigate(["/cuenta", this.idparam]);
       });
     }
+  }
+
+  toggleDatePicker(e){
+    e.preventDefault();
+    this.showDatePicker = !this.showDatePicker;
+  }
+
+  cargarMeseros() {
+    this._meseroService
+      .cargarListaMeseros("")
+      .subscribe((resp: any) => {
+        this.meseros = resp.meseros;
+      });
+  }
+
+  cambioMesero(id: string) {
+    this._meseroService.obtenerMesero(id).subscribe(mesero => {
+
+        this.mesero = mesero;
+        this.cuenta.mesero = mesero;
+      });
   }
 
 }

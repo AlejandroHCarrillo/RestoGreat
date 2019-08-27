@@ -1,33 +1,38 @@
 <div class="row animated fadeIn">
   <div class="col-md-6">
     <div class="card card-body">
-      <h3 class="box-title m-b-0">Cuenta: {{ cuenta.nombre }}</h3>
+      <h3 class="box-title m-b-0">Cuenta:</h3>
       <div class="row">
         <div class="col-sm-12 col-xs-12">
           <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCuenta(f)">
             <div class="form-group">
-              <label>Fecha:</label> {{ cuenta.fecha | date }}
-              <input
-                [(ngModel)]="cuenta.fecha"
-                name="fecha"
-                type="text"
-                class="form-control"
-                placeholder="Fecha"
-                required
-              />
+              Fecha: <span *ngIf="!showDatePicker">
+                {{ cuenta.fecha | date:'dd-MMMM-yyyy' }}
+              </span>
+              <input type="date"  
+              [ngModel]="cuenta.fecha| date:'yyyy-MM-dd'" 
+              (ngModelChange)="cuenta.fecha = $event" 
+              [ngModelOptions]="{standalone: true}"
+              *ngIf="showDatePicker"
+              class="form-control w-50"
+              >
+              <button (click)="toggleDatePicker($event)">Edit</button>
+
             </div>
-            cuenta.mesero: {{ cuenta.mesero.nombre }}
             <div class="form-row">
-              <div class="form-group">
-                <label>Mesero:</label> {{ cuenta.mesero.nombre }} {{ cuenta.mesero.apaterno }} {{ cuenta.mesero.amaterno }}
-                <input
-                  [(ngModel)]="cuenta.mesero.nombre"
-                  name="nombre"
-                  type="text"
-                  class="form-control"
-                  placeholder="Mesero"
-                  required
-                />
+              <div class="form-group" *ngIf="mesero">
+                <label>Mesero:</label> 
+                <span *ngIf="!showDatePicker">
+                  {{ cuenta.mesero.nombre }} {{ cuenta.mesero.apaterno }} {{ cuenta.mesero.amaterno }}
+                </span>
+                <select (change)="cambioMesero( $event.target.value );" 
+                        [(ngModel)]="mesero._id" 
+                        name="mesero" 
+                        *ngIf="showDatePicker"
+                        class="custom-select" required>
+                    <option *ngFor="let mesero of meseros" [value]="mesero._id">{{ mesero.nombre }} {{ mesero.apaterno }} {{ mesero.amaterno }} </option>
+                  </select>
+
               </div>
             </div>
             <div class="form-row">
@@ -62,6 +67,7 @@
                 [(ngModel)]="cuenta.estatus"
                 name="estatus"
                 required
+                disabled={{!showDatePicker}}
               >
                 <option value="1">Abierta</option>
                 <option value="2">Cerrada</option>
@@ -89,7 +95,3 @@
     </div>
   </div>
 </div>
-<pre>
-    {{ cuenta | json }}
-  </pre
->

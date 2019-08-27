@@ -1,7 +1,10 @@
 import { Mesero } from 'src/app/models/mesero.model';
 export class Cuenta {
     constructor(
-    ) { }
+    ) {
+        this.mesero = new Mesero();
+        this.fecha = new Date();
+     }
 
     public consecutivo: Number;
     public fecha: Date;

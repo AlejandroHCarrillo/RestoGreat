@@ -1,7 +1,11 @@
-var mongoose =	require('mongoose');
-var Schema =	mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
+	
+autoIncrement.initialize(mongoose.connection);
 
 var productoSchema =	new Schema({
+        consecutivo: { type: Number	},
         clave: { type: String, required: [true, 'La clave del producto es necesario']	},
         grupo: { type: Schema.Types.ObjectId, ref: 'Grupo', required: [true, 'El grupo del producto es necesario'] },
         nombre: { type: String, required: [true, 'El nombre del producto es necesario']	},
@@ -17,4 +21,5 @@ var productoSchema =	new Schema({
         usuario: { type: Schema.Types.ObjectId, ref: 'Usuario' }
 },	{	collection: 'productos' });
 
+productoSchema.plugin(autoIncrement.plugin, { model: 'producto', field: 'consecutivo' });
 module.exports = mongoose.model('Producto', productoSchema);

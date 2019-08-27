@@ -6,7 +6,9 @@ console.log('databaseName:' + databaseName);
 
 // Requires
 var express = require('express')
-var mongoose = require('mongoose')
+var mongoose = require('mongoose'),
+// Schema = mongoose.Schema,
+autoIncrement = require('mongoose-auto-increment');
 var bodyParser = require('body-parser')
 
 // Inicializar variables
@@ -64,6 +66,8 @@ mongoose.connection.openUri('mongodb://localhost:' + mongoDBPort + '/' + databas
     if (err) throw err;    
     console.log('Base de datos: \x1b[32m%s\x1b[0m ', ' on line ');    
 } );
+
+autoIncrement.initialize(mongoose.connection);
 
 // Rutas
 app.use('/seccion', seccionRoutes);

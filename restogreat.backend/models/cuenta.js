@@ -1,5 +1,7 @@
-var mongoose =	require('mongoose');
-var Schema =	mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+    autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose.connection);
 
 var cuentaSchema =	new Schema({
 				consecutivo: { type: Number	},
@@ -14,4 +16,5 @@ var cuentaSchema =	new Schema({
                 fechaActualizacion: { type: Date }
 },	{	collection: 'cuentas' });
 
+cuentaSchema.plugin(autoIncrement.plugin, { model: 'cuenta', field: 'consecutivo' });
 module.exports = mongoose.model('Cuenta', cuentaSchema);

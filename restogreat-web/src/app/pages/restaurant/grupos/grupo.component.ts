@@ -90,9 +90,6 @@ export class GrupoComponent implements OnInit {
   cambioSeccion(id: string) {
     this._seccionService.obtenerSeccion(id).subscribe(seccion => {
       this.seccion = seccion;
-      // if (this.seccion) {
-      //   console.log(this.seccion.img);
-      // }
     });
   }
 

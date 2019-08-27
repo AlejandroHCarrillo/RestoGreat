@@ -1,7 +1,12 @@
-var mongoose =	require('mongoose');
-var Schema =	mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
+	
+autoIncrement.initialize(mongoose.connection);
+
 
 var clienteSchema =	new Schema({
+				consecutivo: { type: Number	},
 				nombre: { type: String, required: [true, 'El nombre del cliente es necesario'] },
 				rfc: { type: String, required: [true, 'El RFC del cliente es necesario'] },
 				direccionCalle: { type: String, required: [true, 'La calle de la direccion del cliente es necesaria'] },
@@ -17,4 +22,5 @@ var clienteSchema =	new Schema({
                 fechaActualizacion: { type: Date }
 },	{	collection: 'clientes' });
 
+clienteSchema.plugin(autoIncrement.plugin, { model: 'cliente', field: 'consecutivo' });
 module.exports = mongoose.model('Cliente', clienteSchema);

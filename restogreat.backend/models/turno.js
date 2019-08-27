@@ -1,7 +1,11 @@
-var mongoose =	require('mongoose');
-var Schema =	mongoose.Schema;
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema,
+	autoIncrement = require('mongoose-auto-increment');
+	
+autoIncrement.initialize(mongoose.connection);
 
 var turnoSchema =	new Schema({
+    consecutivo: { type: Number	},
     fecha: { type: Date, required: [true, 'La fecha del turno es necesaria'] },
     numero: { type: Number, required: [true, 'El numero de turno es necesario']	},
     mesero: { type: Schema.Types.ObjectId, ref: 'Mesero' },
@@ -11,4 +15,5 @@ var turnoSchema =	new Schema({
     fechaActualizacion: { type: Date }
 },	{ collection: 'turnos' });
 
+turnoSchema.plugin(autoIncrement.plugin, { model: 'turno', field: 'consecutivo' });
 module.exports = mongoose.model('Turno', turnoSchema);

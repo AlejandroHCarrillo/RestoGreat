@@ -31,6 +31,12 @@ export class MeseroService {
     return this.http.get(url);
   }
 
+  cargarListaMeseros(filtro?: string) {
+    let url = URL_SERVICIOS + "/mesero/lista/filtro=" + filtro || "";
+    return this.http.get(url);
+  }
+
+
   cargarCajeros() {
     let url = URL_SERVICIOS + "/mesero/cajeros";
     return this.http.get(url);

@@ -39,6 +39,33 @@ app.get("/", (req, res, next) => {
 });
 
 // ==========================================================
+// Obtener lista de meseros con filtro
+// ==========================================================
+app.get("/lista/:filtro", (req, res, next) => {  
+  var filtro = req.params.filtro;
+  var posIgual = filtro.indexOf("=");
+  var regexp = new RegExp(filtro.substring(posIgual+1, filtro.length), "i");
+  
+  Mesero.find({ "nombre": regexp }, "nombre apaterno amaterno nombrecorto nivel")
+    .exec((err, meseros) => {
+      if (err) {
+        return res.status(500).json({
+          ok: false,
+          mensaje: "Error cargando los meseros",
+          errors: err
+        });
+      }
+
+      res.status(200).json({
+        ok: true,
+        meseros: meseros,
+        filtro: filtro.substring(posIgual+1, filtro.length),
+        total: meseros.length
+      });
+    });
+});
+
+// ==========================================================
 // Obtener los cajeros
 // ==========================================================
 app.get("/cajeros", (req, res, next) => {

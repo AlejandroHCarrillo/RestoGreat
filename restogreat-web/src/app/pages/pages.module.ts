@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
+// Datetime picker
+ 
+
 // import { PagesComponent } from './pages.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -123,7 +126,9 @@ import { PagoComponent } from './restaurant/pagos/pago.component';
         PAGES_ROUTES,
         FormsModule,
         ChartsModule,
-        PipesModule
+        PipesModule,
+        // OwlDateTimeModule, 
+        // OwlNativeDateTimeModule,
     ]
 })
 export class PagesModule { }

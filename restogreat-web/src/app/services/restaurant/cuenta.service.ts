@@ -56,7 +56,7 @@ export class CuentaService {
     let url = URL_SERVICIOS + "/cuenta?token=" + this.token;
 
     return this.http.post(url, cuenta).map((resp: any) => {
-      Swal.fire("Cuenta creado", resp.cuenta.nombre, "success");
+      Swal.fire("Cuenta creada ", resp.cuenta.nombre, "success");
       return resp.cuenta;
     });
   }
@@ -66,7 +66,9 @@ export class CuentaService {
     url += "?token=" + this.token;
 
     return this.http.put(url, cuenta).map((resp: any) => {
-      Swal.fire("Cuenta actualizado", cuenta.fecha.toString() , "success");
+      var fecha = new Date(cuenta.fecha);
+      var message = 'Cuenta numero: ' + cuenta.consecutivo.toString() + ' con fecha: ' + fecha.toLocaleDateString();
+      Swal.fire("Cuenta actualizada ", message, "success");
       return true;
     });
   }
