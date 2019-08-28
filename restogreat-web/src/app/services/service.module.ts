@@ -28,6 +28,7 @@ import {
   CausacancelacionService,
   TurnoService,
   CuentaService, 
+  ComensalService,
   BancoService,
   ConceptodescuentoService,
   PagoService
@@ -64,6 +65,7 @@ import {
     CausacancelacionService,
     TurnoService,
     CuentaService,
+    ComensalService, 
     BancoService, 
     ConceptodescuentoService,
     PagoService

@@ -129,9 +129,6 @@ app.get("/:id", (req, res) => {
 // ==========================================
 app.get("/usuario/:id", (req, res) => {
   var id = req.params.id;
-
-  console.log("Usuario ID:", id);
-
   Usuario.findById(id)
     .exec((err, usuario) => {
       if (err) {
@@ -148,7 +145,6 @@ app.get("/usuario/:id", (req, res) => {
           errors: { message: "No existe un usuario con ese ID" }
         });
       }
-      console.log("usuario encontrado", usuario);
 
       // Mesero.find({ "nivel": 5 }, "nombre apaterno amaterno")
       var query = { user: new ObjectId(usuario._id) };
@@ -170,7 +166,7 @@ app.get("/usuario/:id", (req, res) => {
               errors: { message: "No existe un mesero con ese ID" }
             });
           }
-          console.log("Mesero: ", mesero);          
+
           res.status(200).json({
             ok: true,
             mesero: mesero

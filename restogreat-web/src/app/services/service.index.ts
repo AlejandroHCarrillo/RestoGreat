@@ -24,6 +24,7 @@ export { ModificadorService } from './restaurant/modificador.service';
 export { CausacancelacionService } from './restaurant/causacancelacion.service';
 export { TurnoService } from './restaurant/turno.service';
 export { CuentaService } from './restaurant/cuenta.service';
+export { ComensalService } from './restaurant/comensal.service';
 export { BancoService } from './restaurant/banco.service';
 export { ConceptodescuentoService } from './restaurant/conceptodescuento.service';
 export { PagoService } from './restaurant/pago.service';

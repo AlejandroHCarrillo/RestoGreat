@@ -13,7 +13,7 @@ app.get("/", (req, res, next) => {
   var desde = req.query.desde || 0;
   desde = Number(desde);
 
-  Cuenta.find({}, "fecha numeromesa numerocomensales mesero estatus")
+  Cuenta.find({}, "consecutivo fecha numeromesa numerocomensales mesero estatus")
     .populate("usuario", "nombre")
     .populate("mesero", "nombre apaterno amaterno")
     .skip(desde)

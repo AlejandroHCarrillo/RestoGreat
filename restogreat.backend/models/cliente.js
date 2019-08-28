@@ -4,7 +4,6 @@ var mongoose = require('mongoose'),
 	
 autoIncrement.initialize(mongoose.connection);
 
-
 var clienteSchema =	new Schema({
 				consecutivo: { type: Number	},
 				nombre: { type: String, required: [true, 'El nombre del cliente es necesario'] },

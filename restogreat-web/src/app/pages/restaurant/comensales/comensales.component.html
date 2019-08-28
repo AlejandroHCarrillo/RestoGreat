@@ -1,0 +1,52 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <h3 class="card-title">
+            Comensales ( <small>{{ comensales.length }}</small> )
+          </h3>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Comensal</th>
+                <th>Platillo / Modificadores / Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comensal of comensales; let i = index">
+                <td class="w25">comensal: {{ i + 1 }}</td>
+                <td>
+                  <ol *ngIf="comensal.platillos">
+                    <li *ngFor="let platillo of comensal.platillos">
+                      <strong>
+                        {{ platillo.nombreplatillo }}
+                      </strong>
+                      <small>
+                        {{ platillo.modificadores }}
+                      </small>
+                      <strong>
+                        {{ platillo.estatus | estatusplatillo }}
+                      </strong>
+                    </li>
+                  </ol>
+                </td>
+                <td>
+                    <!-- <button
+                    [routerLink]="['/cuenta', cuenta._id]"
+                    class="btn btn-primary" >
+                    <i class="fa fa-edit"></i>
+                  </button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<pre>
+  {{ comensales | json }}
+</pre>

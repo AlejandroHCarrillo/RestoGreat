@@ -41,6 +41,8 @@ import { TurnosComponent } from './restaurant/turnos/turnos.component';
 import { TurnoComponent } from './restaurant/turnos/turno.component';
 import { CuentasComponent } from './restaurant/cuentas/cuentas.component';
 import { CuentaComponent } from './restaurant/cuentas/cuenta.component';
+import { ComensalesComponent } from './restaurant/comensales/comensales.component';
+import { ComensalComponent } from './restaurant/comensales/comensal.component';
 import { BancosComponent } from './restaurant/bancos/bancos.component';
 import { BancoComponent } from './restaurant/bancos/banco.component';
 import { ConceptosdescuentoComponent } from './restaurant/conceptosdescuento/conceptosdescuento.component';
@@ -91,6 +93,8 @@ const pagesRoutes: Routes = [
 
     { path: 'cuentas', component:    CuentasComponent, data: { titulo: 'Lista de cuentas' } },
     { path: 'cuenta/:id', component: CuentaComponent, data: { titulo: 'Abrir cuenta' } },
+    { path: 'cuenta/comensales/:id',   component: ComensalesComponent, data: { titulo: 'Lista de comensales de la cuenta' } },
+    { path: 'cuenta/comensal/:id', component: ComensalComponent, data: { titulo: 'Agregar comensales a la cuenta' } },
 
     { path: 'bancos', component:    BancosComponent, data: { titulo: 'Lista de bancos' } },
     { path: 'banco/:id', component: BancoComponent, data: { titulo: 'Mantenimiento a bancos' } },

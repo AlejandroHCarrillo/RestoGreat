@@ -1,3 +1,4 @@
+import { Producto } from 'src/app/models/producto.model';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Cuenta } from "src/app/models/cuenta.model";
 import {
@@ -9,6 +10,8 @@ import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { Mesero } from "src/app/models/mesero.model";
+import { Comensal } from "src/app/models/comensal.model";
+import { Platillo } from "src/app/models/platillo.model";
 
 @Component({
   selector: "app-cuenta",
@@ -25,6 +28,8 @@ export class CuentaComponent implements OnInit {
 
   mesero: Mesero;
   meseros: Mesero[] = [];
+
+  comensales: Comensal[] = [];
 
   constructor(
     public http: HttpClient,
@@ -59,14 +64,58 @@ export class CuentaComponent implements OnInit {
   }
 
   cargarCuenta(id: string) {
-    this._cuentaService.cargarCuenta(id).subscribe(cuenta => {      
+    this._cuentaService.cargarCuenta(id).subscribe(cuenta => {
       if(!cuenta.mesero){
         console.log("No tiene mesero asignado");
         this.asignarMeseroActual();
       }      
       this.mesero = cuenta.mesero;
       this.cuenta = cuenta;
+      
+      this.cargarComensales();
     });
+  }
+
+  cargarComensales(){
+    console.log("Cargando comensales:", this.cuenta.numerocomensales);
+    for (let i = 0; i < this.cuenta.numerocomensales ; i++) {
+      let element = new Comensal();
+      element.platillos = new Array<Platillo>();
+
+      let platillo = new Platillo();
+      let sopa = new Producto();
+      sopa.nombre = "Sopa " + i;
+      platillo.producto = sopa;
+      platillo.modificadores = "c/oregano, s/chile";
+      platillo.estatus = 1;
+      element.platillos.push(platillo);
+      
+      let platillo2 = new Platillo();      
+      let platofuerte = new Producto();
+      platofuerte.nombre = "Plato fuerte " + i;
+      platillo2.producto = platofuerte;
+      platillo2.modificadores = "Parrilla, T1/2, c/pimienta";
+      platillo2.estatus = 2;
+      element.platillos.push(platillo2);
+      
+      let platillo3 = new Platillo();      
+      let bebida = new Producto();
+      bebida.nombre = "bebida " + i;
+      platillo3.producto = bebida;
+      platillo3.modificadores = "S/Naranja";
+      platillo3.estatus = 3;
+      element.platillos.push(platillo3);
+      
+      let platillo4 = new Platillo();
+      let postre = new Producto();
+      postre.nombre = "postre " + i;
+      platillo4.producto = postre;
+      platillo4.modificadores = "S/fresa";
+      platillo4.estatus = i;
+      element.platillos.push(platillo4);
+      
+      this.comensales.push(element);
+    }
   }
 
   asignarMeseroActual(){
@@ -77,6 +126,7 @@ export class CuentaComponent implements OnInit {
       console.log("Mesero Asignado: ", meseroResp);
     });
   }
+
   guardarCuenta(f: NgForm) {
     if (f.invalid) {
       return;
@@ -89,8 +139,8 @@ export class CuentaComponent implements OnInit {
       // console.log('Creando Cuenta');
       this._cuentaService.crearCuenta(this.cuenta).subscribe(cuenta => {
         this.cuenta = cuenta;
+
         this.router.navigate(["/cuenta", this.cuenta._id]).catch(err => {
-          console.log(err);
         });
       });
     } else {

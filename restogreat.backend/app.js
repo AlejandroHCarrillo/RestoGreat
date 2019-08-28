@@ -51,6 +51,7 @@ var clienteRoutes = require('./routes/cliente');
 var conceptoDescuentoRoutes = require('./routes/conceptodescuento');
 var corteCajaRoutes = require('./routes/cortecaja');
 var cuentaRoutes = require('./routes/cuenta');
+var comensalRoutes = require('./routes/comensal');
 var desembolsoCajaRoutes = require('./routes/desembolso-caja');
 var facturaRoutes = require('./routes/factura');
 var formaPagoRoutes = require('./routes/forma-pago');
@@ -82,6 +83,7 @@ app.use('/cliente', clienteRoutes)
 app.use('/conceptodescuento', conceptoDescuentoRoutes)
 app.use('/cortecaja', corteCajaRoutes)
 app.use('/cuenta', cuentaRoutes)
+app.use('/comensal', comensalRoutes)
 app.use('/desembolsocaja', desembolsoCajaRoutes)
 app.use('/factura', facturaRoutes)
 app.use('/formapago', formaPagoRoutes)

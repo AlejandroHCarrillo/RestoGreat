@@ -66,6 +66,8 @@ import { ConceptosdescuentoComponent } from './restaurant/conceptosdescuento/con
 import { ConceptodescuentoComponent } from './restaurant/conceptosdescuento/conceptodescuento.component';
 import { PagosComponent } from './restaurant/pagos/pagos.component';
 import { PagoComponent } from './restaurant/pagos/pago.component';
+import { ComensalesComponent } from './restaurant/comensales/comensales.component';
+import { ComensalComponent } from './restaurant/comensales/comensal.component';
 
 @NgModule({
     declarations: [
@@ -113,7 +115,9 @@ import { PagoComponent } from './restaurant/pagos/pago.component';
         ConceptosdescuentoComponent,
         ConceptodescuentoComponent,
         PagosComponent,
-        PagoComponent
+        PagoComponent,
+        ComensalesComponent,
+        ComensalComponent
     ],
     exports: [
         DashboardComponent,

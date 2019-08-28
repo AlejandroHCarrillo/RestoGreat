@@ -33,7 +33,6 @@
       <div class="card">
         <div class="card-body">
           <div class="text-right">
-            <!-- (click)="crearCuenta()" -->
             <button
               [routerLink]="['/cuenta', 'nuevo']"
               class="btn waves-effect waves-light btn-rounded btn-primary"
@@ -48,38 +47,26 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Clave</th>
-                <th>Seccion</th>
+                <th></th>
+                <th>Fecha</th>
+                <th>Mesero</th>
+                <th>Estado</th>
+                <th>Mesa</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let cuenta of cuentas">
-                <td class="w70">
-                  <img
-                    (click)="mostrarModal(cuenta._id)"
-                    src="{{ cuenta.img | imagen: 'cuenta' }}"
-                    class="img-50 img-circle pointer"
-                    alt="cuenta.nombre"
-                  />
+                <td class="w25">
+                  {{cuenta.consecutivo}}
                 </td>
                 <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="cuenta.nombre"
-                  />
+                  {{cuenta.fecha | date : 'dd/MMM/yyyy'}}
                 </td>
                 <td>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [(ngModel)]="cuenta.clave"
-                  />
+                  {{cuenta.mesero.nombre}} {{cuenta.mesero.apaterno}} {{cuenta.mesero.amaterno}}
                 </td>
-                <td>{{ cuenta.seccion?.nombre }}</td>
+                <td>{{ cuenta.numeromesa }}</td>
                 <td>
                   <button (click)="guardarCuenta(cuenta)" class="btn btn-primary">
                     <i class="fa fa-save"></i>
@@ -108,7 +95,4 @@
       </div>
     </div>
   </div>
-  <pre>
-    {{ cuentas | json }}
-  </pre>
   

@@ -6,33 +6,40 @@
         <div class="col-sm-12 col-xs-12">
           <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCuenta(f)">
             <div class="form-group">
-              Fecha: <span *ngIf="!showDatePicker">
-                {{ cuenta.fecha | date:'dd-MMMM-yyyy' }}
+              Fecha:
+              <span *ngIf="!showDatePicker">
+                {{ cuenta.fecha | date: "dd-MMMM-yyyy" }}
               </span>
-              <input type="date"  
-              [ngModel]="cuenta.fecha| date:'yyyy-MM-dd'" 
-              (ngModelChange)="cuenta.fecha = $event" 
-              [ngModelOptions]="{standalone: true}"
-              *ngIf="showDatePicker"
-              class="form-control w-50"
-              >
+              <input
+                type="date"
+                [ngModel]="cuenta.fecha | date: 'yyyy-MM-dd'"
+                (ngModelChange)="cuenta.fecha = $event"
+                [ngModelOptions]="{ standalone: true }"
+                *ngIf="showDatePicker"
+                class="form-control w-50"
+              />
               <button (click)="toggleDatePicker($event)">Edit</button>
-
             </div>
             <div class="form-row">
               <div class="form-group" *ngIf="mesero">
-                <label>Mesero:</label> 
+                <label>Mesero:</label>
                 <span *ngIf="!showDatePicker">
-                  {{ cuenta.mesero.nombre }} {{ cuenta.mesero.apaterno }} {{ cuenta.mesero.amaterno }}
+                  {{ cuenta.mesero.nombre }} {{ cuenta.mesero.apaterno }}
+                  {{ cuenta.mesero.amaterno }}
                 </span>
-                <select (change)="cambioMesero( $event.target.value );" 
-                        [(ngModel)]="mesero._id" 
-                        name="mesero" 
-                        *ngIf="showDatePicker"
-                        class="custom-select" required>
-                    <option *ngFor="let mesero of meseros" [value]="mesero._id">{{ mesero.nombre }} {{ mesero.apaterno }} {{ mesero.amaterno }} </option>
-                  </select>
-
+                <select
+                  (change)="cambioMesero($event.target.value)"
+                  [(ngModel)]="mesero._id"
+                  name="mesero"
+                  *ngIf="showDatePicker"
+                  class="custom-select"
+                  required
+                >
+                  <option *ngFor="let mesero of meseros" [value]="mesero._id"
+                    >{{ mesero.nombre }} {{ mesero.apaterno }}
+                    {{ mesero.amaterno }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="form-row">
@@ -61,13 +68,13 @@
               </div>
             </div>
             <div class="form-group w-75">
-              <label>Estatus:</label><br>
+              <label>Estatus:</label><br />
               <select
                 class="custom-select"
                 [(ngModel)]="cuenta.estatus"
                 name="estatus"
                 required
-                disabled={{!showDatePicker}}
+                disabled="{{ !showDatePicker }}"
               >
                 <option value="1">Abierta</option>
                 <option value="2">Cerrada</option>
@@ -90,6 +97,56 @@
               Cancel
             </a>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <h3 class="card-title">
+            Comensales ( <small>{{ comensales.length }}</small> )
+          </h3>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Comensal</th>
+                <th>Platillo / Modificadores / Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comensal of comensales; let i = index">
+                <td class="w25">comensal: {{ i + 1 }}</td>
+                <td>
+                  <ol>
+                    <li *ngFor="let platillo of comensal.platillos">
+                      <strong>
+                        {{ platillo.producto.nombre }}
+                      </strong>
+                      <small>
+                        {{ platillo.modificadores }}
+                      </small>
+                      <strong>
+                        {{ platillo.estatus | estatusplatillo }}
+                      </strong>
+                    </li>
+                  </ol>
+                </td>
+                <td>
+                    <button
+                    [routerLink]="['/cuenta', cuenta._id]"
+                    class="btn btn-primary" >
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
